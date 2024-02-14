@@ -1,23 +1,23 @@
-# Nuxt 3 Minimal Starter
+# Nuxt SSR Firebase with tailwindcss and NuxtUI/NuxtUI-pro
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
 
-Make sure to install the dependencies:
+## .env configuration
 
-```bash
-# npm
-npm install
+```properties
+FIREBASE_API_KEY=...
+FIREBASE_AUTH_DOMAIN=...
+FIREBASE_PROJECT_ID=....
+FIREBASE_STORAGE_BUCKET=...
+FIREBASE_MESSAGING_SENDER_ID=...
+FIREBASE_APP_ID=...
+FIREBASE_MEASUREMENT_ID=...
 
-# pnpm
-pnpm install
+GOOGLE_APPLICATION_CREDENTIALS=service-account.json
+WEBSITE_URL=....
+```
 
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
