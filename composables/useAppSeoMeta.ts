@@ -1,5 +1,5 @@
-import {UseSeoMetaInput} from "@unhead/schema";
-import {PageConfig} from "~/types";
+import {UseSeoMetaInput} from '@unhead/schema';
+import {PageConfig} from '~/types';
 
 export default function () {
     const {t} = useI18n()
@@ -27,5 +27,4 @@ export default function () {
     return {
         seoMetaInputByPageConfig
     }
-
 }

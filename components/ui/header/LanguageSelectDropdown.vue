@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const {locale, locales, setLocale} = useI18n()
+const {locales, setLocale} = useI18n()
 const languages = locales.value.map((item) => {
   return {
     label: item.name,
@@ -8,7 +8,6 @@ const languages = locales.value.map((item) => {
     click: () => setLocale(item.code)
   }
 })
-const currentLocale = computed(() => locales.value.find(item => item.code === locale.value))
 </script>
 
 <template>
@@ -18,9 +17,7 @@ const currentLocale = computed(() => locales.value.find(item => item.code === lo
         square
         variant="ghost"
         class="hover:bg-gray-50 dark:hover:bg-gray-800"
-        :icon="currentLocale.icon"
+        icon="i-heroicons-globe-alt"
     />
   </UDropdown>
-
-
 </template>
