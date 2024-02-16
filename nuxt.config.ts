@@ -17,7 +17,8 @@ export default defineNuxtConfig({
         '@nuxtjs/i18n',
         'nuxt-vuefire',
         '@nuxt/ui',
-        'nuxt-gtag'
+        'nuxt-gtag',
+        '@nuxtjs/sitemap'
     ],
     extends: ['@nuxt/ui-pro'],
     ui: {
@@ -65,6 +66,11 @@ export default defineNuxtConfig({
             appId: process.env.FIREBASE_APP_ID,
             measurementId: process.env.FIREBASE_MEASUREMENT_ID,
         },
+    },
+    sitemap: {
+        sources: ['/api/sitemap'],
+        xsl: false,
+        exclude: ['/auth/**', 'register'],
     },
     nitro: {
         preset: 'firebase',
@@ -118,7 +124,7 @@ export default defineNuxtConfig({
             redirectOn: 'root',  // recommended
         },
         // seo: true,
-        baseUrl: 'https://my-nuxt-app.com',
+        baseUrl: process.env.WEBSITE_URL || 'http://localhost:3000',
     },
     typescript: {
         tsConfig: {
