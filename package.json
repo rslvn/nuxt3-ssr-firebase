@@ -8,12 +8,12 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "postupgrade": "npm install",
-    "predeploy": "NITRO_PRESET=firebase nuxt build",
+    "build:firebase": "NITRO_PRESET=firebase nuxt build",
+    "predeploy": "npm run build:firebase",
     "deploy": "npx firebase-tools deploy",
     "clear": "rm -rf .nuxt .output .firebase",
     "clear-all": "rm -rf node_modules package-lock.json .nuxt .output .firebase",
-    "upgrade": "npx npm-check-updates -u"
+    "upgrade": "npx nuxi upgrade --force"
   },
   "devDependencies": {
     "@firebase/app-types": "^0.9.0",
