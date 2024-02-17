@@ -23,6 +23,7 @@
     "@nuxt/ui": "^2.13.0",
     "@nuxt/ui-pro": "^0.7.5",
     "@nuxtjs/i18n": "^8.1.1",
+    "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/sitemap": "^5.1.0",
     "@pinia/nuxt": "^0.5.1",
     "@types/jest": "^29.5.12",

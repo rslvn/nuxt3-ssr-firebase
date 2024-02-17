@@ -18,7 +18,8 @@ export default defineNuxtConfig({
         'nuxt-vuefire',
         '@nuxt/ui',
         'nuxt-gtag',
-        '@nuxtjs/sitemap'
+        '@nuxtjs/sitemap',
+        '@nuxtjs/robots'
     ],
     extends: ['@nuxt/ui-pro'],
     ui: {
