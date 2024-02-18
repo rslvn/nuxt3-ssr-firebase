@@ -25,11 +25,3 @@ switch (mode) {
 }
 
 </script>
-
-<template>
-  <UContainer>
-    <section>
-      <USkeleton class="h-10"/>
-    </section>
-  </UContainer>
-</template>

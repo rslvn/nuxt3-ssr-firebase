@@ -1,3 +1,5 @@
+const firebaseModules = ["firebase/app", "firebase/auth", "firebase/firestore"];
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
@@ -143,6 +145,10 @@ export default defineNuxtConfig({
                 output: {
                     // target ~250KB per chunk in an ideal world
                     experimentalMinChunkSize: 250 * 1024,
+                    manualChunks(id) {
+                        const separateModule = firebaseModules.find(module => id.includes(module));
+                        if (separateModule) return separateModule;
+                    }
                     // manualChunks: (id, _) => {
                     //
                     //     // need to avoid touching non-entrypoint files, otherwise it breaks bundling
