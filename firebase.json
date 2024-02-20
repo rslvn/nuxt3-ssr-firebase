@@ -1,11 +1,23 @@
 {
-  "functions": { "source": ".output/server" ,"runtime": "nodejs18"},
+  "functions": {
+    "source": ".output/server",
+    "runtime": "nodejs18"
+  },
   "hosting": {
     "site": "dancewall-2cc09",
     "public": ".output/public",
     "cleanUrls": true,
-    "rewrites": [{ "source": "**", "function": "server" }],
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "server"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "headers": [
       {
         "source": "/**",
@@ -17,8 +29,7 @@
         ]
       },
       {
-        "source":
-        "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2|font.css)",
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2|font.css)",
         "headers": [
           {
             "key": "Cache-Control",

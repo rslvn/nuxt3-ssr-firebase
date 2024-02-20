@@ -1,5 +1,4 @@
-const firebaseModules = ["firebase/app", "firebase/auth", "firebase/firestore"];
-
+const separateModules = ['vuefire'];
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
@@ -138,7 +137,7 @@ export default defineNuxtConfig({
                 }
         }
     },
-    postcss:{
+    postcss: {
         plugins: {
             'tailwindcss/nesting': 'postcss-nesting',
             tailwindcss: {},
@@ -149,18 +148,18 @@ export default defineNuxtConfig({
         build: {
             minify: 'terser',
             rollupOptions: {
-                external: ['firebase-admin', 'firebase','@firebase/app-types'],
+
                 output: {
-                    // target ~250KB per chunk in an ideal world
                     experimentalMinChunkSize: 250 * 1024,
-                    // manualChunks(id) {
-                    //     if (id.includes('node_modules')) {
-                    //         return id.toString().split('node_modules/')[1].split('/')[0].toString();
-                    //     }
-                    // }
-                },
+                    manualChunks(id) {
+                        const separateModule = separateModules.find(module => id.includes(module));
+                        if (separateModule) return separateModule;
+                    }
+                }
             },
         },
-    }
-
+        optimizeDeps: {
+            exclude: separateModules
+        }
+    },
 })

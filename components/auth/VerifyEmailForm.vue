@@ -16,6 +16,7 @@ const {notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert
 const verified = ref(false)
 
 if (!props.oobCode) {
+  // throw error
   showErrorAlert({key: 'notification.invalidVerificationCode'})
 }
 
