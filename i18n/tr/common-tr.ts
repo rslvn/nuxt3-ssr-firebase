@@ -11,7 +11,8 @@ export default {
         Warning: 'Uyari',
         Info: 'Bilgilendirme',
         ForgotPassword: 'Parolami unuttum',
-        ResetPassword: 'Parolayi yenile'
+        ResetPassword: 'Parolayi yenile',
+        Profile: 'Profil'
     },
 
 }

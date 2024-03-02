@@ -40,7 +40,7 @@ const _useAuthUser = () => {
                 saveUserProfile({
                     id: user.value.uid,
                     username,
-                    firstName: user.value.displayName?.split(' ')[0] || null,
+                    name: {firstName: user.value.displayName?.split(' ')[0] || null},
                     email: user.value.email,
                     profilePhoto: {
                         image: {

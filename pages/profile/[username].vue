@@ -5,6 +5,8 @@ definePageMeta({
   middleware: ['authenticated-allowed'],
 })
 
+const {seoMetaInputByUserProfile} = useAppSeoMeta()
+
 const {t} = useI18n()
 const {getUserProfileByUsername} = useUserProfileCollection()
 const {userProfile, isUsernameOfLoggedInUser} = useAuthUser()
@@ -19,11 +21,11 @@ const profile = ref(null as UserProfile)
 const isMyProfile = isUsernameOfLoggedInUser(username)
 
 onMounted(async () => {
-
   profile.value = isMyProfile ? userProfile.value : await getUserProfileByUsername(username)
   if (!profile.value) {
     throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
   }
+  useSeoMeta(seoMetaInputByUserProfile(profile.value))
 })
 
 </script>

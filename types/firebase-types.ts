@@ -72,13 +72,15 @@ export interface AlbumImage extends BaseModel {
 }
 
 export interface UserProfile extends BaseModel {
-    firstName?: string
-    middleName?: string
-    lastName?: string
+    name?: {
+        firstName?: string
+        middleName?: string
+        lastName?: string
+    }
+    username: string
     gender?: Gender
     email?: string
     about?: string
-    username: string
     profilePhoto: AlbumImage
     coverPhoto: AlbumImage
 }

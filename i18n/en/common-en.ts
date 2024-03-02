@@ -14,6 +14,7 @@ export default {
         ForgotPassword: 'Forgot password',
         ResetPassword: 'Reset password',
         Resend: 'Resend',
-        processing: 'processing...'
+        processing: 'processing...',
+        Profile: 'Profile'
     }
 }

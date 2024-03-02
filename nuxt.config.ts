@@ -88,6 +88,7 @@ export default defineNuxtConfig({
         // Keys within public are also exposed client-side
         public: {
             url: process.env.WEBSITE_URL || 'http://localhost:3000',
+            appName: 'nuxt3-ssr-firebase'
         }
     },
     i18n: {

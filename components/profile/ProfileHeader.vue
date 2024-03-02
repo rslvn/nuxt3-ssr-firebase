@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {UserProfile} from "~/types";
+import {getCoverPhoto, getDisplayName, getProfilePhoto} from "~/service/user-profile-service";
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -8,26 +9,21 @@ const props = defineProps<{
 }>()
 
 const {} = useAuthUser()
+const {t} = useI18n()
 
 const displayName = computed(() => {
-  if (props.userProfile?.firstName) {
-    if (props.userProfile?.middleName) {
-      return `${props.userProfile?.firstName} ${props.userProfile?.middleName} ${props.userProfile?.lastName}`
-    }
-    return `${props.userProfile?.firstName} ${props.userProfile?.lastName}`
-  }
-
-  return props.userProfile?.email || 'User'
+  const name = getDisplayName(props.userProfile)
+  return name || props.userProfile?.email || t('common.Profile')
 })
 
 const images = [
   {
-    src: props.userProfile.coverPhoto.image.src || 'https://picsum.photos/1920/1080?random=1',
-    description: props.userProfile.coverPhoto.image.alt || `cover photo of ${displayName}`
+    src: getCoverPhoto(props?.userProfile),
+    description: props.userProfile.coverPhoto.image.alt || `cover photo of ${displayName.value}`
   }
 ]
 
-const profilePhoto = props.userProfile?.profilePhoto?.image?.src || 'https://picsum.photos/500/800'
+const profilePhoto = getProfilePhoto(props?.userProfile)
 
 </script>
 

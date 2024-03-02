@@ -15,12 +15,13 @@
 <script setup>
 
 const {locale} = useI18n()
+const runtimeConfig = useRuntimeConfig()
 
 useHead({
   htmlAttrs: {
     lang: locale.value
   },
-  titleTemplate: '%s - nuxt3-ssr-firebase',
+  titleTemplate: `%s - ${runtimeConfig.public.appName}`,
   link: [
     {
       rel: 'icon',
