@@ -9,8 +9,7 @@ const user = useCurrentUser()
 <template>
   <div>
     <UContainer class="mt-5">
-      <h1>Welcome tangowall home</h1>
-<!--      <pre v-if="user">{{ user }}</pre>-->
+      <h1>Welcome Nuxt3 SSR Firebase</h1>
     </UContainer>
   </div>
 </template>

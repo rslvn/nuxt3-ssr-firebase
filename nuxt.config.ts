@@ -1,3 +1,4 @@
+const separatedChunks = ['vuefire', '@firebase'];
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
@@ -19,7 +20,7 @@ export default defineNuxtConfig({
         '@nuxt/ui',
         'nuxt-gtag',
         '@nuxtjs/sitemap',
-        '@nuxtjs/robots'
+        // 'nuxt-purgecss'
     ],
     extends: ['@nuxt/ui-pro'],
     ui: {
@@ -59,8 +60,6 @@ export default defineNuxtConfig({
         config: {
             apiKey: process.env.FIREBASE_API_KEY,
             authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-            // databaseURL:
-            //     'https://nuxt-vuefire-example-blaze-default-rtdb.firebaseio.com',
             projectId: process.env.FIREBASE_PROJECT_ID,
             storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
             messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
@@ -75,7 +74,7 @@ export default defineNuxtConfig({
     },
     nitro: {
         preset: 'firebase',
-
+        compressPublicAssets: true,
         // for the upcoming preset
         firebase: {
             gen: 2,
@@ -136,39 +135,27 @@ export default defineNuxtConfig({
                 }
         }
     },
+    postcss: {
+        plugins: {
+            'tailwindcss/nesting': 'postcss-nesting',
+            tailwindcss: {},
+            autoprefixer: {},
+            ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
+        }
+    },
     vite: {
         build: {
-            minify: 'terser',
             rollupOptions: {
                 output: {
-                    // target ~250KB per chunk in an ideal world
-                    experimentalMinChunkSize: 250 * 1024,
-                    // manualChunks: (id, _) => {
-                    //
-                    //     // need to avoid touching non-entrypoint files, otherwise it breaks bundling
-                    //     // because imports aren't idempotent
-                    //     if (
-                    //         !id.includes("node_modules") &&
-                    //         !id.startsWith("virtual:") &&
-                    //         !id.includes("src") &&
-                    //         !id.includes("assets")
-                    //     ) {
-                    //         // merge pages/foo/* as chunk-pg-foo, pages/bar/* as chunk-pg-bar, etc.
-                    //         // then merge pages/* (ie no subfolder) into chunk-pg-misc
-                    //         if (id.includes("pages")) {
-                    //             const parts = id.split("/");
-                    //             const folderIndex = parts.indexOf("pages");
-                    //             if (folderIndex + 2 < parts.length) {
-                    //                 const pageGroup = parts[folderIndex + 1];
-                    //                 return `chunk-pg-${pageGroup}`;
-                    //             }
-                    //             return "chunk-pg-misc";
-                    //         }
-                    //     }
-                    // },
-                },
+                    manualChunks(id) {
+                        const separateModule = separatedChunks.find(module => id.includes(module));
+                        if (separateModule) return separateModule;
+                    }
+                }
             },
         },
-    }
-
+        optimizeDeps: {
+            exclude: separatedChunks
+        }
+    },
 })

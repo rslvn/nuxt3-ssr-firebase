@@ -2,7 +2,8 @@ export default {
     page: {
         notFound: 'OPPS! Page not found',
         home: {
-            description: 'tangowall is a tango dance platform for searching tango events, professionals, dancer and more...'
+            title: 'Welcome to NUXT3 firebase',
+            description: 'Nuxt3 application with firebase hosting and authentication'
         },
         auth: {
             title: 'Authentication',

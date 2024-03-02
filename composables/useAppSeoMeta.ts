@@ -8,7 +8,7 @@ export default function () {
     const seoMetaInputByPageConfig = (pageConfig: PageConfig): UseSeoMetaInput => {
         const title = t(pageConfig.title.key, pageConfig.title.params)
         const description = t(pageConfig.description.key, pageConfig.description.params)
-        const image = runtimeConfig.public.url + '/img/tangowall-cover-20240206.png'
+        const image = runtimeConfig.public.url + '/img/cover-20240206.png'
         const pageUrl = runtimeConfig.public.url + pageConfig.path
         return {
             title,

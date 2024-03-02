@@ -29,7 +29,8 @@ export const PAGES = {
         description: {key: 'page.resetPassword.description'},
         path: '/auth/reset-password'
     } as PageConfig,
-    VERIFY_EMAIL: {title: {key: 'NA'}, description: {key: 'NA'}, path: '/auth/verify-email'} as PageConfig
+    VERIFY_EMAIL: {title: {key: 'NA'}, description: {key: 'NA'}, path: '/auth/verify-email'} as PageConfig,
+    PROFILE: {title: {key: 'NA'}, description: {key: 'NA'}, path: '/profile'} as PageConfig,
 }
 
 export const AUTHENTICATED_NOT_ALLOWED_ROUTES = [

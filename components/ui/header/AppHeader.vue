@@ -20,8 +20,8 @@ const logOff = () => {
 <template>
   <UHeader>
     <template #logo>
-      tangowall
-      <UBadge label="Registration" variant="subtle" class="mb-0.5 hidden md:flex"/>
+      nuxt3-ssr
+      <UBadge label="firebase" variant="subtle" class="mb-0.5 hidden md:flex"/>
     </template>
 
     <template #right>

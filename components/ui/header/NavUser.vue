@@ -1,13 +1,26 @@
 <script setup lang="ts">
 import {signOut} from "firebase/auth";
+import {PAGES} from "~/types";
+
 const {t} = useI18n()
-const user = useCurrentUser()
-const firebaseAuth = useFirebaseAuth();
-const items = [
+// const user = useCurrentUser()
+const firebaseAuth = useFirebaseAuth()
+const {user, profile} = useAuthUser()
+
+const navigateToProfile = () => {
+  if (profile.value?.username) {
+    return navigateTo(`${PAGES.PROFILE.path}/${profile.value.username}`)
+  }
+}
+const items = computed(() => [
   [
     {
-      slot: 'account',
-      disabled: true
+      label: profile.value?.username || user.value.email,
+      icon: "i-heroicons-user",
+      avatar: {
+        src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      },
+      click: navigateToProfile
     }
   ],
   [
@@ -19,7 +32,7 @@ const items = [
       }
     }
   ]
-]
+])
 </script>
 
 <template>
@@ -32,16 +45,5 @@ const items = [
         variant="ghost"
         icon="i-heroicons-user"
     />
-    <template #account>
-      <div class="text-left truncate">
-        {{ user.displayName || user.email }}
-      </div>
-    </template>
-
-    <template #item="{ item }">
-      <span class="truncate">{{ item.label }}</span>
-
-      <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"/>
-    </template>
   </UDropdown>
 </template>
