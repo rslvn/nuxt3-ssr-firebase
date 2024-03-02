@@ -1,1 +1,1 @@
-export * from './firebase/useProfileCollection'
+export * from './firebase/useUserProfileCollection'

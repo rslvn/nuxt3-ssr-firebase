@@ -5,17 +5,17 @@ import {PAGES} from "~/types";
 const {t} = useI18n()
 // const user = useCurrentUser()
 const firebaseAuth = useFirebaseAuth()
-const {user, profile} = useAuthUser()
+const {user, userProfile} = useAuthUser()
 
 const navigateToProfile = () => {
-  if (profile.value?.username) {
-    return navigateTo(`${PAGES.PROFILE.path}/${profile.value.username}`)
+  if (userProfile.value?.username) {
+    return navigateTo(`${PAGES.PROFILE.path}/${userProfile.value.username}`)
   }
 }
 const items = computed(() => [
   [
     {
-      label: profile.value?.username || user.value.email,
+      label: userProfile.value?.username || user.value.email,
       icon: "i-heroicons-user",
       avatar: {
         src: 'https://avatars.githubusercontent.com/u/739984?v=4'

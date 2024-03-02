@@ -147,7 +147,7 @@ export default defineNuxtConfig({
         build: {
             rollupOptions: {
                 output: {
-                    manualChunks(id) {
+                    manualChunks(id: any) {
                         const separateModule = separatedChunks.find(module => id.includes(module));
                         if (separateModule) return separateModule;
                     }

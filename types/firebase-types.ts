@@ -31,19 +31,54 @@ export const CollectionField = {
 }
 
 export enum FirestoreCollection {
-    PROFILE = 'profile'
+    USER_PROFILE = 'user-profile'
 }
 
 export interface BaseModel {
-    id?: string,
-    createdAt?: Timestamp | Date,
-    createdBy?: string,
-    updatedAt?: Timestamp | Date,
+    id?: string
+    createdAt?: Timestamp | Date
+    createdBy?: string
+    updatedAt?: Timestamp | Date
     updatedBy?: string
 }
 
-export interface Profile extends BaseModel {
-    name?: string
-    surname?: string
+export enum Gender {
+    MALE = 'MALE',
+    FEMALE = 'FEMALE',
+    OTHER = 'OTHER'
+}
+
+export enum AlbumType {
+    PROFILE = 'PROFILE',
+    COVER = 'COVER',
+    CUSTOM = 'CUSTOM',
+}
+
+export interface Image {
+    src: string
+    alt?: string
+    path?: string
+}
+
+export interface Album extends BaseModel {
+    name: string
+    albumType: AlbumType
+    userId: string
+}
+
+export interface AlbumImage extends BaseModel {
+    albumId?: string
+    image?: Image
+}
+
+export interface UserProfile extends BaseModel {
+    firstName?: string
+    middleName?: string
+    lastName?: string
+    gender?: Gender
+    email?: string
+    about?: string
     username: string
+    profilePhoto: AlbumImage
+    coverPhoto: AlbumImage
 }
