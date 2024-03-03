@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {UserProfile} from "~/types";
 
-definePageMeta({
-  middleware: ['authenticated-allowed'],
-})
+// definePageMeta({
+//   middleware: ['authenticated-allowed'],
+// })
 
 const {seoMetaInputByUserProfile} = useAppSeoMeta()
 
@@ -17,16 +17,19 @@ if (!username) {
   throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
 }
 
-const profile = ref(null as UserProfile)
-const isMyProfile = isUsernameOfLoggedInUser(username)
-
-onMounted(async () => {
+// workaround using async onCreated
+const loadUserProfile = async () => {
   profile.value = isMyProfile ? userProfile.value : await getUserProfileByUsername(username)
   if (!profile.value) {
     throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
   }
-  useSeoMeta(seoMetaInputByUserProfile(profile.value))
-})
+}
+
+const profile = ref(null as UserProfile)
+const isMyProfile = isUsernameOfLoggedInUser(username);
+
+loadUserProfile()
+useSeoMeta(seoMetaInputByUserProfile(profile.value))
 
 </script>
 
