@@ -78,7 +78,7 @@ export default defineNuxtConfig({
         // for the upcoming preset
         firebase: {
             gen: 2,
-            nodeVersion: '18',
+            nodeVersion: '20',
         },
     },
     imports: {

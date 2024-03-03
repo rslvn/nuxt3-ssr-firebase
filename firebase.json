@@ -1,7 +1,7 @@
 {
   "functions": {
     "source": ".output/server",
-    "runtime": "nodejs18"
+    "runtime": "nodejs20"
   },
   "hosting": {
     "site": "dancewall-2cc09",
