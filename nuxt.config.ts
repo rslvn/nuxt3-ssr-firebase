@@ -21,7 +21,6 @@ export default defineNuxtConfig({
         '@nuxt/ui',
         'nuxt-gtag',
         '@nuxtjs/sitemap',
-        // 'nuxt-purgecss'
     ],
     extends: ['@nuxt/ui-pro'],
     ui: {
@@ -142,28 +141,9 @@ export default defineNuxtConfig({
             'tailwindcss/nesting': 'postcss-nesting',
             tailwindcss: {},
             autoprefixer: {},
-            ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
+            cssnano: {}
+            // ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
         }
-    },
-    // purgecss: {
-    //     extractors: () => [
-    //         {
-    //             extractor: class {
-    //                 static extract(content) {
-    //                     return (content.match(/[A-z0-9-:\\/]+/g || []).concat(content.match(/[@A-Za-z0-9-:/]+/g) || [])
-    //                 },
-    //             },
-    //             extensions: ['html', 'vue', 'js']
-    //         }
-    //     ]
-    // },
-    purgecss: {
-        // extractors: [
-        //     {
-        //         extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
-        //         extensions: ['html', 'vue', 'js']
-        //     }
-        // ]
     },
     vite: {
         build: {
