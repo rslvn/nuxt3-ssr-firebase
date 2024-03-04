@@ -2,9 +2,11 @@
 
 ## Setup
 
-## .env configuration for hosting
+## .env configuration
 
 create `.env` file with content below and update your firebase configuration
+
+> GOOGLE_APPLICATION_CREDENTIALS must be the single line of the service account file content [Admin-SDK](https://vuefire.vuejs.org/nuxt/environment-variables.html#Admin-SDK)
 
 ```properties
 FIREBASE_API_KEY=...
@@ -14,14 +16,6 @@ FIREBASE_STORAGE_BUCKET=...
 FIREBASE_MESSAGING_SENDER_ID=...
 FIREBASE_APP_ID=...
 FIREBASE_MEASUREMENT_ID=...
-GOOGLE_APPLICATION_CREDENTIALS=service-account.json
+GOOGLE_APPLICATION_CREDENTIALS='{"type":"service_account","project_id":"***","private_key_id":"***","client_email":"f***","client_id":"***","auth_uri":"***","token_uri":"***","auth_provider_x509_cert_url":"***","client_x509_cert_url":"***","universe_domain":"***"}'
 WEBSITE_URL=....
-```
-
-## .env.function configuration for hosting
-
-create `.env.function` file with content below
-
-```properties
-GOOGLE_APPLICATION_CREDENTIALS=service-account.json
 ```
