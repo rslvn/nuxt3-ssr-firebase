@@ -1,3 +1,4 @@
+// import {terser} from 'rollup-plugin-terser'
 const separatedChunks = ['vuefire', '@firebase'];
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -144,9 +145,42 @@ export default defineNuxtConfig({
             ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
         }
     },
+    // purgecss: {
+    //     extractors: () => [
+    //         {
+    //             extractor: class {
+    //                 static extract(content) {
+    //                     return (content.match(/[A-z0-9-:\\/]+/g || []).concat(content.match(/[@A-Za-z0-9-:/]+/g) || [])
+    //                 },
+    //             },
+    //             extensions: ['html', 'vue', 'js']
+    //         }
+    //     ]
+    // },
+    purgecss: {
+        // extractors: [
+        //     {
+        //         extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
+        //         extensions: ['html', 'vue', 'js']
+        //     }
+        // ]
+    },
     vite: {
         build: {
+            // minify:'terser',
             rollupOptions: {
+                // plugins: [terser({
+                //     format: {
+                //         comments: false,
+                //     },
+                //
+                //     mangle: {
+                //         keep_classnames: false,
+                //         reserved: [],
+                //     },
+                //     sourceMap: true
+                //
+                // })],
                 output: {
                     manualChunks(id: any) {
                         const separateModule = separatedChunks.find(module => id.includes(module));
