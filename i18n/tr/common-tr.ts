@@ -3,6 +3,7 @@ export default {
         confirmPassword: 'Parola eslesmedi'
     },
     common: {
+        About: 'Hakkinda',
         Home: 'Anasayfa',
         Login: 'Giris Yap',
         Register: 'Kaydol',
@@ -12,7 +13,8 @@ export default {
         Info: 'Bilgilendirme',
         ForgotPassword: 'Parolami unuttum',
         ResetPassword: 'Parolayi yenile',
-        Profile: 'Profil'
+        Profile: 'Profil',
+        Settings: 'Ayarlar'
     },
 
 }

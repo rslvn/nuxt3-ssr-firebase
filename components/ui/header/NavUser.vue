@@ -15,7 +15,7 @@ const navigateToProfile = () => {
 const items = computed(() => [
   [
     {
-      label: userProfile.value?.username || user.value.email,
+      label: userProfile.value?.username || user.value?.email,
       icon: "i-heroicons-user",
       avatar: {
         src: 'https://avatars.githubusercontent.com/u/739984?v=4'
@@ -37,7 +37,7 @@ const items = computed(() => [
 
 <template>
   <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-52' }">
-    <UAvatar v-if="user.photoURL" :src="user.photoURL" :alt="user.displayName||'user' + ' avatar'" size="sm"/>
+    <UAvatar v-if="user?.photoURL" :src="user.photoURL" :alt="user.displayName||'user' + ' avatar'" size="sm"/>
     <UButton
         v-else
         color="gray"

@@ -111,7 +111,10 @@ export default defineNuxtConfig({
                 iso: 'tr-US',
                 icon: 'i-emojione-flag-for-turkey',
                 files: [
-                    'tr/common-tr.ts'
+                    'tr/common-tr.ts',
+                    'tr/field-tr.ts',
+                    'tr/notification-tr.ts',
+                    'tr/page-tr.ts',
                 ],
             }
         ],
@@ -141,7 +144,7 @@ export default defineNuxtConfig({
             'tailwindcss/nesting': 'postcss-nesting',
             tailwindcss: {},
             autoprefixer: {},
-            ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
+            ...(process.env.NODE_ENV === 'production' ? {cssnano: {}} : {})
         }
     },
     vite: {

@@ -30,7 +30,7 @@ const _useAuthUser = () => {
             .then(profile => {
                 if (profile) { // profile found
                     userProfile.value = profile
-                    console.log('profile found for ', user.value.email)
+                    console.log('profile found for', user.value.email)
                     return
                 }
 
@@ -68,6 +68,7 @@ const _useAuthUser = () => {
     }
 
     const isUsernameOfLoggedInUser = (username: string) => {
+        console.log('>>>> isUsernameOfLoggedInUser ', userProfile.value)
         return !userProfile.value ? false : userProfile.value.username === username
     }
 

@@ -12,14 +12,13 @@ const {} = useAuthUser()
 const {t} = useI18n()
 
 const displayName = computed(() => {
-  const name = getDisplayName(props.userProfile)
-  return name || props.userProfile?.email || t('common.Profile')
+  return getDisplayName(props.userProfile)
 })
 
 const images = [
   {
     src: getCoverPhoto(props?.userProfile),
-    description: props.userProfile.coverPhoto.image.alt || `cover photo of ${displayName.value}`
+    description: props.userProfile.coverPhoto.image.alt || `the cover photo of ${displayName.value || 'the profile'}`
   }
 ]
 
@@ -41,7 +40,7 @@ const profilePhoto = getProfilePhoto(props?.userProfile)
     </div>
     <div class="mt-2 sm:mt-20">
       <div class="flex flex-col text-center sm:text-left sm:space-y-0">
-        <div>
+        <div v-if="displayName">
           <span class="truncate text-xl font-extrabold">{{ displayName }}</span>
         </div>
         <div>

@@ -3,6 +3,7 @@ export default {
         confirmPassword: 'Password doesn\'t match'
     },
     common: {
+        About: 'About',
         Home: 'Home',
         Login: 'Login',
         Register: 'Register',
@@ -15,6 +16,7 @@ export default {
         ResetPassword: 'Reset password',
         Resend: 'Resend',
         processing: 'processing...',
-        Profile: 'Profile'
+        Profile: 'Profile',
+        Settings: 'Settings'
     }
 }
