@@ -36,14 +36,15 @@ const items = computed(() => [
 </script>
 
 <template>
-  <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-52' }">
-    <UAvatar v-if="user?.photoURL" :src="user.photoURL" :alt="user.displayName||'user' + ' avatar'" size="sm"/>
+  <UDropdown :items="items" :ui="{ item: { icon: {base: 'w-6 h-6'}, size:'text-md' } }">
+    <UAvatar v-if="user?.photoURL" :src="user.photoURL" :alt="user.displayName||'user' + ' avatar'"/>
     <UButton
         v-else
         color="gray"
         square
         variant="ghost"
         icon="i-heroicons-user"
+        :ui="{icon: {size: {sm: 'w-6 h-6'}}}"
     />
   </UDropdown>
 </template>

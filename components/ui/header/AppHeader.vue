@@ -4,7 +4,7 @@ import {signOut} from "firebase/auth"
 const {t} = useI18n()
 const user = useCurrentUser()
 const firebaseAuth = useFirebaseAuth()
-const { isHeaderDialogOpen } = useUIState()
+const {isHeaderDialogOpen} = useUIState()
 
 const closeDialog = () => {
   isHeaderDialogOpen.value = false
@@ -18,20 +18,22 @@ const logOff = () => {
 </script>
 
 <template>
-  <UHeader>
+  <UHeader :ui="{logo: 'text-2xl'}">
     <template #logo>
       nuxt3-ssr
       <UBadge label="firebase" variant="subtle" class="mb-0.5 hidden md:flex"/>
     </template>
 
     <template #right>
-      <RegisterBar v-if="!user?.emailVerified" class="hidden lg:flex"/>
+      <RegisterBar v-if="!user" class="hidden lg:flex"/>
+<!--      <RegisterBar v-if="!user?.emailVerified" class="hidden lg:flex"/>-->
 
       <UColorModeButton class="hidden md:block"/>
 
       <client-only>
         <LanguageSelectDropdown class="hidden md:block"/>
-        <nav-user v-if="user && user.emailVerified"/>
+        <NavUser v-if="user"/>
+<!--        <NavUser v-if="user && user.emailVerified"/>-->
       </client-only>
     </template>
 
@@ -41,7 +43,8 @@ const logOff = () => {
         <LanguageSelect/>
       </div>
       <UDivider class="my-6"/>
-      <RegisterBar v-if="!user?.emailVerified" block />
+      <RegisterBar v-if="!user" block/>
+<!--      <RegisterBar v-if="!user?.emailVerified" block/>-->
       <UButton v-if="user" :label="t('common.SignOut')" color="green" variant="ghost"
                @click="logOff" block/>
     </template>

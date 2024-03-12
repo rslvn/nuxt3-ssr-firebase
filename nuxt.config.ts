@@ -26,6 +26,9 @@ export default defineNuxtConfig({
     ui: {
         icons: ['heroicons', 'simple-icons', 'emojione']
     },
+    colorMode: {
+        preference: 'system'
+    },
     gtag: {
         id: 'G-VWMF1MJ0W2'
     },

@@ -17,6 +17,7 @@ export default {
         Resend: 'Resend',
         processing: 'processing...',
         Profile: 'Profile',
-        Settings: 'Settings'
+        Settings: 'Settings',
+        Verify: 'Verify',
     }
 }

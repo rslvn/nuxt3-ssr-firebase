@@ -11,7 +11,7 @@ const languages = locales.value.map((item) => {
 </script>
 
 <template>
-  <UDropdown :items="[languages]" :ui="{ item: { disabled: 'cursor-text select-text', width: 'w-32' } }">
+  <UDropdown :items="[languages]" :ui="{ item: { icon: {base: 'w-7 h-7'}, size:'text-lg' } }">
     <UButton
         color="gray"
         square

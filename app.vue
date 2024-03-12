@@ -21,10 +21,10 @@ onMounted(() => {
       console.log(new Date(), '>>>> user logged out')
       return router.push(PAGES.LOGIN.path)
 
-    } else if (user && !user.emailVerified) {
-      // user email is not verified, force logout
-      console.log(new Date(), '>>>> force user logout')
-      await signOut(firebaseAuth)
+    // } else if (user && !user.emailVerified) {
+    //   // user email is not verified, force logout
+    //   console.log(new Date(), '>>>> force user logout')
+    //   await signOut(firebaseAuth)
 
     } else if (user && typeof route.query.redirect === 'string') {
       // user logged in
@@ -35,7 +35,7 @@ onMounted(() => {
       return router.push(PAGES.HOME.path)
 
     } else {
-      console.log(new Date(), '>>>> user logged in, no action')
+      console.log(new Date(), '>>>> user logged in, no action', user)
     }
   })
 })

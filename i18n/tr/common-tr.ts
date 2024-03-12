@@ -14,7 +14,8 @@ export default {
         ForgotPassword: 'Parolami unuttum',
         ResetPassword: 'Parolayi yenile',
         Profile: 'Profil',
-        Settings: 'Ayarlar'
+        Settings: 'Ayarlar',
+        Verify: 'Dogrula',
     },
 
 }

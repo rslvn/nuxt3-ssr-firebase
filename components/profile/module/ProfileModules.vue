@@ -53,17 +53,19 @@ const modules = computed(() => {
   return props.isMyProfile ? profileModuleConfigs : profileModuleConfigs.filter(module => !module.private)
 })
 
-const links = computed(() => modules.value.map(module => module.link))
+const links = computed(() => modules.value.map(module => [module.link]))
 const selectedModule = computed(() => modules.value.find(module => module.type === selectedModuleType.value))
 
 </script>
 
 <template>
-  <UContainer :ui="{ constrained: 'max-w-3xl' }">
-    <UDashboardToolbar class="mt-40 sm:mt-24 xl:mt-16 py-0 px-1.5 overflow-x-auto">
-      <UHorizontalNavigation :links="links"/>
-    </UDashboardToolbar>
-  </UContainer>
+  <div>
+    <UContainer :ui="{ constrained: 'max-w-2xl' }">
+      <UDashboardToolbar class="mt-40 sm:mt-24 xl:mt-16 py-0 px-1.5 overflow-x-auto">
+        <UHorizontalNavigation :links="links" :ui="{wrapper: 'justify-center', label:'text-lg', icon: {base: 'w-7 h-7'}}"/>
+      </UDashboardToolbar>
+    </UContainer>
 
-  <component :is="selectedModule.component" v-if="selectedModule" v-bind="props"/>
+    <component :is="selectedModule.component" v-if="selectedModule" v-bind="props"/>
+  </div>
 </template>

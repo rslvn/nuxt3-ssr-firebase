@@ -1,5 +1,10 @@
 export default {
     field: {
+        fullName: {
+            label: 'Adiniz',
+            placeholder: 'enter full name name',
+            description: 'Sizinle iletisim kuracagimiz email addresiniz'
+        },
         firstName: {
             label: 'First Name',
             placeholder: 'enter first name'
