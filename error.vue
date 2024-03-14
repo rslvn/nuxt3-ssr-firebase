@@ -4,7 +4,7 @@
     <UContainer>
       <UMain>
         <UPage>
-          <UPageError :error="error" />
+          <UPageError :error="error"/>
         </UPage>
       </UMain>
     </UContainer>
@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import type { NuxtError } from '#app'
+import type {NuxtError} from '#app'
 
-defineProps<{
+const props = defineProps<{
   error: NuxtError
 }>()
 </script>

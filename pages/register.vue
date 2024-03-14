@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {createUserWithEmailAndPassword, sendEmailVerification} from "firebase/auth";
 import {PAGES} from "~/types";
+import {computed} from "vue";
 
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
@@ -9,33 +10,58 @@ definePageMeta({
 const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.REGISTER))
 
-const {t} = useI18n()
+const {t, locale} = useI18n()
 const firebaseAuth = useFirebaseAuth();
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {email, password, confirmPassword, getSchema} = useFormFields()
 const loading = ref(false)
-const providers = [
-  {
-    label: t('page.register.provider', {provider: 'Google'}),
-    icon: 'i-simple-icons-google',
-    color: 'red' as const,
-    click: () => googleRegister
-  },
-  {
-    label: t('page.register.provider', {provider: 'Facebook'}),
-    icon: 'i-simple-icons-facebook',
-    color: 'blue' as const,
-    click: () => facebookRegister
-  },
-  {
-    label: t('page.register.provider', {provider: 'Twitter'}),
-    icon: 'i-simple-icons-twitter',
-    color: 'sky' as const,
-    click: () => twitterRegister
-  }]
+const providers = computed(() => {
+      return locale
+          ? [
+            {
+              label: t('page.register.provider', {provider: 'Google'}),
+              icon: 'i-simple-icons-google',
+              color: 'red' as const,
+              click: () => googleRegister
+            },
+            {
+              label: t('page.register.provider', {provider: 'Facebook'}),
+              icon: 'i-simple-icons-facebook',
+              color: 'blue' as const,
+              click: () => facebookRegister
+            },
+            {
+              label: t('page.register.provider', {provider: 'Twitter'}),
+              icon: 'i-simple-icons-twitter',
+              color: 'sky' as const,
+              click: () => twitterRegister
+            }
+          ]
+          : null
+    }
+)
+// const providers = [
+//   {
+//     label: t('page.register.provider', {provider: 'Google'}),
+//     icon: 'i-simple-icons-google',
+//     color: 'red' as const,
+//     click: () => googleRegister
+//   },
+//   {
+//     label: t('page.register.provider', {provider: 'Facebook'}),
+//     icon: 'i-simple-icons-facebook',
+//     color: 'blue' as const,
+//     click: () => facebookRegister
+//   },
+//   {
+//     label: t('page.register.provider', {provider: 'Twitter'}),
+//     icon: 'i-simple-icons-twitter',
+//     color: 'sky' as const,
+//     click: () => twitterRegister
+//   }]
 
-const fields = [email, password, confirmPassword]
-const schema = getSchema(fields)
+const fields = computed(() =>[email.value, password.value, confirmPassword.value])
+const schema = computed(() =>getSchema(fields.value))
 
 const facebookRegister = () => {
 }

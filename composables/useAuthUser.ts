@@ -33,7 +33,6 @@ const _useAuthUser = () => {
                     console.log('profile found for', user.value.email)
                     return
                 }
-
                 console.log('No profile of ', user.value.email)
                 // no profile found then create it
                 const username = user.value.email ? generateUsername(user.value.email) : user.value.uid.replace(dashAllRegex, '')
@@ -54,8 +53,7 @@ const _useAuthUser = () => {
                             alt: 'cover photo'
                         }
                     }
-                })
-                    .then(savedProfile => userProfile.value = savedProfile)
+                }).then(savedProfile => userProfile.value = savedProfile)
             })
     }
 
@@ -68,7 +66,6 @@ const _useAuthUser = () => {
     }
 
     const isUsernameOfLoggedInUser = (username: string) => {
-        console.log('>>>> isUsernameOfLoggedInUser ', userProfile.value)
         return !userProfile.value ? false : userProfile.value.username === username
     }
 

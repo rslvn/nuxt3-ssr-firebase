@@ -18,8 +18,8 @@ if(!props.oobCode){
   showErrorAlert({key: 'notification.invalidVerificationCode'})
 }
 
-const fields = [password, confirmPassword]
-const schema = getSchema(fields)
+const fields = computed(() =>[password.value, confirmPassword.value])
+const schema = computed(() =>getSchema(fields.value))
 
 const handleResetPassword = async (data: any) => {
   loading.value = true

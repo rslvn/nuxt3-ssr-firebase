@@ -65,9 +65,9 @@ export default defineNuxtConfig({
             authDomain: process.env.FIREBASE_AUTH_DOMAIN,
             projectId: process.env.FIREBASE_PROJECT_ID,
             storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-            // messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-            // appId: process.env.FIREBASE_APP_ID,
-            // measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+            messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.FIREBASE_APP_ID,
+            measurementId: process.env.FIREBASE_MEASUREMENT_ID,
         },
     },
     sitemap: {
@@ -102,6 +102,7 @@ export default defineNuxtConfig({
                 iso: 'en-US',
                 icon: 'i-emojione-flag-england',
                 files: [
+                    'en/button-en.ts',
                     'en/common-en.ts',
                     'en/field-en.ts',
                     'en/notification-en.ts',
@@ -114,6 +115,7 @@ export default defineNuxtConfig({
                 iso: 'tr-US',
                 icon: 'i-emojione-flag-for-turkey',
                 files: [
+                    'tr/button-tr.ts',
                     'tr/common-tr.ts',
                     'tr/field-tr.ts',
                     'tr/notification-tr.ts',

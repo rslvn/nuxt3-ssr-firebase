@@ -11,5 +11,6 @@ export default {
         verificationMailSent: 'The verification mail has been sent. Please be aware it can be in JUNK or SPAM box.',
         emailNotVerified: 'The email address is not verified. Please check your inbox for verifying your email address. Please be aware it can be in JUNK or SPAM box.',
         emailVerified: 'Great! The email address is verified successfully.',
+        profileNameUpdated: 'Profile name is updated'
     },
 }

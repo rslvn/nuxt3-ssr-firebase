@@ -2,13 +2,14 @@
 import {UserProfile} from "~/types";
 import {getDisplayName} from "~/service/user-profile-service";
 import {sendEmailVerification} from "firebase/auth";
+import {User} from "@firebase/auth";
 
 const props = defineProps<{
   userProfile: UserProfile
+  user: User
   isMyProfile?: boolean
 }>()
 const {t} = useI18n()
-const user = useCurrentUser()
 const {showSuccessToaster, notifyByError} = useNotifyUser()
 
 const displayName = computed(() => {
@@ -17,11 +18,11 @@ const displayName = computed(() => {
 const loading = ref(false)
 
 const sendVerificationLink = () => {
-  if (!user.value) {
+  if (!props.user) {
     return
   }
   loading.value = true
-  sendEmailVerification(user.value)
+  sendEmailVerification(props.user)
       .then(() => {
         showSuccessToaster({key: 'notification.verificationMailSent'})
       })
@@ -56,8 +57,6 @@ const sendVerificationLink = () => {
               {{ t('common.Verify') }}
             </UButton>
           </template>
-
-
         </template>
       </UDashboardSection>
       <UDivider class="mb-4"/>

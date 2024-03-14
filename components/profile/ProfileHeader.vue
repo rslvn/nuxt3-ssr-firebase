@@ -8,7 +8,6 @@ const props = defineProps<{
   isMyProfile?: boolean
 }>()
 
-const {} = useAuthUser()
 const {t} = useI18n()
 
 const displayName = computed(() => {

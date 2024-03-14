@@ -3,9 +3,11 @@
 import {UserProfile} from "~/types";
 import AboutProfile from "~/components/profile/module/AboutProfile.vue";
 import ProfileSettings from "~/components/profile/module/ProfileSettings.vue";
+import {User} from "@firebase/auth";
 
 const props = defineProps<{
   userProfile: UserProfile
+  user: User
   isMyProfile?: boolean
 }>()
 

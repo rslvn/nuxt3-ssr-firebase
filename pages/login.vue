@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import {PAGES} from "~/types";
 import {signInWithEmailAndPassword} from "firebase/auth";
+import {computed} from "vue";
 
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
 })
 
-const {t} = useI18n()
+const {t, locale} = useI18n()
 const {seoMetaInputByPageConfig} = useAppSeoMeta()
 
 useSeoMeta(seoMetaInputByPageConfig(PAGES.LOGIN))
@@ -15,25 +16,31 @@ const firebaseAuth = useFirebaseAuth()
 const {notifyByError, showWarningToaster} = useNotifyUser()
 const {email, password, getSchema} = useFormFields()
 const loading = ref(false)
-const providers = [
-  {
-    label: t('page.login.provider', {provider: 'Google'}),
-    icon: 'i-simple-icons-google',
-    color: 'red' as const,
-    click: () => googleLogin
-  },
-  {
-    label: t('page.login.provider', {provider: 'Facebook'}),
-    icon: 'i-simple-icons-facebook',
-    color: 'blue' as const,
-    click: () => facebookLogin
-  },
-  {
-    label: t('page.login.provider', {provider: 'Twitter'}),
-    icon: 'i-simple-icons-twitter',
-    color: 'sky' as const,
-    click: () => twitterLogin
-  }]
+const providers = computed(() => {
+      return locale
+          ? [
+            {
+              label: t('page.login.provider', {provider: 'Google'}),
+              icon: 'i-simple-icons-google',
+              color: 'red' as const,
+              click: () => googleLogin
+            },
+            {
+              label: t('page.login.provider', {provider: 'Facebook'}),
+              icon: 'i-simple-icons-facebook',
+              color: 'blue' as const,
+              click: () => facebookLogin
+            },
+            {
+              label: t('page.login.provider', {provider: 'Twitter'}),
+              icon: 'i-simple-icons-twitter',
+              color: 'sky' as const,
+              click: () => twitterLogin
+            }
+          ]
+          : null
+    }
+)
 const facebookLogin = () => {
 }
 const twitterLogin = () => {
@@ -41,8 +48,8 @@ const twitterLogin = () => {
 const googleLogin = () => {
 }
 
-const fields = [email, password]
-const schema = getSchema(fields)
+const fields = computed(() => [email.value, password.value])
+const schema = computed(() => getSchema(fields.value))
 
 const handleLogin = async (data: any) => {
   loading.value = true

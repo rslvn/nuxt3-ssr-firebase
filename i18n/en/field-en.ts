@@ -7,15 +7,18 @@ export default {
         },
         firstName: {
             label: 'First Name',
-            placeholder: 'enter first name'
+            placeholder: 'enter first name',
+            description: 'Your first name that is displayed in your profile'
         },
         middleName: {
-            label: 'First Name',
-            placeholder: 'enter first name'
+            label: 'Middle Name',
+            placeholder: 'enter your middle name',
+            description: 'Your middle name that is displayed in your profile'
         },
         lastName: {
             label: 'Last Name',
-            placeholder: 'enter last name'
+            placeholder: 'enter last name',
+            description: 'Your last name that is displayed in your profile'
         },
         emailAddress: {
             label: 'Email Address',
@@ -34,7 +37,8 @@ export default {
         },
         country: {
             label: 'Country',
-            placeholder: 'enter country'
+            placeholder: 'enter country',
+            description: 'Your country that is displayed in your profile'
         }
     },
 }

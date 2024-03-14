@@ -1,7 +1,19 @@
 <script setup lang="ts">
-
+import {UserProfile} from "~/types";
+import {User} from "@firebase/auth";
+defineProps<{
+  userProfile: UserProfile
+  user: User
+  isMyProfile?: boolean
+}>()
 </script>
 
 <template>
-  <span>Profile settings</span>
+  <UContainer>
+    <UDashboardPanelContent class="pb-24 ">
+      <UCard>
+        <UpdateProfileForm :user-profile="userProfile"/>
+      </UCard>
+    </UDashboardPanelContent>
+  </UContainer>
 </template>

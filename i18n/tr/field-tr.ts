@@ -6,35 +6,38 @@ export default {
             description: 'Sizinle iletisim kuracagimiz email addresiniz'
         },
         firstName: {
-            label: 'First Name',
-            placeholder: 'enter first name'
+            label: 'Adiniz',
+            placeholder: 'Adinizi giriniz',
+            description: 'Profilinizde gorunen adiniz'
         },
         middleName: {
-            label: 'First Name',
-            placeholder: 'enter first name'
+            label: 'Gobek adiniz',
+            placeholder: 'Ikinci adinizi giriniz',
+            description: 'Profilinizde gorunen gobek adiniz'
         },
         lastName: {
-            label: 'Last Name',
-            placeholder: 'enter last name'
+            label: 'Soyadiniz',
+            placeholder: 'Soyadinizi giriniz',
+            description: 'Profilinizde gorunen soyadiniz'
         },
         emailAddress: {
-            label: 'Email Address',
-            placeholder: 'enter email address',
-            description: 'Your email address'
+            label: 'E-posta adresiniz',
+            placeholder: 'e-posta adresinizi giriniz',
+            description: 'Sizin e-posta adresiniz'
         },
         password: {
-            label: 'Password',
-            placeholder: 'enter password',
-            description: 'Your password'
+            label: 'Parola',
+            placeholder: 'Parolayi giriniz',
+            description: 'Sizin parolaniz'
         },
         confirmPassword: {
-            label: 'Confirm password',
-            placeholder: 'confirm password',
-            description: 'You should enter the same password again'
+            label: 'Parolayi onayle',
+            placeholder: 'parolanizi oynaylayiniz',
+            description: 'Parolaniz ile ayni olmalidir'
         },
         country: {
-            label: 'Country',
-            placeholder: 'enter country'
+            label: 'Ulke',
+            placeholder: 'ulkenizi giriniz'
         }
     },
 }
