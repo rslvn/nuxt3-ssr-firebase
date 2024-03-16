@@ -1,6 +1,7 @@
 export default {
     button: {
         UpdateProfileName: 'Update profile name',
-        UpdateUsername: 'Update username',
+        ChangeUsername: 'Change username',
+        ChangePassword: 'Change password',
     }
 }

@@ -10,13 +10,19 @@ defineProps<{
 <template>
   <UContainer>
     <UDashboardPanelContent class="pb-24 ">
+
       <UCard>
-        <UpdateProfileForm :user-profile="userProfile"/>
+        <UpdateProfileNameForm :user-profile="userProfile"/>
       </UCard>
 
       <UCard class="mt-5">
-        <UpdateUsernameForm :user-profile="userProfile"/>
+        <ChangeUsernameForm :user-profile="userProfile"/>
       </UCard>
+
+      <UCard class="mt-5">
+        <ChangePasswordForm :user-profile="userProfile"/>
+      </UCard>
+
     </UDashboardPanelContent>
   </UContainer>
 </template>

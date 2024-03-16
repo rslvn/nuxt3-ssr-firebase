@@ -42,7 +42,7 @@ const updateProfile = () => {
 
 <template>
   <UForm :state="state" :schema="schema" @submit="updateProfile">
-    <UDashboardSection title="Name"
+    <UDashboardSection :title="t('button.UpdateProfileName')"
                        description="This information will be displayed publicly so be careful what you share.">
       <UFormGroup :label="firstName.label" :name="firstName.name" :description="firstName.description"
                   :required="firstName.required"

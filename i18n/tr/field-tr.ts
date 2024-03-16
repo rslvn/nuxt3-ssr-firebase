@@ -30,8 +30,23 @@ export default {
             placeholder: 'Parolayi giriniz',
             description: 'Sizin parolaniz'
         },
+        oldPassword: {
+            label: 'Mevcut parola',
+            placeholder: 'mevcut bir parolanizi giriniz',
+            description: 'Mevcut parolaniz'
+        },
+        newPassword: {
+            label: 'Yeni parola',
+            placeholder: 'yeni bir parolanizi giriniz',
+            description: 'Yeni parolaniz'
+        },
+        newPasswordConfirm: {
+            label: 'Yeni parolayi onayla',
+            placeholder: 'yeni parolanizi onaylayiniz',
+            description: 'Yeni parolaniz ile ayni olmalidir'
+        },
         confirmPassword: {
-            label: 'Parolayi onayle',
+            label: 'Parolayi onayla',
             placeholder: 'parolanizi oynaylayiniz',
             description: 'Parolaniz ile ayni olmalidir'
         },

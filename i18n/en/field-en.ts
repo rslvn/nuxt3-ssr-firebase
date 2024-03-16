@@ -30,6 +30,21 @@ export default {
             placeholder: 'enter password',
             description: 'Your password'
         },
+        oldPassword: {
+            label: 'Current password',
+            placeholder: 'enter the current password',
+            description: 'Your current password'
+        },
+        newPassword: {
+            label: 'New password',
+            placeholder: 'enter a new password',
+            description: 'Your new password'
+        },
+        newPasswordConfirm: {
+            label: 'Confirm new password',
+            placeholder: 'confirm new password',
+            description: 'You should enter the same new password again'
+        },
         confirmPassword: {
             label: 'Confirm password',
             placeholder: 'confirm password',

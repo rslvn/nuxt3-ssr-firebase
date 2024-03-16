@@ -29,7 +29,7 @@ const updateUsername = () => {
       .then((profile) => {
         if (profile) {
           updateUserProfile()
-          showSuccessToaster({key: 'notification.profileNameUpdated'})
+          showSuccessToaster({key: 'notification.profileUsernameUpdated'})
           navigateTo(`${PAGES.PROFILE.path}/${profile.username}`, {replace: true})
         }
       })
@@ -41,17 +41,19 @@ const updateUsername = () => {
 
 <template>
   <UForm :state="state" :schema="schema" @submit="updateUsername">
-    <UFormGroup :label="username.label" :name="username.name" :description="username.description"
-                :required="username.required" eager-validation
-                class="grid grid-cols-1 sm:grid-cols-2 gap-2 items-center"
-                :ui="{ container: '' }">
-      <UInput :type="username.type" :placeholder="username.placeholder" v-model="state.username"
-              :required="username.required"/>
-    </UFormGroup>
+    <UDashboardSection :title="t('button.ChangeUsername')">
+      <UFormGroup :label="username.label" :name="username.name" :description="username.description"
+                  :required="username.required" eager-validation
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-2 items-center"
+                  :ui="{ container: '' }">
+        <UInput :type="username.type" :placeholder="username.placeholder" v-model="state.username"
+                :required="username.required"/>
+      </UFormGroup>
+    </UDashboardSection>
 
     <UDashboardSection>
       <template #links>
-        <UButton type="submit" :label="t('button.UpdateUsername')" :loading="loading" :disabled="loading"/>
+        <UButton type="submit" :label="t('button.ChangeUsername')" :loading="loading" :disabled="loading"/>
       </template>
     </UDashboardSection>
   </UForm>

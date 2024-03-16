@@ -30,6 +30,21 @@ export default function () {
             required: true
         }
     })
+
+    const oldPassword = computed(() => {
+        if (!locale) {
+            return null
+        }
+        return {
+            name: 'oldPassword',
+            type: 'password',
+            label: t('field.oldPassword.label'),
+            placeholder: t('field.oldPassword.placeholder'),
+            description: t('field.oldPassword.description'),
+            color: 'gray',
+            required: true
+        }
+    })
     const confirmPassword = computed(() => {
         if (!locale) {
             return null
@@ -107,6 +122,7 @@ export default function () {
         email: z.string().email(),
         password: z.string().min(6),
         confirmPassword: z.string().min(6),
+        oldPassword: z.string().min(6),
         firstName: z.string().min(2),
         middleName: z.optional(z.string()),
         lastName: z.string().min(2),
@@ -135,6 +151,7 @@ export default function () {
         email,
         password,
         confirmPassword,
+        oldPassword,
         firstName,
         middleName,
         lastName,

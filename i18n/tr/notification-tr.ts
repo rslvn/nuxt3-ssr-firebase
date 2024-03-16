@@ -11,6 +11,8 @@ export default {
         verificationMailSent: 'The verification mail has been sent. Please be aware it can be in JUNK or SPAM box.',
         emailNotVerified: 'The email address is not verified. Please check your inbox for verifying your email address. Please be aware it can be in JUNK or SPAM box.',
         emailVerified: 'Great! The email address is verified successfully.',
-        profileNameUpdated: 'Profil adi kaydedildi'
+        profileNameUpdated: 'Profil adi kaydedildi',
+        profileUsernameUpdated: 'Profil kullanici adi guncellendi',
+        profilePasswordUpdated: 'Parola guncellendi'
     },
 }
