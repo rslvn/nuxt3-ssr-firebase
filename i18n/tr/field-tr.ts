@@ -38,6 +38,11 @@ export default {
         country: {
             label: 'Ulke',
             placeholder: 'ulkenizi giriniz'
+        },
+        username: {
+            label: 'Kullanici adi',
+            placeholder: 'bir kullanici adi giriniz',
+            description: 'Profile baglantinizdaki kullanici adiniz'
         }
     },
 }

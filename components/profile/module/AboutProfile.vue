@@ -2,15 +2,14 @@
 import {UserProfile} from "~/types";
 import {getDisplayName} from "~/service/user-profile-service";
 import {sendEmailVerification} from "firebase/auth";
-import {User} from "@firebase/auth";
 
 const props = defineProps<{
   userProfile: UserProfile
-  user: User
   isMyProfile?: boolean
 }>()
 const {t} = useI18n()
 const {showSuccessToaster, notifyByError} = useNotifyUser()
+const authStore = useAuthStore()
 
 const displayName = computed(() => {
   return getDisplayName(props.userProfile)
@@ -18,11 +17,11 @@ const displayName = computed(() => {
 const loading = ref(false)
 
 const sendVerificationLink = () => {
-  if (!props.user) {
-    return
-  }
   loading.value = true
-  sendEmailVerification(props.user)
+  getCurrentUser()
+      .then(async (user) => {
+        await sendEmailVerification(user)
+      })
       .then(() => {
         showSuccessToaster({key: 'notification.verificationMailSent'})
       })
@@ -41,8 +40,9 @@ const sendVerificationLink = () => {
         <template #links>
           <span>{{ userProfile?.email }}</span>
 
-          <template v-if="isMyProfile && user">
-            <UIcon v-if="user.emailVerified" name="i-heroicons-check-circle-solid" class="text-green-700 h-7 w-7"
+          <template v-if="isMyProfile && authStore.authUser">
+            <UIcon v-if="authStore.authUser?.emailVerified" name="i-heroicons-check-circle-solid"
+                   class="text-green-700 h-7 w-7"
                    dynamic></UIcon>
             <UButton
                 v-else

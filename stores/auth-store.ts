@@ -1,24 +1,16 @@
-import {acceptHMRUpdate, defineStore} from 'pinia'
-
-
+import {defineStore} from 'pinia'
+import {AuthState, AuthUser} from "~/types";
 
 export const useAuthStore = defineStore('auth-store', {
-    state: () => {
+
+    state: (): AuthState => {
         return {
-            counter: 0
+            authUser: null
         }
     },
     actions: {
-        increase() {
-            this.counter++
-        },
-        decrease() {
-            this.counter--
+        setAuthUser(authUser: AuthUser) {
+            this.authUser = authUser
         },
     }
 })
-
-// make sure to pass the right store definition, `useAuth` in this case.
-if (import.meta.hot) {
-    import.meta.hot.accept(acceptHMRUpdate(useAuthStore, import.meta.hot))
-}

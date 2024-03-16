@@ -3,7 +3,6 @@ import {PAGES} from "~/types";
 
 const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.HOME))
-const user = useCurrentUser()
 </script>
 
 <template>

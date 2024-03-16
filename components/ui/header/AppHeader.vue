@@ -2,9 +2,9 @@
 import {signOut} from "firebase/auth"
 
 const {t} = useI18n()
-const user = useCurrentUser()
 const firebaseAuth = useFirebaseAuth()
 const {isHeaderDialogOpen} = useUIState()
+const authStore = useAuthStore()
 
 const closeDialog = () => {
   isHeaderDialogOpen.value = false
@@ -25,16 +25,14 @@ const logOff = () => {
     </template>
 
     <template #right>
-      <RegisterBar v-if="!user" class="hidden lg:flex"/>
-<!--      <RegisterBar v-if="!user?.emailVerified" class="hidden lg:flex"/>-->
+      <RegisterBar v-if="!authStore.authUser" class="hidden lg:flex"/>
+      <!--      <RegisterBar v-if="!user?.emailVerified" class="hidden lg:flex"/>-->
 
       <UColorModeButton class="hidden md:block"/>
 
-      <client-only>
-        <LanguageSelectDropdown class="hidden md:block"/>
-        <NavUser v-if="user"/>
-<!--        <NavUser v-if="user && user.emailVerified"/>-->
-      </client-only>
+      <LanguageSelectDropdown class="hidden md:block"/>
+      <NavUser v-if="authStore.authUser"/>
+      <!--        <NavUser v-if="user && user.emailVerified"/>-->
     </template>
 
     <template #panel>
@@ -43,9 +41,9 @@ const logOff = () => {
         <LanguageSelect/>
       </div>
       <UDivider class="my-6"/>
-      <RegisterBar v-if="!user" block/>
-<!--      <RegisterBar v-if="!user?.emailVerified" block/>-->
-      <UButton v-if="user" :label="t('common.SignOut')" color="green" variant="ghost"
+      <RegisterBar v-if="!authStore.authUser" block/>
+      <!--      <RegisterBar v-if="!user?.emailVerified" block/>-->
+      <UButton v-if="authStore.authUser" :label="t('common.SignOut')" color="green" variant="ghost"
                @click="logOff" block/>
     </template>
   </UHeader>

@@ -1,4 +1,4 @@
-import {CollectionField, FirebaseQueryOperator, OrderBy, WhereClause} from '~/types'
+import {CollectionField, FirebaseQueryOperator, WhereClause} from '~/types'
 
 export interface KeyValuePair {
     key: string,

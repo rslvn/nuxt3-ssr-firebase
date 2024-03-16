@@ -1,7 +1,9 @@
 import {UserProfile} from "~/types";
+import slugify from "slugify";
 
 const DEFAULT_PROFILE_PHOTO = 'https://picsum.photos/500/800'
 const DEFAULT_COVER_PHOTO = 'https://picsum.photos/1920/1080?random=1'
+const dashAllRegex = /-/g
 
 export const getProfilePhoto = (userProfile?: UserProfile) => {
     return userProfile?.profilePhoto?.image?.src || DEFAULT_PROFILE_PHOTO
@@ -21,4 +23,20 @@ export const getDisplayName = (userProfile?: UserProfile) => {
         return userProfile.name.firstName
     }
     return null
+}
+
+export const generateUsernameById = (id: string) => {
+    return id.replace(dashAllRegex, '')
+}
+
+export const generateUsernameByEmail = (email: string) => {
+    const usernamePrefix = email.replace(/@.*$/, '')
+    return slugify(usernamePrefix, {
+        lower: true,
+        remove: /[*+~.,?#=()'"!:@]/g
+    }).replace(dashAllRegex, '') + (1000 + Math.random() * 9000).toFixed(0)
+}
+
+export const generateUsernameByEmailWith4DigitSuffix = (email: string) => {
+    return generateUsernameByEmail(email).replace(dashAllRegex, '') + (1000 + Math.random() * 9000).toFixed(0)
 }

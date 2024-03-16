@@ -1,6 +1,7 @@
 export default {
     validation: {
-        confirmPassword: 'Parola eslesmedi'
+        confirmPassword: 'Parola eslesmedi',
+        username: '{username} alinmis. Baska bir kullanici adi deneyiniz',
     },
     common: {
         About: 'Hakkinda',
@@ -12,6 +13,7 @@ export default {
         Warning: 'Uyari',
         Info: 'Bilgilendirme',
         ForgotPassword: 'Parolami unuttum',
+        Optional: 'Optional',
         ResetPassword: 'Parolayi yenile',
         Profile: 'Profil',
         Settings: 'Ayarlar',

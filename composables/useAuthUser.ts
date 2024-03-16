@@ -1,49 +1,49 @@
-import {createSharedComposable} from '@vueuse/core'
-import {UserProfile} from "~/types"
-import slugify from 'slugify'
+import {AuthUser, UserProfile} from "~/types"
 import {User} from "@firebase/auth";
+import {generateUsernameByEmail, generateUsernameById, getDisplayName} from "~/service/user-profile-service";
+import {useAuthStore} from "~/stores/auth-store";
 
-const dashAllRegex = /-/g
-
-const generateUsername = (email: string) => {
-    const usernamePrefix = email.replace(/@.*$/, '')
-    return slugify(usernamePrefix, {
-        lower: true,
-        remove: /[*+~.,?#=()'"!:@]/g
-    }).replace(dashAllRegex, '') + (1000 + Math.random() * 9000).toFixed(0)
-}
-
-const _useAuthUser = () => {
+export default function () {
+    const authStore = useAuthStore()
     const {getUserProfile, saveUserProfile} = useUserProfileCollection()
-    const user = useCurrentUser()
-    const userProfile = ref(null as UserProfile)
 
-    const loadProfile = (newUser?: User) => {
-        if (user.value?.uid === newUser?.uid) {
+    const toAuthUser = (user: User, userProfile: UserProfile): AuthUser => {
+        return {
+            userId: userProfile.id,
+            username: userProfile.username,
+            displayName: getDisplayName(userProfile),
+            email: userProfile.email,
+            emailVerified: user.emailVerified,
+            profilePhoto: userProfile.profilePhoto.image,
+            providers: [],
+        }
+    }
+
+    const setAuthStoreByUser = async (user: User) => {
+        if (!user?.uid) {
+            authStore.setAuthUser(null)
             return
         }
-        if (!user.value?.uid) {
-            userProfile.value = null
-            return
-        }
-        getUserProfile(user.value.uid)
-            .then(profile => {
-                if (profile) { // profile found
-                    userProfile.value = profile
-                    console.log('profile found for', user.value.email)
+
+        console.log(new Date(), '>>>> initializeAuthUserStore', user.email)
+        await getUserProfile(user.uid)
+            .then(async (userProfile) => {
+                if (userProfile) { // profile found
+                    console.log(new Date(), 'profile found for', user.email)
+                    authStore.setAuthUser(toAuthUser(user, userProfile))
                     return
                 }
-                console.log('No profile of ', user.value.email)
+                console.log(new Date(), 'No profile of ', user.email)
                 // no profile found then create it
-                const username = user.value.email ? generateUsername(user.value.email) : user.value.uid.replace(dashAllRegex, '')
-                saveUserProfile({
-                    id: user.value.uid,
+                const username = user.email ? generateUsernameByEmail(user.email) : generateUsernameById(user.uid)
+                await saveUserProfile({
+                    id: user.uid,
                     username,
-                    name: {firstName: user.value.displayName?.split(' ')[0] || null},
-                    email: user.value.email,
+                    name: {firstName: user.displayName?.split(' ')[0] || null},
+                    email: user.email,
                     profilePhoto: {
                         image: {
-                            src: user.value.photoURL || 'https://picsum.photos/500/800',
+                            src: user.photoURL || 'https://picsum.photos/500/800',
                             alt: 'profile photo'
                         }
                     },
@@ -53,28 +53,14 @@ const _useAuthUser = () => {
                             alt: 'cover photo'
                         }
                     }
-                }).then(savedProfile => userProfile.value = savedProfile)
+                }).then(userProfile => {
+                    console.log(new Date(), 'profile created for', user.email)
+                    authStore.setAuthUser(toAuthUser(user, userProfile))
+                })
             })
     }
 
-    loadProfile()
-
-    watch(user, async () => loadProfile(user.value), {immediate: true})
-
-    const isUserProfileOfLoggedInUser = (requestedProfile: UserProfile) => {
-        return !userProfile.value ? false : userProfile.value.id === requestedProfile.id
-    }
-
-    const isUsernameOfLoggedInUser = (username: string) => {
-        return !userProfile.value ? false : userProfile.value.username === username
-    }
-
     return {
-        user,
-        userProfile,
-        isUserProfileOfLoggedInUser,
-        isUsernameOfLoggedInUser
+        setAuthStoreByUser
     }
 }
-
-export const useAuthUser = createSharedComposable(_useAuthUser)

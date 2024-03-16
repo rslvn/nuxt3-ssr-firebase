@@ -40,28 +40,9 @@ const providers = computed(() => {
           : null
     }
 )
-// const providers = [
-//   {
-//     label: t('page.register.provider', {provider: 'Google'}),
-//     icon: 'i-simple-icons-google',
-//     color: 'red' as const,
-//     click: () => googleRegister
-//   },
-//   {
-//     label: t('page.register.provider', {provider: 'Facebook'}),
-//     icon: 'i-simple-icons-facebook',
-//     color: 'blue' as const,
-//     click: () => facebookRegister
-//   },
-//   {
-//     label: t('page.register.provider', {provider: 'Twitter'}),
-//     icon: 'i-simple-icons-twitter',
-//     color: 'sky' as const,
-//     click: () => twitterRegister
-//   }]
 
-const fields = computed(() =>[email.value, password.value, confirmPassword.value])
-const schema = computed(() =>getSchema(fields.value))
+const fields = computed(() => [email.value, password.value, confirmPassword.value])
+const schema = computed(() => getSchema(fields.value))
 
 const facebookRegister = () => {
 }

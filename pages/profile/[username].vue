@@ -4,14 +4,9 @@ import {ProvideInjectType} from '~/types';
 const {seoMetaInputByUserProfile} = useAppSeoMeta()
 
 const {t} = useI18n()
-const {notifyByError} = useNotifyUser()
 const {getUserProfileByUsername, getUserProfile} = useUserProfileCollection()
-const currentUser = ref(null)
-await getCurrentUser()
-    .then(user => {
-      currentUser.value = user
-    })
 const {params} = useRoute()
+const authStore = useAuthStore()
 
 const username = params.username as string
 if (!username) {
@@ -27,8 +22,7 @@ await getUserProfileByUsername(username)
       userProfile.value = profile
     })
     .catch((reason) => {
-      console.log('>>>>> reason',reason)
-      if(reason?.code === 'permission-denied'){
+      if (reason?.code === 'permission-denied') {
         throw createError({statusCode: 403, statusMessage: t('page.accessDenied'), fatal: true})
       }
       throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
@@ -36,7 +30,7 @@ await getUserProfileByUsername(username)
 
 useSeoMeta(seoMetaInputByUserProfile(userProfile.value))
 
-const isMyProfile = computed(() => userProfile.value?.id === currentUser.value?.uid);
+const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?.userId);
 
 const updateUserProfile = async () => {
   userProfile.value = await getUserProfile(userProfile.value.id)
@@ -55,7 +49,7 @@ provide(ProvideInjectType.USER_PROFILE_UPDATED, {
         <ProfileHeaderSkeleton v-else/>
       </section>
 
-      <ProfileModules v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile" :user="currentUser"/>
+      <ProfileModules v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
     </UDashboardPanel>
   </UDashboardPage>
 </template>

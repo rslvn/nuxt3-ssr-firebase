@@ -12,7 +12,7 @@ const router = useRouter()
 const route = useRoute()
 const user = useCurrentUser()
 const {t} = useI18n()
-// const firebaseAuth = useFirebaseAuth()
+const {setAuthStoreByUser} = useAuthUser()
 
 onErrorCaptured((error, instance, info) => {
   console.log('[errorCaptured] error', error, 'instance:', instance, 'info:', info)
@@ -22,8 +22,9 @@ onErrorCaptured((error, instance, info) => {
 })
 
 // we don't need this watcher on server
-onMounted(() => {
+onMounted(async () => {
   watch(user, async (user, prevUser) => {
+    await setAuthStoreByUser(user)
     if (prevUser && prevUser.emailVerified && !user) {
       // user logged out
       console.log(new Date(), '>>>> user logged out')
@@ -43,8 +44,12 @@ onMounted(() => {
       return router.push(PAGES.HOME.path)
 
     } else {
-      console.log(new Date(), '>>>> user logged in, no action', user)
+      console.log(new Date(), '>>>> user logged in, no action')
     }
   })
 })
+
+await getCurrentUser()
+    .then(async (value) => await setAuthStoreByUser(value))
+
 </script>

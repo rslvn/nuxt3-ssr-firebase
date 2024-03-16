@@ -31,11 +31,9 @@ const profilePhoto = getProfilePhoto(props?.userProfile)
   </UCarousel>
   <div
       class="-mt-28 mx-auto flex flex-col items-center w-full px-4 absolute sm:space-x-2 sm:flex-row sm:px-6 lg:px-8">
-    <div class="ring-3 ring-gray-900 dark:ring-gray-300 h-52 w-52">
-      <div
-          class="bg-origin-padding p-4 border-4 border-gray-500 dark:border-gray-900 rounded-full bg-center bg-gray-400 bg-no-repeat h-52 w-52"
-          :style="{'background-image': `url(${profilePhoto})`}"
-      ></div>
+    <div class="bg-gray-400 rounded-full h-52 w-52">
+      <img class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900"
+           :src="profilePhoto" alt="asdasd">
     </div>
     <div class="mt-2 sm:mt-20">
       <div class="flex flex-col text-center sm:text-left sm:space-y-0">

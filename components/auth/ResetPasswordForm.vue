@@ -2,24 +2,24 @@
 import {PAGES} from "~/types";
 import {confirmPasswordReset, verifyPasswordResetCode} from "firebase/auth";
 
-const props =defineProps({
+const props = defineProps({
   oobCode: {
     type: String,
     required: false,
     default: ''
   },
 })
-const {notifyByError, closeAlert, alertMessage,showErrorAlert, showSuccessAlert} = useNotifyUser()
+const {notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert} = useNotifyUser()
 const {t} = useI18n()
 const firebaseAuth = useFirebaseAuth()
 const {password, confirmPassword, getSchema} = useFormFields()
 const loading = ref(false)
-if(!props.oobCode){
+if (!props.oobCode) {
   showErrorAlert({key: 'notification.invalidVerificationCode'})
 }
 
-const fields = computed(() =>[password.value, confirmPassword.value])
-const schema = computed(() =>getSchema(fields.value))
+const fields = computed(() => [password.value, confirmPassword.value])
+const schema = computed(() => getSchema(fields.value))
 
 const handleResetPassword = async (data: any) => {
   loading.value = true
@@ -53,7 +53,9 @@ const handleResetPassword = async (data: any) => {
         >
           <template #footer>
             {{ t('page.auth.rememberedPassword') }}
-            <NuxtLink :to="PAGES.LOGIN.path" class="text-primary font-medium">{{ t(PAGES.LOGIN.title.key, PAGES.LOGIN.title.params) }}</NuxtLink>
+            <NuxtLink :to="PAGES.LOGIN.path" class="text-primary font-medium">
+              {{ t(PAGES.LOGIN.title.key, PAGES.LOGIN.title.params) }}
+            </NuxtLink>
           </template>
         </UAuthForm>
       </client-only>

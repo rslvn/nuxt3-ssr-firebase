@@ -1,5 +1,6 @@
 export default {
     button: {
-        UpdateProfileName: 'Profil adini kaydet'
+        UpdateProfileName: 'Profil adini kaydet',
+        UpdateUsername: 'Kullanici adini kaydet',
     }
 }

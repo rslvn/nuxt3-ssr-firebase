@@ -9,7 +9,7 @@ defineProps({
   }
 })
 
-const { isHeaderDialogOpen } = useUIState()
+const {isHeaderDialogOpen} = useUIState()
 const {t} = useI18n()
 
 </script>

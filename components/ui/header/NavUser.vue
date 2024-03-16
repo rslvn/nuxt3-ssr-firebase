@@ -3,23 +3,20 @@ import {signOut} from "firebase/auth";
 import {PAGES} from "~/types";
 
 const {t} = useI18n()
-// const user = useCurrentUser()
 const firebaseAuth = useFirebaseAuth()
-const {user, userProfile} = useAuthUser()
+const authStore = useAuthStore()
 
 const navigateToProfile = () => {
-  if (userProfile.value?.username) {
-    return navigateTo(`${PAGES.PROFILE.path}/${userProfile.value.username}`)
+  if (authStore.authUser?.username) {
+    return navigateTo(`${PAGES.PROFILE.path}/${authStore.authUser.username}`)
   }
 }
 const items = computed(() => [
   [
     {
-      label: userProfile.value?.username || user.value?.email,
+      label: authStore.authUser?.username || authStore.authUser?.email,
       icon: "i-heroicons-user",
-      avatar: {
-        src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-      },
+      slot: 'profile',
       click: navigateToProfile
     }
   ],
@@ -37,14 +34,21 @@ const items = computed(() => [
 
 <template>
   <UDropdown :items="items" :ui="{ item: { icon: {base: 'w-6 h-6'}, size:'text-md' } }">
-    <UAvatar v-if="user?.photoURL" :src="user.photoURL" :alt="user.displayName||'user' + ' avatar'"/>
     <UButton
-        v-else
         color="gray"
         square
         variant="ghost"
-        icon="i-heroicons-user"
         :ui="{icon: {size: {sm: 'w-6 h-6'}}}"
-    />
+    >
+      <img class="object-cover rounded-full bg-center h-7 w-7"
+           :src="authStore.authUser.profilePhoto.src" alt="asdasd">
+    </UButton>
+
+    <template #profile="{ item }">
+      <img class="object-cover rounded-full bg-center h-6 w-6"
+           :src="authStore.authUser.profilePhoto.src" alt="asdasd">
+      <span> {{ authStore.authUser?.displayName || 'Profile' }}</span>
+    </template>
+
   </UDropdown>
 </template>

@@ -1,5 +1,39 @@
 import {Timestamp} from 'firebase/firestore'
 
+export interface Image {
+    src: string
+    alt?: string
+    path?: string
+}
+
+// auth types
+export enum ProviderType {
+    PASSWORD = 'password',
+    GOOGLE = 'google.com',
+    TWITTER = 'twitter.com',
+    FACEBOOK = 'facebook.com',
+}
+
+export interface ProviderData {
+    providerType: ProviderType
+    displayName?: string
+    email?: string
+    phoneNumber?: string
+    photoURL?: string
+    uid?: string
+}
+
+export interface AuthUser {
+    displayName: string
+    email?: string
+    profilePhoto?: Image
+    userId: string
+    username: string
+    emailVerified: boolean
+    providers: ProviderData[]
+}
+
+// firestore types
 export enum FirebaseQueryOperator {
     LT = '<',
     LE = '<=',
@@ -52,12 +86,6 @@ export enum AlbumType {
     PROFILE = 'PROFILE',
     COVER = 'COVER',
     CUSTOM = 'CUSTOM',
-}
-
-export interface Image {
-    src: string
-    alt?: string
-    path?: string
 }
 
 export interface Album extends BaseModel {

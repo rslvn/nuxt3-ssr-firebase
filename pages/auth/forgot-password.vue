@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { LazyForgetPasswordForm } from '#components'
+import {LazyForgetPasswordForm} from '#components'
+
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
 })

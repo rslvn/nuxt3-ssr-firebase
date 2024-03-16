@@ -25,7 +25,7 @@ export default function () {
     const showSuccessAlert = (message: TranslationConfig, title?: TranslationConfig) => {
         showAlert(NOTIFICATION_TYPES.SUCCESS, message, title)
     }
-    
+
     const showErrorAlert = (message: TranslationConfig, title?: TranslationConfig) => {
         showAlert(NOTIFICATION_TYPES.ERROR, message, title)
     }

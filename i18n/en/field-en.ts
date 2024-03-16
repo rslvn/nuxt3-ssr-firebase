@@ -39,6 +39,11 @@ export default {
             label: 'Country',
             placeholder: 'enter country',
             description: 'Your country that is displayed in your profile'
+        },
+        username: {
+            label: 'Username',
+            placeholder: 'enter a username',
+            description: 'Your username in your profile url'
         }
     },
 }

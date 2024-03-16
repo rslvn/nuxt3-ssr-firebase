@@ -18,6 +18,8 @@ const state = reactive({
   middleName: props.userProfile?.name?.middleName || '',
   lastName: props.userProfile?.name?.lastName || '',
 })
+const fields = computed(() => [firstName.value, middleName.value, lastName.value])
+const schema = computed(() => getSchema(fields.value))
 
 const updateProfile = () => {
   loading.value = true
@@ -36,30 +38,30 @@ const updateProfile = () => {
       .finally(() => loading.value = false)
 }
 
-const fields = computed(() => [firstName.value, middleName.value, lastName.value])
-const schema = computed(() => getSchema(fields.value))
-
 </script>
 
 <template>
   <UForm :state="state" :schema="schema" @submit="updateProfile">
     <UDashboardSection title="Name"
                        description="This information will be displayed publicly so be careful what you share.">
-      <UFormGroup :label="firstName.label" :description="firstName.description"
-                  class="grid grid-cols-1 sm:grid-cols-2 gap-2 items-center"
+      <UFormGroup :label="firstName.label" :name="firstName.name" :description="firstName.description"
+                  :required="firstName.required"
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
         <UInput :type="firstName.type" :placeholder="firstName.placeholder" v-model="state.firstName"/>
       </UFormGroup>
 
-      <UFormGroup :label="middleName.label" :description="middleName.description"
-                  class="grid grid-cols-1 sm:grid-cols-2 gap-2 items-center"
+      <UFormGroup :label="middleName.label" :name="middleName.name" :description="middleName.description"
+                  :required="middleName.required"
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
         <UInput :type="middleName.type" :placeholder="middleName.placeholder" v-model="state.middleName"/>
       </UFormGroup>
 
-      <UFormGroup :label="lastName.label" :description="lastName.description"
-                  class="grid grid-cols-1 sm:grid-cols-2 gap-2 items-center"
-                  :ui="{ container: '' }">
+      <UFormGroup :label="lastName.label" :name="lastName.name" :description="lastName.description"
+                  :required="lastName.required"
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-2"
+                  :ui="{ container: '', error: 'text-sm' }">
         <UInput :type="lastName.type" :placeholder="lastName.placeholder" v-model="state.lastName"/>
       </UFormGroup>
     </UDashboardSection>
