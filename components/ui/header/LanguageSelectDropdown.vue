@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const {locales, setLocale} = useI18n()
-const languages = locales.value.map((item) => {
-  return {
-    label: item.name,
-    icon: item.icon,
-    value: item.code,
-    click: () => setLocale(item.code)
-  }
-})
+const {locales, setLocale, locale} = useI18n()
+const languages = computed(() => locales.value.map((item) => ({
+      label: item.name,
+      labelClass: locale.value === item.code ? 'text-primary-400' : '',
+      icon: item.icon,
+      value: item.code,
+      click: () => setLocale(item.code)
+    })))
+
 </script>
 
 <template>

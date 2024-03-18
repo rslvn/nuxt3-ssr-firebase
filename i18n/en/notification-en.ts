@@ -13,6 +13,8 @@ export default {
         emailVerified: 'Great! The email address is verified successfully.',
         profileNameUpdated: 'Profile name is updated',
         profileUsernameUpdated: 'Profile username is changed',
-        profilePasswordUpdated: 'Password is changed'
+        profilePasswordUpdated: 'Password is changed',
+        profileUrlCopied: 'Profile URL copied',
+        noEmailAuthentication: 'You don\'t have an email password authentication yet'
     },
 }

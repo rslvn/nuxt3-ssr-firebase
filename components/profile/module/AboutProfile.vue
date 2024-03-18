@@ -36,7 +36,7 @@ const sendVerificationLink = () => {
 
       <UDashboardSection :title="t('field.emailAddress.label')" :description="t('field.emailAddress.description')"
                          icon="i-heroicons-envelope"
-                         :ui="{container: 'flex items-center justify-center sm:justify-between sm:flex-row gap-4', title: 'font-normal', icon:{base: 'w-8 h-8'}}">
+                         :ui="{container: 'flex items-center justify-center sm:justify-between sm:flex-row gap-4', title: 'font-normal', icon:{base: 'w-5 h-5'}}">
         <template #links>
           <span>{{ userProfile?.email }}</span>
 
@@ -62,7 +62,7 @@ const sendVerificationLink = () => {
       <UDivider class="mb-4"/>
       <UDashboardSection :title="t('field.fullName.label')" :description="t('field.fullName.description')"
                          icon="i-heroicons-identification"
-                         :ui="{container: 'flex items-center justify-center sm:justify-between sm:flex-row gap-4', title: 'font-normal', icon:{base: 'w-8 h-8'}}">
+                         :ui="{container: 'flex items-center justify-center sm:justify-between sm:flex-row gap-4', title: 'font-normal', icon:{base: 'w-5 h-5'}}">
         <template #links>
           <span>{{ displayName }}</span>
         </template>
@@ -70,5 +70,4 @@ const sendVerificationLink = () => {
       <UDivider class="mb-4"/>
     </UDashboardPanelContent>
   </UContainer>
-
 </template>

@@ -5,7 +5,8 @@ import {getDisplayName} from "~/service/user-profile-service";
 export default function () {
     const {t} = useI18n()
     const runtimeConfig = useRuntimeConfig()
-    const {fullPath} = useRoute()
+    const requestURL = useRequestURL()
+    // const {fullPath} = useRoute()
 
     const getSeoMetaInput = (title: string, description: string, image: string): UseSeoMetaInput => {
         return {
@@ -13,7 +14,7 @@ export default function () {
             description,
             ogTitle: title,
             ogDescription: description,
-            ogUrl: `${runtimeConfig.public.url}${fullPath}`,
+            ogUrl: requestURL.href,
             ogImage: image,
             twitterCard: 'summary_large_image',
             twitterTitle: title,
@@ -25,7 +26,7 @@ export default function () {
     const seoMetaInputByPageConfig = (pageConfig: PageConfig): UseSeoMetaInput => {
         const title = t(pageConfig.title.key, pageConfig.title.params)
         const description = t(pageConfig.description.key, pageConfig.description.params)
-        const image = runtimeConfig.public.url + '/img/cover-20240206.png'
+        const image = requestURL.origin + '/img/cover-20240206.png'
 
         return getSeoMetaInput(title, description, image)
     }
@@ -33,7 +34,7 @@ export default function () {
     const seoMetaInputByUserProfile = (userProfile: UserProfile): UseSeoMetaInput => {
         const displayName = getDisplayName(userProfile)
         const title = displayName || t('common.Profile')
-        const description = displayName ? `${runtimeConfig.public.appName} profile of ${title}` : `${runtimeConfig.public.appName} profile`
+        const description = displayName ? `${runtimeConfig.public.appName} profile of ${displayName}` : `${runtimeConfig.public.appName} profile`
         const image = userProfile?.profilePhoto?.image?.src || 'https://picsum.photos/500/800'
         return getSeoMetaInput(title, description, image)
     }

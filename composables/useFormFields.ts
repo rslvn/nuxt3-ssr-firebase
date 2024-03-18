@@ -109,7 +109,7 @@ export default function () {
         }
         return {
             name: 'username',
-            type: 'text',
+            type: 'username',
             label: t('field.username.label'),
             placeholder: t('field.username.placeholder'),
             description: t('field.username.description'),
@@ -120,13 +120,13 @@ export default function () {
 
     const schemaConfig: any = {
         email: z.string().email(),
-        password: z.string().min(6),
-        confirmPassword: z.string().min(6),
-        oldPassword: z.string().min(6),
-        firstName: z.string().min(2),
-        middleName: z.optional(z.string()),
-        lastName: z.string().min(2),
-        username: z.string().min(5).refine(async (username: string) => !(await getUserProfileByUsername(username)), (username) => ({
+        password: z.string().min(6).max(32),
+        confirmPassword: z.string().min(6).max(32),
+        oldPassword: z.string().min(6).max(32),
+        firstName: z.string().min(2).max(32),
+        middleName: z.optional(z.string().max(64)),
+        lastName: z.string().min(2).max(64),
+        username: z.string().min(5).max(32).refine(async (username: string) => !(await getUserProfileByUsername(username)), (username) => ({
             message: t('validation.username', {username}),
         }))
     }

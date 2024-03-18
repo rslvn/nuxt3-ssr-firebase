@@ -11,6 +11,7 @@ const {password, confirmPassword, oldPassword, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {t} = useI18n()
+const {passwordProviderIdExist} = useAuthUser()
 
 const loading = ref(false)
 const state = reactive({
@@ -20,6 +21,8 @@ const state = reactive({
 })
 const fields = computed(() => [password.value, confirmPassword.value, oldPassword.value])
 const schema = computed(() => getSchema(fields.value))
+
+const noPasswordProvider = computed(() => !passwordProviderIdExist.value)
 
 const changePassword = async () => {
   loading.value = true
@@ -48,7 +51,8 @@ const changePassword = async () => {
                   :required="oldPassword.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '', error: 'text-sm' }">
-        <UInput :type="oldPassword.type" :placeholder="oldPassword.placeholder" v-model="state.oldPassword"/>
+        <UInput :type="oldPassword.type" :placeholder="oldPassword.placeholder" v-model="state.oldPassword"
+                :disabled="noPasswordProvider"/>
       </UFormGroup>
 
       <UFormGroup :label="t('field.newPassword.label')" :name="password.name"
@@ -56,7 +60,8 @@ const changePassword = async () => {
                   :required="password.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
-        <UInput :type="password.type" :placeholder="t('field.newPassword.placeholder')" v-model="state.password"/>
+        <UInput :type="password.type" :placeholder="t('field.newPassword.placeholder')" v-model="state.password"
+                :disabled="noPasswordProvider"/>
       </UFormGroup>
 
       <UFormGroup :label="t('field.newPasswordConfirm.label')" :name="confirmPassword.name"
@@ -65,14 +70,18 @@ const changePassword = async () => {
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
         <UInput :type="confirmPassword.type" :placeholder="t('field.newPasswordConfirm.placeholder')"
-                v-model="state.confirmPassword"/>
+                v-model="state.confirmPassword" :disabled="noPasswordProvider"/>
       </UFormGroup>
 
     </UDashboardSection>
 
     <UDashboardSection>
       <template #links>
-        <UButton type="submit" :label="t('button.ChangePassword')" :loading="loading" :disabled="loading"/>
+        <UBadge v-if="noPasswordProvider" color="orange" variant="soft">
+          {{ t('notification.noEmailAuthentication') }}
+        </UBadge>
+        <UButton v-else type="submit" :label="t('button.ChangePassword')" :loading="loading"
+                 :disabled="loading"/>
       </template>
     </UDashboardSection>
   </UForm>

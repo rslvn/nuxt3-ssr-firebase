@@ -25,7 +25,11 @@ const updateProfile = () => {
   loading.value = true
   getUserProfile(props.userProfile.id)
       .then(async (profile) => {
-        profile.name = state
+        profile.name = {
+          firstName: state.firstName? state.firstName.trim() : '',
+          middleName: state.middleName? state.middleName.trim() : '',
+          lastName: state.lastName? state.lastName.trim() : ''
+        }
         return await saveUserProfile(profile)
       })
       .then((profile) => {

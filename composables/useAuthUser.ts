@@ -1,6 +1,10 @@
-import {AuthUser, UserProfile} from "~/types"
+import {AuthUser, ProviderIdType, UserProfile} from "~/types"
 import {User} from "@firebase/auth";
-import {generateUsernameByEmail, generateUsernameById, getDisplayName} from "~/service/user-profile-service";
+import {
+    generateUsernameByEmailWith4DigitSuffix,
+    generateUsernameById,
+    getDisplayName
+} from "~/service/user-profile-service";
 import {useAuthStore} from "~/stores/auth-store";
 
 export default function () {
@@ -15,7 +19,7 @@ export default function () {
             email: userProfile.email,
             emailVerified: user.emailVerified,
             profilePhoto: userProfile.profilePhoto.image,
-            providers: [],
+            providers: user.providerData,
         }
     }
 
@@ -35,7 +39,7 @@ export default function () {
                 }
                 console.log(new Date(), 'No profile of ', user.email)
                 // no profile found then create it
-                const username = user.email ? generateUsernameByEmail(user.email) : generateUsernameById(user.uid)
+                const username = user.email ? generateUsernameByEmailWith4DigitSuffix(user.email) : generateUsernameById(user.uid)
                 await saveUserProfile({
                     id: user.uid,
                     username,
@@ -60,7 +64,10 @@ export default function () {
             })
     }
 
+    const passwordProviderIdExist = computed(() => !!authStore.authUser?.providers?.find(userInfo => userInfo.providerId === ProviderIdType.PASSWORD))
+
     return {
-        setAuthStoreByUser
+        setAuthStoreByUser,
+        passwordProviderIdExist
     }
 }

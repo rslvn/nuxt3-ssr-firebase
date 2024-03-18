@@ -13,6 +13,8 @@ export default {
         emailVerified: 'Great! The email address is verified successfully.',
         profileNameUpdated: 'Profil adi kaydedildi',
         profileUsernameUpdated: 'Profil kullanici adi guncellendi',
-        profilePasswordUpdated: 'Parola guncellendi'
+        profilePasswordUpdated: 'Parola guncellendi',
+        profileUrlCopied: 'Profil linki kopyalandi',
+        noEmailAuthentication: 'Henuz bir e-posta parola girisiniz yok'
     },
 }

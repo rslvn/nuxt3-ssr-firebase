@@ -1,4 +1,5 @@
 import {Timestamp} from 'firebase/firestore'
+import {UserInfo} from "@firebase/auth";
 
 export interface Image {
     src: string
@@ -7,20 +8,11 @@ export interface Image {
 }
 
 // auth types
-export enum ProviderType {
+export enum ProviderIdType {
     PASSWORD = 'password',
     GOOGLE = 'google.com',
     TWITTER = 'twitter.com',
     FACEBOOK = 'facebook.com',
-}
-
-export interface ProviderData {
-    providerType: ProviderType
-    displayName?: string
-    email?: string
-    phoneNumber?: string
-    photoURL?: string
-    uid?: string
 }
 
 export interface AuthUser {
@@ -30,7 +22,7 @@ export interface AuthUser {
     userId: string
     username: string
     emailVerified: boolean
-    providers: ProviderData[]
+    providers: UserInfo[]
 }
 
 // firestore types

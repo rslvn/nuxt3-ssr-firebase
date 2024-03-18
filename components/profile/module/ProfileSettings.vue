@@ -5,6 +5,7 @@ defineProps<{
   userProfile: UserProfile
   isMyProfile?: boolean
 }>()
+
 </script>
 
 <template>
