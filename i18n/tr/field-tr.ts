@@ -52,7 +52,8 @@ export default {
         },
         country: {
             label: 'Ulke',
-            placeholder: 'ulkenizi giriniz'
+            placeholder: 'ulkenizi giriniz',
+            description: 'Profilinizde gorunecek ulke'
         },
         username: {
             label: 'Kullanici adi',

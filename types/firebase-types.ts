@@ -80,6 +80,14 @@ export enum AlbumType {
     CUSTOM = 'CUSTOM',
 }
 
+export interface Address {
+    street?: string
+    city?: string
+    state?: string
+    zip?: string,
+    country: string
+}
+
 export interface Album extends BaseModel {
     name: string
     albumType: AlbumType
@@ -100,6 +108,7 @@ export interface UserProfile extends BaseModel {
     username: string
     gender?: Gender
     email?: string
+    address?: Address
     about?: string
     profilePhoto: AlbumImage
     coverPhoto: AlbumImage

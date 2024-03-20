@@ -4,5 +4,6 @@ export default {
         ChangeUsername: 'Kullanici adini guncelle',
         ChangePassword: 'Parolayi degistir',
         CopyProfileUrl: 'Profil baglantisini kopyala',
+        UpdateAddress: 'Adresini guncelle'
     }
 }

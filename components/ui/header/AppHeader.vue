@@ -36,7 +36,7 @@ const logOff = () => {
     </template>
 
     <template #panel>
-      <div class="flex flex-row justify-evenly my-6">
+      <div class="grid grid-cols-2 gap-x-2">
         <UColorModeSelect/>
         <LanguageSelect/>
       </div>

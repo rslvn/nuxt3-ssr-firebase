@@ -118,6 +118,21 @@ export default function () {
         }
     })
 
+    const country = computed(() => {
+        if (!locale) {
+            return null
+        }
+        return {
+            name: 'country',
+            type: 'text',
+            label: t('field.country.label'),
+            placeholder: t('field.country.placeholder'),
+            description: t('field.country.description'),
+            color: 'gray',
+            required: true,
+        }
+    })
+
     const schemaConfig: any = {
         email: z.string().email(),
         password: z.string().min(6).max(32),
@@ -128,7 +143,9 @@ export default function () {
         lastName: z.string().min(2).max(64),
         username: z.string().min(5).max(32).refine(async (username: string) => !(await getUserProfileByUsername(username)), (username) => ({
             message: t('validation.username', {username}),
-        }))
+        })),
+        country: z.string(),
+
     }
 
     const getSchema = (fields: { name: string }[]) => {
@@ -151,6 +168,7 @@ export default function () {
         email,
         password,
         confirmPassword,
+        country,
         oldPassword,
         firstName,
         middleName,

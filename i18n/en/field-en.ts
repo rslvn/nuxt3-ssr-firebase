@@ -59,6 +59,6 @@ export default {
             label: 'Username',
             placeholder: 'enter a username',
             description: 'Your username in your profile url'
-        }
+        },
     },
 }

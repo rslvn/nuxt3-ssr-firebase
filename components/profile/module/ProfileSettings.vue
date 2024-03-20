@@ -21,6 +21,10 @@ defineProps<{
       </UCard>
 
       <UCard class="mt-5">
+        <ProfileAddressForm :user-profile="userProfile"/>
+      </UCard>
+
+      <UCard class="mt-5">
         <ChangePasswordForm :user-profile="userProfile"/>
       </UCard>
 

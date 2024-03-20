@@ -5,7 +5,7 @@ const languages = locales.value.map((item) => {
   return {
     id: item.name,
     label: item.name,
-    icon: item.icon,
+    flag: item.flag,
     code: item.code,
     click: () => setLocale(item.code)
   }
@@ -19,7 +19,13 @@ const currentLanguage = ref(languages.find(language => language.code === locale.
 <template>
   <USelectMenu v-model="currentLanguage" :options="languages" @change="changeLocale">
     <template #leading>
-      <UIcon :name="(currentLanguage.icon as string)" class="w-4 h-4 mx-0.5"/>
+      <span class="text-2xl">{{currentLanguage.flag}}  </span>
     </template>
+
+    <template #option="{ option: languages }">
+      <span class="text-2xl">{{ languages.flag }}</span>
+      <span>{{ languages.label }}</span>
+    </template>
+
   </USelectMenu>
 </template>
