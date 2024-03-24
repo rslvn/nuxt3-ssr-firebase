@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import {ProvideInjectType, UserProfile} from "~/types";
+import {UserProfile} from "~/types";
+import {useAppGlobals} from "~/composables/useAppGlobals";
 
 const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
+// const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
 
 const {firstName, middleName, lastName, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
+const {reloadUserProfile} = useAppGlobals()
 const {t} = useI18n()
 
 const loading = ref(false)
@@ -26,15 +28,15 @@ const updateProfile = () => {
   getUserProfile(props.userProfile.id)
       .then(async (profile) => {
         profile.name = {
-          firstName: state.firstName? state.firstName.trim() : '',
-          middleName: state.middleName? state.middleName.trim() : '',
-          lastName: state.lastName? state.lastName.trim() : ''
+          firstName: state.firstName ? state.firstName.trim() : '',
+          middleName: state.middleName ? state.middleName.trim() : '',
+          lastName: state.lastName ? state.lastName.trim() : ''
         }
         return await saveUserProfile(profile)
       })
       .then((profile) => {
         if (profile) {
-          updateUserProfile()
+          reloadUserProfile()
           showSuccessToaster({key: 'notification.profileNameUpdated'})
         }
       })

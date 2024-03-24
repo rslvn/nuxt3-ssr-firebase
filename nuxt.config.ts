@@ -100,7 +100,6 @@ export default defineNuxtConfig({
                 name: 'English',
                 code: 'en',
                 iso: 'en-US',
-                // icon: 'i-emojione-flag-for-united-kingdom',
                 flag: '🇬🇧',
                 files: [
                     'en/button-en.ts',
@@ -114,7 +113,6 @@ export default defineNuxtConfig({
                 name: 'Turkce',
                 code: 'tr',
                 iso: 'tr-US',
-                // icon: 'i-emojione-flag-for-turkey',
                 flag: '🇹🇷',
                 files: [
                     'tr/button-tr.ts',

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import {ProvideInjectType} from '~/types';
+
+import {useAppGlobals} from "~/composables/useAppGlobals";
 
 const {seoMetaInputByUserProfile} = useAppSeoMeta()
 
 const {t} = useI18n()
 const {getUserProfileByUsername, getUserProfile} = useUserProfileCollection()
+const {userProfile} = useAppGlobals()
 const {params} = useRoute()
 const authStore = useAuthStore()
 
@@ -12,7 +14,6 @@ const username = params.username as string
 if (!username) {
   throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
 }
-const userProfile = ref(null)
 
 await getUserProfileByUsername(username)
     .then((profile) => {
@@ -32,12 +33,12 @@ useSeoMeta(seoMetaInputByUserProfile(userProfile.value))
 
 const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?.userId);
 
-const updateUserProfile = async () => {
-  userProfile.value = await getUserProfile(userProfile.value.id)
-}
-provide(ProvideInjectType.USER_PROFILE_UPDATED, {
-  updateUserProfile
-})
+// const updateUserProfile = async () => {
+//   userProfile.value = await getUserProfile(userProfile.value.id)
+// }
+// provide(ProvideInjectType.USER_PROFILE_UPDATED, {
+//   updateUserProfile
+// })
 
 </script>
 

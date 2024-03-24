@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import {PAGES, ProvideInjectType, UserProfile} from "~/types";
-import {slugifyUsername} from "~/service/user-profile-service";
+import {PAGES, UserProfile} from "~/types";
+import {sanitizeUrlContext} from "~/service/url-service";
+import {useAppGlobals} from "~/composables/useAppGlobals";
 
 const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
+// const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
 
 const {username, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
+const {reloadUserProfile} = useAppGlobals()
 const requestURL = useRequestURL()
 
 console.log(requestURL)
@@ -31,7 +33,7 @@ const updateUsername = () => {
       })
       .then((profile) => {
         if (profile) {
-          updateUserProfile()
+          reloadUserProfile()
           showSuccessToaster({key: 'notification.profileUsernameUpdated'})
           navigateTo(`${PAGES.PROFILE.path}/${profile.username}`, {replace: true})
         }
@@ -53,7 +55,7 @@ const copyProfileUrlDisabled = computed(() => {
 })
 
 const sanitizeUsername = () => {
-  state.username = slugifyUsername(state.username)
+  state.username = sanitizeUrlContext(state.username)
 }
 
 </script>

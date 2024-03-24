@@ -1,5 +1,5 @@
 import {UserProfile} from "~/types";
-import slugify from "slugify";
+import {sanitizeUrlContext} from "~/service/url-service";
 
 const DEFAULT_PROFILE_PHOTO = 'https://picsum.photos/500/800'
 const DEFAULT_COVER_PHOTO = 'https://picsum.photos/1920/1080?random=1'
@@ -30,15 +30,10 @@ export const generateUsernameById = (id: string) => {
     return id.replace(dashAllRegex, '')
 }
 
-export const slugifyUsername = (username: string) => slugify(username, {
-    lower: true,
-    replacement: '-',
-    remove: /[*+~.,?#=()'"!:@]/g
-})
 
 export const generateUsernameByEmail = (email: string) => {
     const usernamePrefix = email.replace(/@.*$/, '')
-    return slugifyUsername(usernamePrefix)
+    return sanitizeUrlContext(usernamePrefix)
 }
 
 export const generateUsernameByEmailWith4DigitSuffix = (email: string) => {

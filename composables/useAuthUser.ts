@@ -7,7 +7,7 @@ import {
 } from "~/service/user-profile-service";
 import {useAuthStore} from "~/stores/auth-store";
 
-export default function () {
+const _useAuthUser = () => {
     const authStore = useAuthStore()
     const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 
@@ -46,12 +46,14 @@ export default function () {
                     name: {firstName: user.displayName?.split(' ')[0] || null},
                     email: user.email,
                     profilePhoto: {
+                        albumId: null,
                         image: {
                             src: user.photoURL || 'https://picsum.photos/500/800',
                             alt: 'profile photo'
                         }
                     },
                     coverPhoto: {
+                        albumId: null,
                         image: {
                             src: 'https://picsum.photos/1920/1080?random=1',
                             alt: 'cover photo'
@@ -71,3 +73,5 @@ export default function () {
         passwordProviderIdExist
     }
 }
+
+export const useAuthUser = createSharedComposable(_useAuthUser)

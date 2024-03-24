@@ -16,6 +16,7 @@ export default {
         profileUsernameUpdated: 'Profil kullanici adi guncellendi',
         profilePasswordUpdated: 'Parola guncellendi',
         profileUrlCopied: 'Profil linki kopyalandi',
-        noEmailAuthentication: 'Henuz bir e-posta parola girisiniz yok'
+        noEmailAuthentication: 'Henuz bir e-posta parola girisiniz yok',
+        photoUploadFailed: 'Fotograf yuklemesi basarisiz'
     },
 }

@@ -57,7 +57,9 @@ export const CollectionField = {
 }
 
 export enum FirestoreCollection {
-    USER_PROFILE = 'user-profile'
+    USER_PROFILE = 'user-profile',
+    ALBUM = 'album',
+    ALBUM_IMAGE = 'album-image'
 }
 
 export interface BaseModel {
@@ -91,12 +93,11 @@ export interface Address {
 export interface Album extends BaseModel {
     name: string
     albumType: AlbumType
-    userId: string
 }
 
 export interface AlbumImage extends BaseModel {
-    albumId?: string
-    image?: Image
+    albumId: string
+    image: Image
 }
 
 export interface UserProfile extends BaseModel {

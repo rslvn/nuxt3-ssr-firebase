@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import {ProvideInjectType, UserProfile} from "~/types";
 import {Country} from 'country-state-city';
+import {useAppGlobals} from "~/composables/useAppGlobals";
 
 const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
+// const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
 
 const {country, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
+const {reloadUserProfile} = useAppGlobals()
 const {t} = useI18n()
 
 const loading = ref(false)
@@ -31,7 +33,7 @@ const updateAddress = () => {
       })
       .then((profile) => {
         if (profile) {
-          updateUserProfile()
+          reloadUserProfile()
           showSuccessToaster({key: 'notification.profileAddressUpdated'})
         }
       })
