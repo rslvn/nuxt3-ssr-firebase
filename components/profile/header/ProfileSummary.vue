@@ -7,11 +7,8 @@ const props = defineProps<{
   isMyProfile?: boolean
 }>()
 
-const displayName = computed(() => {
-  return getDisplayName(props.userProfile)
-})
-
-const profilePhoto = getProfilePhoto(props?.userProfile)
+const displayName = computed(() => getDisplayName(props.userProfile))
+const profilePhoto = computed(() => getProfilePhoto(props?.userProfile))
 </script>
 
 <template>
@@ -21,7 +18,7 @@ const profilePhoto = getProfilePhoto(props?.userProfile)
       <img class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900"
            :src="profilePhoto" alt="asdasd">
       <div v-if="isMyProfile" class="absolute text-2xl -my-9 mx-40 opacity-100">
-        <UploadButton />
+        <UploadButton/>
       </div>
     </div>
     <div class="mt-2 sm:mt-20">

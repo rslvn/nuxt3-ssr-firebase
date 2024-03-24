@@ -23,6 +23,18 @@ const _useAuthUser = () => {
         }
     }
 
+    const updateAuthStoreByUserProfile = (userProfile: UserProfile) => {
+        const authUser = {
+            ...authStore.authUser,
+            userId: userProfile.id,
+            username: userProfile.username,
+            displayName: getDisplayName(userProfile),
+            email: userProfile.email,
+            profilePhoto: userProfile.profilePhoto.image,
+        }
+        authStore.setAuthUser(authUser)
+    }
+
     const setAuthStoreByUser = async (user: User) => {
         if (!user?.uid) {
             authStore.setAuthUser(null)
@@ -33,7 +45,6 @@ const _useAuthUser = () => {
         await getUserProfile(user.uid)
             .then(async (userProfile) => {
                 if (userProfile) { // profile found
-                    console.log(new Date(), 'profile found for', user.email)
                     authStore.setAuthUser(toAuthUser(user, userProfile))
                     return
                 }
@@ -60,7 +71,6 @@ const _useAuthUser = () => {
                         }
                     }
                 }).then(userProfile => {
-                    console.log(new Date(), 'profile created for', user.email)
                     authStore.setAuthUser(toAuthUser(user, userProfile))
                 })
             })
@@ -70,6 +80,7 @@ const _useAuthUser = () => {
 
     return {
         setAuthStoreByUser,
+        updateAuthStoreByUserProfile,
         passwordProviderIdExist
     }
 }
