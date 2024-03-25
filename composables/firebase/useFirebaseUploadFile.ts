@@ -5,7 +5,7 @@ import {AlbumType} from "~/types";
 import useAlbumImageCollection from "~/composables/firebase/useAlbumImageCollection";
 import {useAppGlobals} from "~/composables/useAppGlobals";
 
-export default function () {
+export default function (albumType: AlbumType) {
     const firebaseStorage = useFirebaseStorage()
     const {notifyByError, showErrorToaster} = useNotifyUser()
     const {reloadUserProfile} = useAppGlobals()
@@ -18,7 +18,7 @@ export default function () {
     const authStore = useAuthStore()
 
     const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string) => {
-        console.log('>>>> fileForUpload', fileForUpload.value)
+        console.log('>>> uploadFileToFirebaseStorage albumType:',albumType)
         const filePath = `${parentPath}${getNewFileName(fileForUpload.value.name)}`
         const fileUploadRef = storageRef(firebaseStorage, filePath)
         const {uploadTask, upload} = useStorageFile(fileUploadRef)
@@ -29,7 +29,8 @@ export default function () {
             contentType: fileForUpload.value.type,
             cacheControl: 'max-age=31536000, immutable',
             customMetadata: {
-                userId: authStore.authUser.userId
+                userId: authStore.authUser.userId,
+                albumType,
             }
         }
         upload(fileForUpload.value, imageMeta)
@@ -59,6 +60,7 @@ export default function () {
                 getDownloadURL(uploadTask.value.snapshot.ref)
                     .then(async (downloadURL) => {
                         const album = await getOrAddAlbum(authStore.authUser.userId, albumType)
+                        console.log('Found album: ', album,'albumType: ',albumType )
                         const savedAlbumImage = await saveAlbumImage({
                             albumId: album.id,
                             image: {
@@ -93,9 +95,25 @@ export default function () {
         return uploadFileToFirebaseStorage(AlbumType.PROFILE, profilePhotoParentPath)
     }
 
+    const uploadCoverPhoto = () => {
+        const profilePhotoParentPath = `users/${authStore.authUser.userId}/coverPhotos/`
+        return uploadFileToFirebaseStorage(AlbumType.COVER, profilePhotoParentPath)
+    }
+
     watch(fileForUpload, () => {
-        if (fileForUpload.value) {
-            uploadProfilePhoto()
+        if (!fileForUpload.value || !albumType) {
+            console.log('Cannot be uploaded')
+        }
+
+        console.log(`Uploading ${albumType}:`, fileForUpload.value.name)
+        switch (albumType) {
+            case AlbumType.PROFILE:
+                return uploadProfilePhoto()
+            case AlbumType.COVER:
+                return uploadCoverPhoto()
+            case AlbumType.CUSTOM:
+            default:
+                console.log('Unknown albumType: ', albumType)
         }
     })
 

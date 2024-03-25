@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import useFirebaseUploadFile from "~/composables/firebase/useFirebaseUploadFile";
+import {AlbumType} from "~/types";
 
+const props = defineProps<{
+  albumType: AlbumType
+}>()
 const {notifyByError} = useNotifyUser()
-const {fileForUpload, uploadingFile} = useFirebaseUploadFile()
+const {fileForUpload, uploadingFile} = useFirebaseUploadFile(props.albumType)
 
 const fileRef = ref<{ input: HTMLInputElement }>()
 
@@ -12,7 +16,7 @@ function onFileChange(e: Event) {
     return
   }
   fileForUpload.value = input.files[0]
-  console.log('>>>> onFileChange fileForUpload',fileForUpload.value)
+  console.log('>>>> onFileChange fileForUpload', fileForUpload.value)
 }
 
 function onFileClick() {

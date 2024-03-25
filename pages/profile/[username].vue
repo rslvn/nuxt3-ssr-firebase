@@ -33,13 +33,6 @@ useSeoMeta(seoMetaInputByUserProfile(userProfile.value))
 
 const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?.userId);
 
-// const updateUserProfile = async () => {
-//   userProfile.value = await getUserProfile(userProfile.value.id)
-// }
-// provide(ProvideInjectType.USER_PROFILE_UPDATED, {
-//   updateUserProfile
-// })
-
 </script>
 
 <template>

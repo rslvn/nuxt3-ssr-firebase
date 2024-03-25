@@ -27,15 +27,6 @@ const getQueryConstraintByOrderBy = (...orders: OrderBy[]) => {
     return orders.map(order => orderBy(order.field, order.direction))
 }
 
-const getQueryByWhereClauses = (firestore: Firestore, collectionName: string,
-                                whereClause: WhereClause,
-                                ...whereClauses: WhereClause[]) => {
-    const collectionReference = collection(firestore, collectionName)
-    const _query = query(collectionReference, where(whereClause.field, whereClause.operator, whereClause.value))
-    whereClauses.forEach(clause => query(_query, where(clause.field, clause.operator, clause.value)))
-    return _query
-}
-
 const updateBaseModel = <T extends BaseModel>(firebaseAuth: Auth, model: T) => {
     const now = Timestamp.fromDate(new Date())
     if (!model.createdAt) {
@@ -122,7 +113,9 @@ export const getModelById = <T extends BaseModel>(firestore: Firestore, collecti
 export const getModelsByWhereClauses = <T extends BaseModel>(firestore: Firestore, collectionName: string,
                                                              whereClause: WhereClause,
                                                              ...whereClauses: WhereClause[]): Promise<T[]> => {
-    const _query = getQueryByWhereClauses(firestore, collectionName, whereClause, ...whereClauses)
+    const queryConstraints = [...getQueryConstraintByWhereClauses(whereClause), ...getQueryConstraintByWhereClauses(...whereClauses)]
+    const collectionReference = collection(firestore, collectionName)
+    const _query = query(collectionReference, ...queryConstraints)
     return getDocs(_query)
         .then((value) => {
             return value.docs.map(value1 => value1.data() as T)

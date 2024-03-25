@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UserProfile} from "~/types";
+import {AlbumType, UserProfile} from "~/types";
 import {getDisplayName, getProfilePhoto} from "~/service/user-profile-service";
 
 const props = defineProps<{
@@ -18,7 +18,7 @@ const profilePhoto = computed(() => getProfilePhoto(props?.userProfile))
       <img class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900"
            :src="profilePhoto" alt="asdasd">
       <div v-if="isMyProfile" class="absolute text-2xl -my-9 mx-40 opacity-100">
-        <UploadButton/>
+        <UploadButton :album-type="AlbumType.PROFILE"/>
       </div>
     </div>
     <div class="mt-2 sm:mt-20">
