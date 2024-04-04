@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {AlbumType} from "~/types";
+import imageCompression from 'browser-image-compression';
 
 const props = defineProps<{
   albumType: AlbumType
@@ -14,7 +15,19 @@ function onFileChange(e: Event) {
   if (!input?.files?.length) {
     return
   }
-  fileForUpload.value = input.files[0]
+  console.log(`originalFile size ${input.files[0].size / 1024 / 1024} MB`);
+
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1024,
+    useWebWorker: true,
+  }
+
+  imageCompression(input.files[0], options)
+      .then(compressedFile => {
+        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`);
+        fileForUpload.value = compressedFile
+      })
 }
 
 function onFileClick() {

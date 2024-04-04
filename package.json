@@ -32,6 +32,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.19",
+    "browser-image-compression": "^2.0.2",
     "country-state-city": "^3.2.1",
     "firebase": "^10.10.0",
     "firebase-admin": "^11.11.1",
