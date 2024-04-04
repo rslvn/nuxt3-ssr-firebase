@@ -1,4 +1,3 @@
-import {useFirestore} from "vuefire";
 import {AlbumImage, FirebaseQueryOperator, FirestoreCollection} from "~/types";
 import {getModelById,getModelsByWhereClauses, saveModel} from "~/service/firebase/firestore/firestore-collection-service";
 import {getWhereClause} from "~/service/firebase/firebase-type-util";

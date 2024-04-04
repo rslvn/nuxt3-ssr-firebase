@@ -1,9 +1,6 @@
 import {getDownloadURL, ref as storageRef, UploadMetadata} from "@firebase/storage";
 import {getNewFileName} from "~/service/firebase/fire-storage-service";
-import useAlbumCollection from "~/composables/firebase/useAlbumCollection";
 import {AlbumType} from "~/types";
-import useAlbumImageCollection from "~/composables/firebase/useAlbumImageCollection";
-import {useAppGlobals} from "~/composables/useAppGlobals";
 
 export default function (albumType: AlbumType) {
     const firebaseStorage = useFirebaseStorage()

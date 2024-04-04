@@ -11,53 +11,38 @@ const imageIndex = ref(props.startingIndex > props.albumImages.length || props.s
 const albumImage = computed(() => props.albumImages.length && props.albumImages[imageIndex.value])
 
 const nextImage = () => {
-  if (props.albumImages.length >= imageIndex.value) {
+  if (props.albumImages.length - 1 <= imageIndex.value) {
     imageIndex.value = 0
+  } else {
+    imageIndex.value++
   }
-  imageIndex.value++
 }
 const previousImage = () => {
   if (imageIndex.value <= 0) {
     imageIndex.value = props.albumImages.length - 1
+  } else {
+    imageIndex.value--
   }
-  imageIndex.value--
 }
+
+watch(albumImage, () => {
+  console.log('>>>> imageIndex:',imageIndex.value,'albumImage:',albumImage.value.image)
+})
 
 </script>
 
 <template>
-  <!--    <UModal v-model="showLightbox" :overlay="false" fullscreen>-->
-  <!--      <div class="h-screen flex items-center justify-center">-->
-  <!--        <UCard>-->
-  <!--          <img class="object-cover h-max" :src="image.image.src" alt="asdasd">-->
-  <!--        </UCard>-->
-  <!--      </div>-->
-  <!--    </UModal>-->
-
-  <UModal v-model="showLightbox" :overlay="false" fullscreen>
-
-    <!--    <UCard-->
-    <!--        :ui="{-->
-    <!--          base: 'h-full flex flex-col',-->
-    <!--          rounded: '',-->
-    <!--          divide: 'divide-y divide-gray-100 dark:divide-gray-800',-->
-    <!--          body: {-->
-    <!--            base: 'grow'-->
-    <!--          }-->
-    <!--        }"-->
-    <!--    >-->
-    <!--      <template #header>-->
-    <!--        <div class="flex items-center justify-end">-->
-    <!--          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"-->
-    <!--                   @click="showLightbox = false"/>-->
-    <!--        </div>-->
-    <!--      </template>-->
-    <div class="flex items-center justify-center h-screen w-screen">
-      <img class="object-scale-down h-4/5" :src="albumImage.image.src" :alt="albumImage.image.alt">
+  <UModal v-model="showLightbox" :overlay="false" fullscreen >
+    <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="absolute right-10 top-5"
+             @click="showLightbox = false"/>
+    <div class="flex flex-row items-center">
+      <UButton icon="i-heroicons-arrow-left-20-solid" class="absolute left-0 sm:left-10" color="gray"
+               @click="previousImage"/>
+      <div class="flex items-center justify-center h-screen w-screen" @click="showLightbox = false">
+        <img class="object-scale-down h-4/5" :src="albumImage.image.src" :alt="albumImage.image.alt" @click.stop="">
+      </div>
+      <UButton icon="i-heroicons-arrow-right-20-solid" class="absolute right-0 sm:right-10" color="gray"
+               @click="nextImage"/>
     </div>
-    <!--    </UCard>-->
-
   </UModal>
-
-
 </template>

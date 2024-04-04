@@ -8,7 +8,6 @@ import {
 import {getWhereClause} from "~/service/firebase/firebase-type-util";
 
 export default function () {
-
     const firestore = useFirestore()
     const firebaseAuth = useFirebaseAuth()
 

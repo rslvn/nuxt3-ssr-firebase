@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {AlbumType, UserProfile} from "~/types";
 import {getDisplayName, getProfilePhoto} from "~/service/user-profile-service";
-import useAlbumImageCollection from "~/composables/firebase/useAlbumImageCollection";
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -13,19 +12,20 @@ const profilePhoto = computed(() => getProfilePhoto(props?.userProfile))
 const showProfileLightbox = ref(false)
 const profileAlbumImages = ref([])
 const currentProfileImageIndex = ref(0)
-const loadProfileImages = () => {
 
-  if (props.userProfile?.profilePhoto?.albumId) {
-    getAlbumImagesByAlbumId(props.userProfile.profilePhoto.albumId)
-        .then((albumImages) => {
-          console.log('>>>> found profile images',albumImages.length)
-          profileAlbumImages.value = albumImages
-          if (albumImages.length) {
-            currentProfileImageIndex.value = albumImages.findIndex((image) => image.id === props.userProfile.profilePhoto.id)
-          }
-          showProfileLightbox.value = true
-        })
+const loadProfileImages = () => {
+  if (!props.userProfile?.profilePhoto?.albumId) {
+    return
   }
+  getAlbumImagesByAlbumId(props.userProfile.profilePhoto.albumId)
+      .then((albumImages) => {
+        console.log('>>>> found profile images', albumImages.length)
+        profileAlbumImages.value = albumImages
+        if (albumImages.length) {
+          currentProfileImageIndex.value = albumImages.findIndex((image) => image.id === props.userProfile.profilePhoto.id)
+        }
+        showProfileLightbox.value = true
+      })
 }
 </script>
 
@@ -33,12 +33,13 @@ const loadProfileImages = () => {
   <div
       class="-mt-28 mx-auto flex flex-col items-center w-full px-4 absolute sm:space-x-2 sm:flex-row sm:px-6 lg:px-8">
     <div class="bg-gray-400 rounded-full h-52 w-52">
-      <img class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900"
-           :src="profilePhoto" alt="asdasd" @click="loadProfileImages">
-      <div v-if="isMyProfile" class="absolute text-2xl -my-9 mx-40 opacity-100">
-        <UploadButton :album-type="AlbumType.PROFILE"/>
-      </div>
+      <img
+          class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900 cursor-pointer"
+          :src="profilePhoto" alt="asdasd" @click="loadProfileImages">
       <client-only>
+        <div v-if="isMyProfile" class="absolute text-2xl -my-9 mx-40 opacity-100">
+          <UploadButton :album-type="AlbumType.PROFILE"/>
+        </div>
         <Lightbox v-if="showProfileLightbox" v-model="showProfileLightbox" :startingIndex="currentProfileImageIndex"
                   :albumImages="profileAlbumImages"/>
       </client-only>

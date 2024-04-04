@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import useFirebaseUploadFile from "~/composables/firebase/useFirebaseUploadFile";
 import {AlbumType} from "~/types";
 
 const props = defineProps<{
@@ -8,19 +7,18 @@ const props = defineProps<{
 const {notifyByError} = useNotifyUser()
 const {fileForUpload, uploadingFile} = useFirebaseUploadFile(props.albumType)
 
-const fileRef = ref<{ input: HTMLInputElement }>()
+const fileRef = ref<HTMLInputElement>()
 
 function onFileChange(e: Event) {
   const input = e.target as HTMLInputElement
-  if (!input.files?.length) {
+  if (!input?.files?.length) {
     return
   }
   fileForUpload.value = input.files[0]
-  console.log('>>>> onFileChange fileForUpload', fileForUpload.value)
 }
 
 function onFileClick() {
-  fileRef.value?.input.click()
+  fileRef.value?.click()
 }
 </script>
 
@@ -31,6 +29,6 @@ function onFileClick() {
              :disabled="uploadingFile"
              :loading="uploadingFile"
              @click="onFileClick"/>
-    <UInput ref="fileRef" type="file" class="hidden" accept="image/*" @change="onFileChange"/>
+    <input ref="fileRef" type="file" class="hidden" accept="image/*" @change="onFileChange"/>
   </div>
 </template>
