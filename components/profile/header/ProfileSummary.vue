@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {AlbumType, UserProfile} from "~/types";
-import {getDisplayName, getProfilePhoto} from "~/service/user-profile-service";
+import {getDisplayName, getProfilePhotoImage} from "~/service/user-profile-service";
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 const {getAlbumImagesByAlbumId} = useAlbumImageCollection()
 const displayName = computed(() => getDisplayName(props.userProfile))
-const profilePhoto = computed(() => getProfilePhoto(props?.userProfile))
+const profilePhoto = computed(() => getProfilePhotoImage(props?.userProfile,displayName.value))
 const showProfileLightbox = ref(false)
 const profileAlbumImages = ref([])
 const currentProfileImageIndex = ref(0)
@@ -33,9 +33,8 @@ const loadProfileImages = () => {
   <div
       class="-mt-28 mx-auto flex flex-col items-center w-full px-4 absolute sm:space-x-2 sm:flex-row sm:px-6 lg:px-8">
     <div class="bg-gray-400 rounded-full h-52 w-52">
-      <img
-          class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900 cursor-pointer"
-          :src="profilePhoto" alt="asdasd" @click="loadProfileImages">
+      <NuxtImg class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900 cursor-pointer"
+               :src="profilePhoto.src" :alt="profilePhoto.alt" @click="loadProfileImages" placeholder/>
       <client-only>
         <div v-if="isMyProfile" class="absolute text-2xl -my-9 mx-40 opacity-100">
           <UploadButton :album-type="AlbumType.PROFILE"/>

@@ -25,21 +25,18 @@ const previousImage = () => {
   }
 }
 
-watch(albumImage, () => {
-  console.log('>>>> imageIndex:',imageIndex.value,'albumImage:',albumImage.value.image)
-})
-
 </script>
 
 <template>
-  <UModal v-model="showLightbox" :overlay="false" fullscreen >
+  <UModal v-model="showLightbox" :overlay="false" fullscreen>
     <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="absolute right-10 top-5"
              @click="showLightbox = false"/>
     <div class="flex flex-row items-center">
       <UButton icon="i-heroicons-arrow-left-20-solid" class="absolute left-0 sm:left-10" color="gray"
                @click="previousImage"/>
       <div class="flex items-center justify-center h-screen w-screen" @click="showLightbox = false">
-        <img class="object-scale-down h-4/5" :src="albumImage.image.src" :alt="albumImage.image.alt" @click.stop="">
+        <NuxtImg class="object-scale-down h-4/5" :src="albumImage.image.src" :alt="albumImage.image.alt" @click.stop=""
+                 placeholder/>
       </div>
       <UButton icon="i-heroicons-arrow-right-20-solid" class="absolute right-0 sm:right-10" color="gray"
                @click="nextImage"/>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {AlbumType, UserProfile} from "~/types";
-import {getCoverPhoto, getDisplayName} from "~/service/user-profile-service";
+import {getCoverPhotoImage, getDisplayName} from "~/service/user-profile-service";
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -14,10 +14,7 @@ const displayName = computed(() => {
 })
 
 const images = computed(() => [
-  {
-    src: getCoverPhoto(props?.userProfile),
-    description: props.userProfile.coverPhoto.image.alt || `the cover photo of ${displayName.value || 'the profile'}`
-  }
+  getCoverPhotoImage(props?.userProfile, displayName.value)
 ])
 
 const showCoverLightbox = ref(false)
@@ -50,8 +47,8 @@ const loadCoverImages = () => {
     </client-only>
     <UCarousel v-slot="{ item }" :items="images" :ui="{ item: 'basis-full' }"
                class="rounded-lg overflow-hidden z-0 cursor-pointer">
-      <img :src="item.src" class="h-80 w-full object-cover cursor-pointer" draggable="false" :alt="item.description"
-           @click="loadCoverImages">
+      <NuxtImg :src="item.src" draggable="false" :alt="item.alt" @click="loadCoverImages" placeholder
+               class="h-80 w-full object-cover cursor-pointer"/>
     </UCarousel>
     <client-only>
       <Lightbox v-if="showCoverLightbox" v-model="showCoverLightbox" :startingIndex="currentCoverImageIndex"

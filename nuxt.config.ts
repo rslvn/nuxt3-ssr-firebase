@@ -20,8 +20,8 @@ export default defineNuxtConfig({
         '@nuxt/ui',
         'nuxt-gtag',
         '@nuxtjs/sitemap',
-        '@vueuse/nuxt'
-        // 'nuxt-purgecss'
+        '@vueuse/nuxt',
+        '@nuxt/image'
     ],
     extends: ['@nuxt/ui-pro'],
     ui: {

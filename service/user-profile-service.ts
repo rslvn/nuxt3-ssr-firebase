@@ -1,4 +1,4 @@
-import {UserProfile} from "~/types";
+import {Image, UserProfile} from "~/types";
 import {sanitizeUrlContext} from "~/service/url-service";
 
 const DEFAULT_PROFILE_PHOTO = 'https://picsum.photos/500/800'
@@ -6,12 +6,18 @@ const DEFAULT_COVER_PHOTO = 'https://picsum.photos/1920/1080?random=1'
 const dashAllRegex = /-/g
 const httpProtocolRegex = /(^\w+:|^)\/\//
 
-export const getProfilePhoto = (userProfile?: UserProfile) => {
-    return userProfile?.profilePhoto?.image?.src || DEFAULT_PROFILE_PHOTO
+export const getProfilePhotoImage = (userProfile: UserProfile, displayName: string): Image => {
+    return {
+        src: userProfile?.profilePhoto?.image?.src || DEFAULT_PROFILE_PHOTO,
+        alt: userProfile?.profilePhoto?.image?.alt || `the profile photo of ${displayName || 'the profile'}`
+    }
 }
 
-export const getCoverPhoto = (userProfile?: UserProfile) => {
-    return userProfile?.coverPhoto?.image?.src || DEFAULT_COVER_PHOTO
+export const getCoverPhotoImage = (userProfile: UserProfile,displayName: string):Image => {
+    return {
+        src: userProfile?.coverPhoto?.image?.src || DEFAULT_COVER_PHOTO,
+        alt: userProfile?.coverPhoto?.image?.alt || `the cover photo of ${displayName || 'the profile'}`
+    }
 }
 
 export const getDisplayName = (userProfile?: UserProfile) => {
