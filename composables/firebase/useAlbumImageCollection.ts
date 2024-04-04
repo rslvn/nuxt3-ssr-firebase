@@ -1,6 +1,7 @@
 import {useFirestore} from "vuefire";
-import {AlbumImage, FirestoreCollection} from "~/types";
-import {getModelById, saveModel} from "~/service/firebase/firestore/firestore-collection-service";
+import {AlbumImage, FirebaseQueryOperator, FirestoreCollection} from "~/types";
+import {getModelById,getModelsByWhereClauses, saveModel} from "~/service/firebase/firestore/firestore-collection-service";
+import {getWhereClause} from "~/service/firebase/firebase-type-util";
 
 export default function () {
     const firestore = useFirestore()
@@ -14,8 +15,13 @@ export default function () {
         return getModelById(firestore, FirestoreCollection.ALBUM_IMAGE, albumImageId)
     }
 
+    const getAlbumImagesByAlbumId = (albumId: string): Promise<AlbumImage[]> => {
+        return getModelsByWhereClauses(firestore, FirestoreCollection.ALBUM_IMAGE, getWhereClause('albumId', FirebaseQueryOperator.EQ, albumId))
+    }
+
     return {
         saveAlbumImage,
-        getAlbumImage
+        getAlbumImage,
+        getAlbumImagesByAlbumId
     }
 }

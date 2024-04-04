@@ -7,7 +7,3 @@ export interface TranslationConfig {
     key: string
     params?: any
 }
-
-export enum ProvideInjectType {
-    USER_PROFILE_UPDATED = 'userProfileUpdated'
-}

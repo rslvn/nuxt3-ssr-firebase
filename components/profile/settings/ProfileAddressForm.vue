@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import {ProvideInjectType, UserProfile} from "~/types";
+import {UserProfile} from "~/types";
 import {Country} from 'country-state-city';
 import {useAppGlobals} from "~/composables/useAppGlobals";
 
 const props = defineProps<{
   userProfile: UserProfile
 }>()
-
-// const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
 
 const {country, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()

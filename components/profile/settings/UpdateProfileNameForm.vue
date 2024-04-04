@@ -6,8 +6,6 @@ const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-// const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
-
 const {firstName, middleName, lastName, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
