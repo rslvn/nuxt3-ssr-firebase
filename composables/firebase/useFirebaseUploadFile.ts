@@ -2,7 +2,7 @@ import {getDownloadURL, ref as storageRef, UploadMetadata} from "@firebase/stora
 import {getNewFileName} from "~/service/firebase/fire-storage-service";
 import {AlbumType} from "~/types";
 
-export default function (albumType: AlbumType) {
+export default function () {
     const firebaseStorage = useFirebaseStorage()
     const {notifyByError, showErrorToaster} = useNotifyUser()
     const {reloadUserProfile} = useAppGlobals()
@@ -11,26 +11,26 @@ export default function (albumType: AlbumType) {
     const {saveAlbumImage} = useAlbumImageCollection()
 
     const uploadingFile = ref(false)
-    const fileForUpload = ref(null as File)
+    // const fileForUpload = ref(null as File)
     const authStore = useAuthStore()
 
-    const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string) => {
-        console.log('>>> uploadFileToFirebaseStorage albumType:',albumType)
-        const filePath = `${parentPath}${getNewFileName(fileForUpload.value.name)}`
+    const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string, file: File) => {
+        console.log('>>> uploadFileToFirebaseStorage albumType:', albumType)
+        const filePath = `${parentPath}${getNewFileName(file.name)}`
         const fileUploadRef = storageRef(firebaseStorage, filePath)
         const {uploadTask, upload} = useStorageFile(fileUploadRef)
 
         uploadingFile.value = true
 
         const imageMeta: UploadMetadata = {
-            contentType: fileForUpload.value.type,
+            contentType: file.type,
             cacheControl: 'max-age=31536000, immutable',
             customMetadata: {
                 userId: authStore.authUser.userId,
                 albumType,
             }
         }
-        upload(fileForUpload.value, imageMeta)
+        upload(file, imageMeta)
             .catch(notifyByError)
 
         if (!uploadTask.value) {
@@ -57,7 +57,7 @@ export default function (albumType: AlbumType) {
                 getDownloadURL(uploadTask.value.snapshot.ref)
                     .then(async (downloadURL) => {
                         const album = await getOrAddAlbum(authStore.authUser.userId, albumType)
-                        console.log('Found album: ', album,'albumType: ',albumType )
+                        console.log('Found album: ', album, 'albumType: ', albumType)
                         const savedAlbumImage = await saveAlbumImage({
                             albumId: album.id,
                             image: {
@@ -87,35 +87,25 @@ export default function (albumType: AlbumType) {
         )
     }
 
-    const uploadProfilePhoto = () => {
-        const profilePhotoParentPath = `users/${authStore.authUser.userId}/profilePhotos/`
-        return uploadFileToFirebaseStorage(AlbumType.PROFILE, profilePhotoParentPath)
-    }
-
-    const uploadCoverPhoto = () => {
-        const profilePhotoParentPath = `users/${authStore.authUser.userId}/coverPhotos/`
-        return uploadFileToFirebaseStorage(AlbumType.COVER, profilePhotoParentPath)
-    }
-
-    watch(fileForUpload, () => {
-        if (!fileForUpload.value || !albumType) {
+    const uploadSinglePhoto = (albumType: AlbumType, photo: File) => {
+        if (!albumType || !photo) {
             console.log('Cannot be uploaded')
         }
 
-        console.log(`Uploading ${albumType}:`, fileForUpload.value.name)
+        console.log(`Uploading ${albumType}:`, photo.name)
         switch (albumType) {
             case AlbumType.PROFILE:
-                return uploadProfilePhoto()
+                return uploadFileToFirebaseStorage(albumType, `users/${authStore.authUser.userId}/profilePhotos/`, photo)
             case AlbumType.COVER:
-                return uploadCoverPhoto()
+                return uploadFileToFirebaseStorage(albumType, `users/${authStore.authUser.userId}/coverPhotos/`, photo)
             case AlbumType.CUSTOM:
             default:
                 console.log('Unknown albumType: ', albumType)
         }
-    })
+    }
 
     return {
-        fileForUpload,
-        uploadingFile
+        uploadingFile,
+        uploadSinglePhoto
     }
 }

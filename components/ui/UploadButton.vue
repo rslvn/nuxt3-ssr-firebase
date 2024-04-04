@@ -6,7 +6,7 @@ const props = defineProps<{
   albumType: AlbumType
 }>()
 const {notifyByError} = useNotifyUser()
-const {fileForUpload, uploadingFile} = useFirebaseUploadFile(props.albumType)
+const {uploadingFile, uploadSinglePhoto} = useFirebaseUploadFile()
 
 const fileRef = ref<HTMLInputElement>()
 
@@ -26,7 +26,7 @@ function onFileChange(e: Event) {
   imageCompression(input.files[0], options)
       .then(compressedFile => {
         console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`);
-        fileForUpload.value = compressedFile
+        uploadSinglePhoto(props.albumType, compressedFile)
       })
 }
 
