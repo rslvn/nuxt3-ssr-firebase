@@ -7,7 +7,7 @@
     "runtime": "nodejs20"
   },
   "hosting": {
-    "site": "dancewall-2cc09",
+    "site": "nuxt3-ssr-firebase",
     "public": ".output/public",
     "cleanUrls": true,
     "rewrites": [
@@ -41,5 +41,8 @@
         ]
       }
     ]
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

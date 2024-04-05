@@ -1,4 +1,4 @@
-const separatedChunks = ['vuefire', '@firebase'];
+// const separatedChunks = ['vuefire', '@firebase'];
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
@@ -31,7 +31,7 @@ export default defineNuxtConfig({
         preference: 'system'
     },
     gtag: {
-        id: 'G-VWMF1MJ0W2'
+        id: 'G-2KY53M5NEN'
     },
     components: [
         {
@@ -153,18 +153,18 @@ export default defineNuxtConfig({
         }
     },
     vite: {
-        build: {
-            rollupOptions: {
-                output: {
-                    manualChunks(id: any) {
-                        const separateModule = separatedChunks.find(module => id.includes(module));
-                        if (separateModule) return separateModule;
-                    }
-                }
-            },
-        },
-        optimizeDeps: {
-            exclude: separatedChunks
-        }
+        // build: {
+        //     rollupOptions: {
+        //         output: {
+        //             manualChunks(id: any) {
+        //                 const separateModule = separatedChunks.find(module => id.includes(module));
+        //                 if (separateModule) return separateModule;
+        //             }
+        //         }
+        //     },
+        // },
+        // optimizeDeps: {
+        //     exclude: separatedChunks
+        // }
     },
 })

@@ -68,7 +68,6 @@ export default function () {
         const type = options?.type || NOTIFICATION_TYPES.ERROR
         const title = options?.title || type.title
         const message = options?.message || {key: 'notification.systemError'}
-        console.log('>>>> sendNotification:', type, title, message)
 
         if (options?.target === NotificationTarget.ALERT) {
             showAlert(type, message, title)
@@ -78,7 +77,7 @@ export default function () {
     }
 
     const notifyByError = (error: any, options?: NotificationMessageOptions) => {
-        console.log('>>>>> notifyByError: ', error)
+        console.log('>>>> notifyByError: ', error)
         if (error?.code) {
             const notificationMessageOptions: NotificationMessageOptions = options || {}
             sendNotification({...notificationMessageOptions, message: ERROR_TRANSLATIONS[error.code]})

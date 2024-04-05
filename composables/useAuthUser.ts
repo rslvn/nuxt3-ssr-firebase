@@ -48,7 +48,7 @@ const _useAuthUser = () => {
                     authStore.setAuthUser(toAuthUser(user, userProfile))
                     return
                 }
-                console.log(new Date(), 'No profile of ', user.email)
+                console.log(new Date(), '>>>> No profile of ', user.email)
                 // no profile found then create it
                 const username = user.email ? generateUsernameByEmailWith4DigitSuffix(user.email) : generateUsernameById(user.uid)
                 await saveUserProfile({

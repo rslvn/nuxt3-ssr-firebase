@@ -39,7 +39,6 @@ export default function () {
         }
 
         uploadTask.value.on('state_changed', (snapshot) => {
-                console.log(snapshot.state)
                 switch (snapshot.state) {
                     case 'running':
                         break
@@ -57,7 +56,7 @@ export default function () {
                 getDownloadURL(uploadTask.value.snapshot.ref)
                     .then(async (downloadURL) => {
                         const album = await getOrAddAlbum(authStore.authUser.userId, albumType)
-                        console.log('Found album: ', album, 'albumType: ', albumType)
+                        console.log('>>>> Found album: ', album, 'albumType: ', albumType)
                         const savedAlbumImage = await saveAlbumImage({
                             albumId: album.id,
                             image: {
@@ -89,10 +88,10 @@ export default function () {
 
     const uploadSinglePhoto = (albumType: AlbumType, photo: File) => {
         if (!albumType || !photo) {
-            console.log('Cannot be uploaded')
+            console.log('>>>>> Cannot be uploaded')
         }
 
-        console.log(`Uploading ${albumType}:`, photo.name)
+        console.log(`>>>>> Uploading ${albumType}:`, photo.name)
         switch (albumType) {
             case AlbumType.PROFILE:
                 return uploadFileToFirebaseStorage(albumType, `users/${authStore.authUser.userId}/profilePhotos/`, photo)
@@ -100,7 +99,7 @@ export default function () {
                 return uploadFileToFirebaseStorage(albumType, `users/${authStore.authUser.userId}/coverPhotos/`, photo)
             case AlbumType.CUSTOM:
             default:
-                console.log('Unknown albumType: ', albumType)
+                console.log('>>>>> Unknown albumType: ', albumType)
         }
     }
 

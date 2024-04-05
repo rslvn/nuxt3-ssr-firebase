@@ -1,5 +1,7 @@
 # Nuxt SSR Firebase with tailwindcss and NuxtUI/NuxtUI-pro
 
+DEMO: https://nuxt3-ssr-firebase.web.app/
+
 ## Setup
 
 ## .env configuration
