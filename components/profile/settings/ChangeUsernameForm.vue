@@ -15,7 +15,6 @@ const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {reloadUserProfile} = useAppGlobals()
 const requestURL = useRequestURL()
 
-console.log(requestURL)
 const {t} = useI18n()
 const loading = ref(false)
 const state = reactive({
