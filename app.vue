@@ -11,7 +11,6 @@ import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from "~/types";
 const router = useRouter()
 const route = useRoute()
 const user = useCurrentUser()
-const {t} = useI18n()
 const {setAuthStoreByUser} = useAuthUser()
 
 onErrorCaptured((error, instance, info) => {
