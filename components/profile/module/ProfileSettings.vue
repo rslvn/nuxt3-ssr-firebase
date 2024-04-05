@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <UContainer>
-    <UDashboardPanelContent class="pb-24 ">
+    <UDashboardPanelContent class="pb-24">
 
       <UCard>
         <UpdateProfileNameForm :user-profile="userProfile"/>

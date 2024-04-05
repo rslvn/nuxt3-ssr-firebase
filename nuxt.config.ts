@@ -31,7 +31,7 @@ export default defineNuxtConfig({
         preference: 'system'
     },
     gtag: {
-        id: 'G-VWMF1MJ0W2'
+        id: 'G-2KY53M5NEN'
     },
     components: [
         {
