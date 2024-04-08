@@ -1,9 +1,9 @@
-import {getDownloadURL, ref as storageRef, UploadMetadata} from "@firebase/storage";
+import {getDownloadURL, ref as storageRef, UploadMetadata,uploadBytesResumable} from "@firebase/storage";
 import {getNewFileName} from "~/service/firebase/fire-storage-service";
 import {AlbumType} from "~/types";
 
 export default function () {
-    const firebaseStorage = useFirebaseStorage()
+    const {$firebaseStorage} = useNuxtApp()
     const {notifyByError, showErrorToaster} = useNotifyUser()
     const {reloadUserProfile} = useAppGlobals()
     const {saveUserProfile, getUserProfile} = useUserProfileCollection()
@@ -17,8 +17,8 @@ export default function () {
     const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string, file: File) => {
         console.log('>>> uploadFileToFirebaseStorage albumType:', albumType)
         const filePath = `${parentPath}${getNewFileName(file.name)}`
-        const fileUploadRef = storageRef(firebaseStorage, filePath)
-        const {uploadTask, upload} = useStorageFile(fileUploadRef)
+        const fileUploadRef = storageRef($firebaseStorage, filePath)
+        // const {uploadTask, upload} = useStorageFile(fileUploadRef)
 
         uploadingFile.value = true
 
@@ -30,15 +30,10 @@ export default function () {
                 albumType,
             }
         }
-        upload(file, imageMeta)
-            .catch(notifyByError)
 
-        if (!uploadTask.value) {
-            uploadingFile.value = false
-            return
-        }
+        const uploadTask = uploadBytesResumable(fileUploadRef, file);
 
-        uploadTask.value.on('state_changed', (snapshot) => {
+        uploadTask.on('state_changed', (snapshot) => {
                 switch (snapshot.state) {
                     case 'running':
                         break
@@ -53,7 +48,7 @@ export default function () {
                 notifyByError(reason)
             },
             () => {
-                getDownloadURL(uploadTask.value.snapshot.ref)
+                getDownloadURL(uploadTask.snapshot.ref)
                     .then(async (downloadURL) => {
                         const album = await getOrAddAlbum(authStore.authUser.userId, albumType)
                         console.log('>>>> Found album: ', album, 'albumType: ', albumType)

@@ -2,7 +2,7 @@
 import {signOut} from "firebase/auth"
 
 const {t} = useI18n()
-const firebaseAuth = useFirebaseAuth()
+const {$firebaseAuth} = useNuxtApp();
 const {isHeaderDialogOpen} = useUIState()
 const authStore = useAuthStore()
 
@@ -11,7 +11,7 @@ const closeDialog = () => {
 }
 
 const logOff = () => {
-  signOut(firebaseAuth)
+  signOut($firebaseAuth)
   closeDialog()
 }
 

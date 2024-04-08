@@ -3,7 +3,7 @@ import {signOut} from "firebase/auth";
 import {PAGES} from "~/types";
 
 const {t} = useI18n()
-const firebaseAuth = useFirebaseAuth()
+const {$firebaseAuth} = useNuxtApp();
 const authStore = useAuthStore()
 
 const navigateToProfile = () => {
@@ -25,7 +25,7 @@ const items = computed(() => [
       label: t('common.SignOut'),
       icon: 'i-heroicons-arrow-left-on-rectangle',
       click: async () => {
-        await signOut(firebaseAuth)
+        await signOut($firebaseAuth)
       }
     }
   ]

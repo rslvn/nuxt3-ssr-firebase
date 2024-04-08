@@ -12,7 +12,7 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 
 useSeoMeta(seoMetaInputByPageConfig(PAGES.LOGIN))
 
-const firebaseAuth = useFirebaseAuth()
+const {$firebaseAuth} = useNuxtApp();
 const {notifyByError, showWarningToaster} = useNotifyUser()
 const {email, password, getSchema} = useFormFields()
 const loading = ref(false)
@@ -53,7 +53,7 @@ const schema = computed(() => getSchema(fields.value))
 
 const handleLogin = async (data: any) => {
   loading.value = true
-  await signInWithEmailAndPassword(firebaseAuth, data.email, data.password)
+  await signInWithEmailAndPassword($firebaseAuth, data.email, data.password)
       .then((userCredentials) => {
         if (!userCredentials?.user?.emailVerified) {
           showWarningToaster({key: 'notification.emailNotVerified'})

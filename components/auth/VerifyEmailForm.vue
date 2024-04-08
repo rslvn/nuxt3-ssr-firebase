@@ -10,7 +10,7 @@ const props = defineProps({
   },
 })
 const {t} = useI18n()
-const firebaseAuth = useFirebaseAuth()
+const {$firebaseAuth} = useNuxtApp();
 const {notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert} = useNotifyUser()
 
 const verified = ref(false)
@@ -25,7 +25,7 @@ onMounted(() => {
     verified.value = true
     return
   }
-  applyActionCode(firebaseAuth, props.oobCode)
+  applyActionCode($firebaseAuth, props.oobCode)
       .then(() => {
         showSuccessAlert({key: 'notification.emailVerified'})
       })
@@ -40,6 +40,6 @@ onMounted(() => {
     <span>{{ t('common.processing') }}</span>
   </section>
   <section v-if="alertMessage" class="mt-5">
-    <AppAlert :alert-message="alertMessage" :close-alert="closeAlert"/>
+    <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert"/>
   </section>
 </template>

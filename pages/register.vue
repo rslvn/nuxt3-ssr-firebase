@@ -11,7 +11,7 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.REGISTER))
 
 const {t, locale} = useI18n()
-const firebaseAuth = useFirebaseAuth();
+const {$firebaseAuth} = useNuxtApp();
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {email, password, confirmPassword, getSchema} = useFormFields()
 const loading = ref(false)
@@ -53,7 +53,7 @@ const googleRegister = () => {
 
 const handleRegister = async (data: any) => {
   loading.value = true
-  await createUserWithEmailAndPassword(firebaseAuth, data.email, data.password)
+  await createUserWithEmailAndPassword($firebaseAuth, data.email, data.password)
       .then(async (userCredentials) => {
         await sendEmailVerification(userCredentials.user)
       })

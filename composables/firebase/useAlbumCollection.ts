@@ -1,4 +1,3 @@
-import {useFirestore} from "vuefire";
 import {Album, AlbumType, FirebaseQueryOperator, FirestoreCollection} from "~/types";
 import {
     getModelById,
@@ -8,19 +7,18 @@ import {
 import {getWhereClause} from "~/service/firebase/firebase-type-util";
 
 export default function () {
-    const firestore = useFirestore()
-    const firebaseAuth = useFirebaseAuth()
+    const {$firebaseAuth, $firebaseStore} = useNuxtApp()
 
     const saveAlbum = (album: Album): Promise<Album> => {
-        return saveModel(firestore, firebaseAuth, FirestoreCollection.ALBUM, album)
+        return saveModel($firebaseStore, $firebaseAuth, FirestoreCollection.ALBUM, album)
     }
 
     const getAlbum = (albumId: string): Promise<Album> => {
-        return getModelById(firestore, FirestoreCollection.ALBUM, albumId)
+        return getModelById($firebaseStore, FirestoreCollection.ALBUM, albumId)
     }
 
     const getAlbumByUserIdAndAlbumType = async (userId: string, albumType: AlbumType): Promise<Album> => {
-        const albums = await getModelsByWhereClauses(firestore, FirestoreCollection.ALBUM,
+        const albums = await getModelsByWhereClauses($firebaseStore, FirestoreCollection.ALBUM,
             getWhereClause('createdBy', FirebaseQueryOperator.EQ, userId),
             getWhereClause('albumType', FirebaseQueryOperator.EQ, albumType));
         return albums?.length > 0 ? albums[0] as Album : null;
