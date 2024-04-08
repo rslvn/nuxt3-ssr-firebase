@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import {signOut} from "firebase/auth";
+import {getAuth,signOut} from "firebase/auth";
 import {PAGES} from "~/types";
 
 const {t} = useI18n()
 const {$firebaseAuth} = useNuxtApp();
 const authStore = useAuthStore()
+const {notifyByError} = useNotifyUser()
 
 const navigateToProfile = () => {
   if (authStore.authUser?.username) {
@@ -25,7 +26,8 @@ const items = computed(() => [
       label: t('common.SignOut'),
       icon: 'i-heroicons-arrow-left-on-rectangle',
       click: async () => {
-        await signOut($firebaseAuth)
+        await signOut(getAuth())
+            .catch(notifyByError)
       }
     }
   ]

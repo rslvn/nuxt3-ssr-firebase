@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {PAGES} from "~/types";
-import {signInWithEmailAndPassword} from "firebase/auth";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {computed} from "vue";
 
 definePageMeta({
@@ -53,7 +53,7 @@ const schema = computed(() => getSchema(fields.value))
 
 const handleLogin = async (data: any) => {
   loading.value = true
-  await signInWithEmailAndPassword($firebaseAuth, data.email, data.password)
+  await signInWithEmailAndPassword(getAuth(), data.email, data.password)
       .then((userCredentials) => {
         if (!userCredentials?.user?.emailVerified) {
           showWarningToaster({key: 'notification.emailNotVerified'})
