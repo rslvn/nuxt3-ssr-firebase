@@ -6,48 +6,50 @@
 </template>
 <script setup lang="ts">
 
+import {IdTokenResult, User} from "@firebase/auth";
 import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from "~/types";
-import {User} from "@firebase/auth";
-
-console.log(new Date(), '>>>> app.vue')
 
 const router = useRouter()
 const route = useRoute()
-const {getAndSetAuthUserByHeader, removeAuthUser} = useAuth()
-
-
+const {authUser} = useAuthStore()
+const {setAuthUserByHeader, removeAuthUser} = useAuthUser()
 const userChanged = async (user: User) => {
-  console.log('>>>>> userChanged', !!user)
   if (user) {
-    //
-    await user.getIdToken()
-        .then(async (token: string) => {
-          await getAndSetAuthUserByHeader(token)
-          // sessionCookie.value = token
+    await user.getIdTokenResult()
+        .then(async (idTokenResult: IdTokenResult) => {
+          await setAuthUserByHeader(idTokenResult.token)
+          if (!idTokenResult.claims.username) {
+            user.getIdToken(true)
+                .then((token: string) => {
+                  setAuthUserByHeader(token)
+                })
+          }
         })
-    //
+
     if (typeof route.query.redirect === 'string') {
       // user logged in
-      console.log(new Date(), 'client', process.client, 'server', process.server, '>>>> user logged in')
+      console.log(new Date(), '>>>> user logged in')
       return router.push(route.query.redirect)
 
     } else if (AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
       return router.push(PAGES.HOME.path)
 
     } else {
-      console.log(new Date(), 'client', process.client, 'server', process.server, '>>>> user logged in, no action')
+      console.log(new Date(), '>>>> user logged in, no action')
     }
 
   } else {
     await removeAuthUser()
-    console.log(new Date(), 'client', process.client, 'server', process.server, '>>>> user logged out')
-    return router.push(PAGES.LOGIN.path)
+    console.log(new Date(), '>>>> user logged out')
+    if (authUser && !AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
+      return router.push(PAGES.LOGIN.path)
+    }
   }
 }
 
 onMounted(() => {
-  const {$firebaseAuth} = useNuxtApp()
-  $firebaseAuth && $firebaseAuth.onAuthStateChanged(userChanged)
+  const {firebaseAuth} = useFirebaseAuth()
+  firebaseAuth && firebaseAuth.onIdTokenChanged(userChanged)
 })
 onErrorCaptured((error, instance, info) => {
   console.log('[errorCaptured] error', error, 'instance:', instance, 'info:', info)

@@ -1,22 +1,28 @@
 import {getUserProfile, saveUserProfile} from "~/server/utils/user-profile-admin-collection";
-import {AuthUser, UserProfile} from "~/types";
-import {
-    generateUsernameByEmailWith4DigitSuffix,
-    generateUsernameById,
-    getDisplayName
-} from "~/service/user-profile-service";
-import {UserRecord} from "firebase-admin/auth";
+import {AuthUser, FirebaseClaims, UserProfile} from "~/types";
+import {generateUsernameByEmailWith4DigitSuffix, generateUsernameById} from "~/service/user-profile-service";
+import {getAuth, UserRecord} from "firebase-admin/auth";
 
-const toAuthUser = (user: UserRecord, userProfile: UserProfile): AuthUser => {
+const toAuthUser = (user: UserRecord, firebaseClaims: FirebaseClaims): AuthUser => {
     return {
-        userId: userProfile.id as string,
-        username: userProfile.username,
-        displayName: getDisplayName(userProfile) as string,
-        email: userProfile.email,
+        userId: user.uid as string,
+        username: firebaseClaims.username,
+        displayName: user.displayName,
+        email: user.email,
         emailVerified: user.emailVerified,
-        profilePhoto: userProfile.profilePhoto.image,
+        profilePhoto: {
+            src: user.photoURL,
+        },
         providers: user.providerData,
     }
+}
+
+const addFirebaseClaims = async (userProfile: UserProfile) => {
+    const firebaseClaims: FirebaseClaims = {
+        username: userProfile.username
+    }
+    await getAuth().setCustomUserClaims(userProfile.id as string, firebaseClaims);
+    return firebaseClaims
 }
 
 const addUserProfile = (user: UserRecord) => {
@@ -24,7 +30,7 @@ const addUserProfile = (user: UserRecord) => {
     const userProfile: UserProfile = {
         id: user.uid,
         username,
-        name: {firstName: user.displayName?.split(' ')[0] || ''},
+        name: {firstName: user.displayName || ''},
         email: user.email,
         profilePhoto: {
             albumId: '',
@@ -38,21 +44,33 @@ const addUserProfile = (user: UserRecord) => {
     return saveUserProfile(userProfile, user.uid)
 }
 
-export default defineEventHandler(async (event) => {
-    // try {
-    const user = event.context.user;
-    if (!user) {
-        console.log('>>>> no extracted user found')
-        return
-    }
-
+async function createOrGetUserProfile(user: UserRecord) {
     let userProfile = await getUserProfile(user.uid)
     if (!userProfile) {
         console.log('>>>> no user profile for uid', user.uid)
         userProfile = await addUserProfile(user)
     }
+    return userProfile;
+}
 
-    const authUser = toAuthUser(user, userProfile)
+export default defineEventHandler(async (event) => {
+    // try {
+    let user = event.context.user;
+    if (!user) {
+        console.log('>>>> no extracted user found')
+        return
+    }
+
+    let firebaseClaims = user.customClaims as FirebaseClaims;
+
+    console.log('Found user with customClaims', firebaseClaims)
+    if (!firebaseClaims) {
+        let userProfile = await createOrGetUserProfile(user);
+        user = await getAuth().updateUser(user.uid, {photoURL: userProfile.profilePhoto.image.src})
+        firebaseClaims = await addFirebaseClaims(userProfile)
+    }
+
+    const authUser = toAuthUser(user, firebaseClaims)
     console.log('sending authUser:', !!authUser)
     return authUser
     // } catch (error){

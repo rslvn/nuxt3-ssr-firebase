@@ -1,11 +1,9 @@
 <script setup lang="ts">
 
-import {useAppGlobals} from "~/composables/useAppGlobals";
-
 const {seoMetaInputByUserProfile} = useAppSeoMeta()
 
 const {t} = useI18n()
-const {getUserProfileByUsername, getUserProfile} = useUserProfileCollection()
+const {getUserProfileByUsername} = useUserProfileCollection()
 const {userProfile} = useAppGlobals()
 const {params} = useRoute()
 const authStore = useAuthStore()

@@ -6,7 +6,7 @@ const props = defineProps<{
   albumType: AlbumType
 }>()
 const {notifyByError} = useNotifyUser()
-const {uploadingFile, uploadSinglePhoto} = useFirebaseUploadFile()
+const {uploadingFile, uploadSinglePhoto} = useFirebaseStorage()
 
 const fileRef = ref<HTMLInputElement>()
 

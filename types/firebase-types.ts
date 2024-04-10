@@ -15,6 +15,10 @@ export enum ProviderIdType {
     FACEBOOK = 'facebook.com',
 }
 
+export interface FirebaseClaims {
+    username: string
+}
+
 export interface AuthUser {
     displayName: string
     email?: string

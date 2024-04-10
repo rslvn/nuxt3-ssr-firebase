@@ -38,7 +38,7 @@ const getUserFromHeader = async (event: H3Event<EventHandlerRequest>) => {
 
         setCookie(event, runtimeConfig.public.authCookieName, sessionCookie, {
             maxAge: runtimeConfig.public.authCookieExpires,
-            sameSite: "lax",
+            sameSite: "strict",
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             path: "/",
@@ -52,8 +52,10 @@ const getUserFromHeader = async (event: H3Event<EventHandlerRequest>) => {
 
 export default defineEventHandler(async (event) => {
     try {
-        if (!event.path.startsWith('/api/')) return
-        event.context.user = await getUserFromCookie(event) || await getUserFromHeader(event)
+        if (!event.path.startsWith('/api/') || event.path.startsWith('/api/auth/logout')) {
+            return
+        }
+        event.context.user = await getUserFromHeader(event) || await getUserFromCookie(event)
 
         console.log('>>> extracted user:', !!event.context.user)
     } catch (error) {

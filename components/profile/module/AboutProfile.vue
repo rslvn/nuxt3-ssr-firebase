@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {UserProfile} from "~/types";
 import {getDisplayName} from "~/service/user-profile-service";
-import {sendEmailVerification} from "firebase/auth";
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -10,6 +9,7 @@ const props = defineProps<{
 const {t} = useI18n()
 const {showSuccessToaster, notifyByError} = useNotifyUser()
 const authStore = useAuthStore()
+const {sendEmailVerificationMail} = useFirebaseAuth()
 
 const displayName = computed(() => {
   return getDisplayName(props.userProfile)
@@ -18,10 +18,7 @@ const loading = ref(false)
 
 const sendVerificationLink = () => {
   loading.value = true
-  getCurrentUser()
-      .then(async (user) => {
-        await sendEmailVerification(user)
-      })
+  sendEmailVerificationMail()
       .then(() => {
         showSuccessToaster({key: 'notification.verificationMailSent'})
       })

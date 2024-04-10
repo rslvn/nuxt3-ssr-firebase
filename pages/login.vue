@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {PAGES} from "~/types";
-import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {computed} from "vue";
 
 definePageMeta({
@@ -12,9 +11,10 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 
 useSeoMeta(seoMetaInputByPageConfig(PAGES.LOGIN))
 
-const {$firebaseAuth} = useNuxtApp();
+const {loginWithPassword} = useFirebaseAuth();
 const {notifyByError, showWarningToaster} = useNotifyUser()
 const {email, password, getSchema} = useFormFields()
+
 const loading = ref(false)
 const providers = computed(() => {
       return locale
@@ -53,7 +53,7 @@ const schema = computed(() => getSchema(fields.value))
 
 const handleLogin = async (data: any) => {
   loading.value = true
-  await signInWithEmailAndPassword(getAuth(), data.email, data.password)
+  await loginWithPassword(data.email, data.password)
       .then((userCredentials) => {
         if (!userCredentials?.user?.emailVerified) {
           showWarningToaster({key: 'notification.emailNotVerified'})

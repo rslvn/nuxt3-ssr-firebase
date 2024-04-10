@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import {PAGES, UserProfile} from "~/types";
 import {sanitizeUrlContext} from "~/service/url-service";
-import {useAppGlobals} from "~/composables/useAppGlobals";
 
 const props = defineProps<{
   userProfile: UserProfile
 }>()
-
-// const {updateUserProfile} = inject(ProvideInjectType.USER_PROFILE_UPDATED)
 
 const {username, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()

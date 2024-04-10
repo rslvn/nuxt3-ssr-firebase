@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {PAGES} from "~/types";
-import {confirmPasswordReset, verifyPasswordResetCode} from "firebase/auth";
 
 const props = defineProps({
   oobCode: {
@@ -11,7 +10,7 @@ const props = defineProps({
 })
 const {notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert} = useNotifyUser()
 const {t} = useI18n()
-const {$firebaseAuth} = useNuxtApp();
+const {resetPassword} = useFirebaseAuth();
 const {password, confirmPassword, getSchema} = useFormFields()
 const loading = ref(false)
 if (!props.oobCode) {
@@ -23,10 +22,7 @@ const schema = computed(() => getSchema(fields.value))
 
 const handleResetPassword = async (data: any) => {
   loading.value = true
-  await verifyPasswordResetCode($firebaseAuth, props.oobCode)
-      .then(async () => {
-        await confirmPasswordReset($firebaseAuth, props.oobCode, data.password)
-      })
+  await resetPassword(props.oobCode, data.password)
       .then(() => {
         showSuccessAlert({key: 'notification.passwordUpdated'})
       })
