@@ -17,6 +17,7 @@ export default {
         profilePasswordUpdated: 'Password is changed',
         profileUrlCopied: 'Profile URL copied',
         noEmailAuthentication: 'You don\'t have an email password authentication yet',
-        photoUploadFailed: 'Photo upload is failed'
+        photoUploadFailed: 'Photo upload is failed',
+        uploadFileSizeTooBig: 'File size can not be bigger than {fileSize} MB'
     },
 }

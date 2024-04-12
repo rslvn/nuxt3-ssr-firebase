@@ -31,10 +31,10 @@ const loadProfileImages = () => {
 
 <template>
   <div
-      class="-mt-28 mx-auto flex flex-col items-center w-full px-4 absolute sm:space-x-2 sm:flex-row sm:px-6 lg:px-8">
+      class="-mt-28 mx-auto flex flex-col items-center w-full px-4 absolute sm:w-auto sm:space-x-2 sm:flex-row sm:px-6 lg:px-8">
     <div class="bg-gray-400 rounded-full h-52 w-52">
-      <NuxtImg class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900 cursor-pointer"
-               :src="profilePhoto.src" :alt="profilePhoto.alt" @click="loadProfileImages" placeholder/>
+      <NuxtImg class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900"
+              :class="{'cursor-pointer': userProfile?.profilePhoto?.id}" :src="profilePhoto.src" :alt="profilePhoto.alt" @click="loadProfileImages" placeholder/>
       <client-only>
         <div v-if="isMyProfile" class="absolute text-2xl -my-9 mx-40 opacity-100">
           <UploadButton :album-type="AlbumType.PROFILE"/>

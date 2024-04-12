@@ -1,4 +1,4 @@
-// const separatedChunks = ['vuefire', '@firebase'];
+const separatedChunks = ['@firebase'];
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const ONE_DAY = 60 * 60 * 24 * 1000;
 const ONE_WEEK = ONE_DAY * 7;
@@ -59,38 +59,6 @@ export default defineNuxtConfig({
             },
         },
     },
-    // vuefire: {
-    //     emulators: {
-    //         // uncomment this line to run the application in production mode without emulators during dev
-    //         // enabled: false,
-    //         auth: {
-    //             options: {
-    //                 disableWarnings: true,
-    //             },
-    //         },
-    //     },
-    //     auth: {
-    //         enabled: true,
-    //         // enables the sessionCookie
-    //         sessionCookie: true
-    //     },
-    //
-    //     // appCheck: {
-    //     //     provider: 'ReCaptchaV3',
-    //     //     // site key, NOT secret key
-    //     //     key: '6LeS5q0nAAAAABH3u13ntLwuIOkiNjHlXJOXoN5T',
-    //     //     isTokenAutoRefreshEnabled: true,
-    //     // },
-    //     config: {
-    //         apiKey: process.env.FIREBASE_API_KEY,
-    //         authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-    //         projectId: process.env.FIREBASE_PROJECT_ID,
-    //         storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-    //         messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-    //         appId: process.env.FIREBASE_APP_ID,
-    //         measurementId: process.env.FIREBASE_MEASUREMENT_ID,
-    //     },
-    // },
     sitemap: {
         sources: ['/api/sitemap'],
         xsl: false,
@@ -167,18 +135,18 @@ export default defineNuxtConfig({
         }
     },
     vite: {
-        // build: {
-        //     rollupOptions: {
-        //         output: {
-        //             manualChunks(id: any) {
-        //                 const separateModule = separatedChunks.find(module => id.includes(module));
-        //                 if (separateModule) return separateModule;
-        //             }
-        //         }
-        //     },
-        // },
-        // optimizeDeps: {
-        //     exclude: separatedChunks
-        // }
+        build: {
+            rollupOptions: {
+                output: {
+                    manualChunks(id: any) {
+                        const separateModule = separatedChunks.find(module => id.includes(module));
+                        if (separateModule) return separateModule;
+                    }
+                }
+            },
+        },
+        optimizeDeps: {
+            exclude: separatedChunks
+        }
     },
 })

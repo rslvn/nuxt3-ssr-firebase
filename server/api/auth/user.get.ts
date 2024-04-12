@@ -1,28 +1,20 @@
 import {getUserProfile, saveUserProfile} from "~/server/utils/user-profile-admin-collection";
-import {AuthUser, FirebaseClaims, UserProfile} from "~/types";
+import {AuthUser, UserProfile} from "~/types";
 import {generateUsernameByEmailWith4DigitSuffix, generateUsernameById} from "~/service/user-profile-service";
-import {getAuth, UserRecord} from "firebase-admin/auth";
+import {UserRecord} from "firebase-admin/auth";
 
-const toAuthUser = (user: UserRecord, firebaseClaims: FirebaseClaims): AuthUser => {
+const toAuthUser = (user: UserRecord, userProfile: UserProfile): AuthUser => {
     return {
         userId: user.uid as string,
-        username: firebaseClaims.username,
+        username: userProfile.username,
         displayName: user.displayName,
         email: user.email,
         emailVerified: user.emailVerified,
         profilePhoto: {
-            src: user.photoURL,
+            src: userProfile.profilePhoto?.image?.src || 'https://picsum.photos/500/800',
         },
         providers: user.providerData,
     }
-}
-
-const addFirebaseClaims = async (userProfile: UserProfile) => {
-    const firebaseClaims: FirebaseClaims = {
-        username: userProfile.username
-    }
-    await getAuth().setCustomUserClaims(userProfile.id as string, firebaseClaims);
-    return firebaseClaims
 }
 
 const addUserProfile = (user: UserRecord) => {
@@ -61,16 +53,8 @@ export default defineEventHandler(async (event) => {
         return
     }
 
-    let firebaseClaims = user.customClaims as FirebaseClaims;
-
-    console.log('Found user with customClaims', firebaseClaims)
-    if (!firebaseClaims) {
-        let userProfile = await createOrGetUserProfile(user);
-        user = await getAuth().updateUser(user.uid, {photoURL: userProfile.profilePhoto.image.src})
-        firebaseClaims = await addFirebaseClaims(userProfile)
-    }
-
-    const authUser = toAuthUser(user, firebaseClaims)
+    const userProfile = await createOrGetUserProfile(user);
+    const authUser = toAuthUser(user, userProfile)
     console.log('sending authUser:', !!authUser)
     return authUser
     // } catch (error){

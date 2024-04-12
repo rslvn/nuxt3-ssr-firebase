@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {ProviderIdType, UserProfile} from "~/types";
-import {EmailAuthProvider, reauthenticateWithCredential, updatePassword} from "firebase/auth";
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -9,8 +8,8 @@ const props = defineProps<{
 const {password, confirmPassword, oldPassword, getSchema} = useFormFields()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {t} = useI18n()
-const {firebaseAuth} = useFirebaseAuth()
-const {authUser} = useAuthStore()
+const {updateUserPassword} = useFirebaseAuth()
+const authStore = useAuthStore()
 
 const loading = ref(false)
 const state = reactive({
@@ -21,21 +20,14 @@ const state = reactive({
 const fields = computed(() => [password.value, confirmPassword.value, oldPassword.value])
 const schema = computed(() => getSchema(fields.value))
 
-const noPasswordProvider = computed(() => !authUser?.providers?.find(userInfo => userInfo.providerId === ProviderIdType.PASSWORD))
+const noPasswordProvider = computed(() => !authStore.authUser?.providers?.find(userInfo => userInfo.providerId === ProviderIdType.PASSWORD))
 
 const changePassword = async () => {
   loading.value = true
 
-  await Promise.resolve(firebaseAuth.currentUser)
-      .then(async (user) => {
-        const emailProvider = EmailAuthProvider.credential(props.userProfile.email, state.oldPassword)
-        await reauthenticateWithCredential(user, emailProvider)
-            .then(async () => {
-              await updatePassword(user, state.password)
-                  .then(() => {
-                    showSuccessToaster({key: 'notification.profilePasswordUpdated'})
-                  })
-            })
+  await updateUserPassword(props.userProfile.email, state.oldPassword, state.password)
+      .then(() => {
+        showSuccessToaster({key: 'notification.profilePasswordUpdated'})
       })
       .catch(notifyByError)
       .finally(() => loading.value = false)

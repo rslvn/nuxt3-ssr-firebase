@@ -2,11 +2,14 @@ import {
     applyActionCode,
     confirmPasswordReset,
     createUserWithEmailAndPassword,
+    EmailAuthProvider,
     getAuth,
+    reauthenticateWithCredential,
     sendEmailVerification,
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signOut,
+    updatePassword,
     verifyPasswordResetCode
 } from "firebase/auth";
 
@@ -28,7 +31,8 @@ export default function () {
     }
 
     const refreshToken = () => {
-        return getAuth().currentUser.getIdToken(true);
+        return Promise.resolve(getAuth().currentUser)
+            .then(user => user?.getIdToken(true))
     }
 
     const verifyEmail = (oobCode: string) => {
@@ -53,8 +57,16 @@ export default function () {
             })
     }
 
+    const updateUserPassword = async (email: string, oldPassword: string, newPassword: string) => {
+        const user = getAuth().currentUser;
+        const emailProvider = EmailAuthProvider.credential(email, oldPassword)
+        return await reauthenticateWithCredential(user, emailProvider)
+            .then(async () => {
+                await updatePassword(user, newPassword)
+            })
+    }
+
     return {
-        // listenAuthStateChanged,
         loginWithPassword,
         logout,
         refreshToken,
@@ -62,6 +74,7 @@ export default function () {
         resetPassword,
         sendEmailVerificationMail,
         sendResetPasswordMail,
+        updateUserPassword,
         verifyEmail,
         firebaseAuth: getAuth()
     }

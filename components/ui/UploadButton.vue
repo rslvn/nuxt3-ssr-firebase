@@ -5,7 +5,7 @@ import imageCompression from 'browser-image-compression';
 const props = defineProps<{
   albumType: AlbumType
 }>()
-const {notifyByError} = useNotifyUser()
+const {showErrorToaster} = useNotifyUser()
 const {uploadingFile, uploadSinglePhoto} = useFirebaseStorage()
 
 const fileRef = ref<HTMLInputElement>()
@@ -15,7 +15,12 @@ function onFileChange(e: Event) {
   if (!input?.files?.length) {
     return
   }
-  console.log(`originalFile size ${input.files[0].size / 1024 / 1024} MB`);
+  const fileSize = input.files[0].size / 1024 / 1024
+  console.log(`originalFile size ${fileSize} MB`);
+  if(fileSize > 5){
+    showErrorToaster({key: 'notification.uploadFileSizeTooBig', params: {fileSize: 5}})
+    return;
+  }
 
   const options = {
     maxSizeMB: 1,

@@ -6,24 +6,31 @@
 </template>
 <script setup lang="ts">
 
-import {IdTokenResult, User} from "@firebase/auth";
+import {User} from "@firebase/auth";
 import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from "~/types";
 
 const router = useRouter()
 const route = useRoute()
-const {authUser} = useAuthStore()
+const authStore = useAuthStore()
 const {setAuthUserByHeader, removeAuthUser} = useAuthUser()
+
+// const forceTokenRefresh = (user: User) => {
+//   const forceRefresh = localStorage.getItem('forceRefresh')
+//   if (forceRefresh) {
+//     localStorage.removeItem('forceRefresh')
+//     user.getIdToken(true)
+//         .then((token: string) => {
+//           setAuthUserByHeader(token)
+//         })
+//   }
+// }
+
 const userChanged = async (user: User) => {
   if (user) {
-    await user.getIdTokenResult()
-        .then(async (idTokenResult: IdTokenResult) => {
-          await setAuthUserByHeader(idTokenResult.token)
-          if (!idTokenResult.claims.username) {
-            user.getIdToken(true)
-                .then((token: string) => {
-                  setAuthUserByHeader(token)
-                })
-          }
+    await user.getIdToken()
+        .then(async (token) => {
+          await setAuthUserByHeader(token)
+          // forceTokenRefresh(user)
         })
 
     if (typeof route.query.redirect === 'string') {
@@ -41,7 +48,7 @@ const userChanged = async (user: User) => {
   } else {
     await removeAuthUser()
     console.log(new Date(), '>>>> user logged out')
-    if (authUser && !AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
+    if (authStore.authUser && !AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
       return router.push(PAGES.LOGIN.path)
     }
   }
