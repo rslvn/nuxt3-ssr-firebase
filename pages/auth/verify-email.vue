@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {LazyVerifyEmailForm} from '#components'
+import {LazyVerifyEmail} from '#components'
 
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
@@ -12,7 +12,7 @@ const oobCode = route.query.oobCode as string
 <template>
   <UContainer>
     <client-only>
-      <LazyVerifyEmailForm :oobCode="oobCode"/>
+      <LazyVerifyEmail :oobCode="oobCode"/>
     </client-only>
   </UContainer>
 </template>

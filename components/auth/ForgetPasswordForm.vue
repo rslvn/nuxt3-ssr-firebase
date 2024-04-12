@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import {PAGES} from "~/types";
-import {sendPasswordResetEmail} from "firebase/auth";
 
 const {t} = useI18n()
-const firebaseAuth = useFirebaseAuth()
+const {sendResetPasswordMail} = useFirebaseAuth();
 const {notifyByError, alertMessage, closeAlert, showSuccessAlert} = useNotifyUser()
 const {email, getSchema} = useFormFields()
 const loading = ref(false)
@@ -13,7 +12,7 @@ const schema = computed(() => getSchema(fields.value))
 
 const handleForgotPassword = async (data: any) => {
   loading.value = true
-  await sendPasswordResetEmail(firebaseAuth, data.email)
+  await sendResetPasswordMail(data.email)
       .then(() => {
         showSuccessAlert({key: 'notification.resetPasswordMailSent'})
       })
@@ -47,7 +46,7 @@ const handleForgotPassword = async (data: any) => {
     </section>
 
     <section v-if="alertMessage" class="mt-5">
-      <AppAlert :alert-message="alertMessage" :close-alert="closeAlert"/>
+      <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert"/>
     </section>
   </div>
 </template>

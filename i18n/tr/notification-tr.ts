@@ -17,6 +17,7 @@ export default {
         profilePasswordUpdated: 'Parola guncellendi',
         profileUrlCopied: 'Profil linki kopyalandi',
         noEmailAuthentication: 'Henuz bir e-posta parola girisiniz yok',
-        photoUploadFailed: 'Fotograf yuklemesi basarisiz'
+        photoUploadFailed: 'Fotograf yuklemesi basarisiz',
+        uploadFileSizeTooBig: 'Yuklenecek fotograf buyuklugu {fileSize} MB\'dan buyuk olamaz'
     },
 }

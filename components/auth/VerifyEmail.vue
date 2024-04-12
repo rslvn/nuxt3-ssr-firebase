@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {applyActionCode} from "firebase/auth";
 import {NotificationTarget} from "~/types";
 
 const props = defineProps({
@@ -10,22 +9,18 @@ const props = defineProps({
   },
 })
 const {t} = useI18n()
-const firebaseAuth = useFirebaseAuth()
+const {verifyEmail} = useFirebaseAuth();
 const {notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert} = useNotifyUser()
 
 const verified = ref(false)
 
-if (!props.oobCode) {
-  // throw error
-  showErrorAlert({key: 'notification.invalidVerificationCode'})
-}
-
 onMounted(() => {
   if (!props.oobCode) {
     verified.value = true
+    showErrorAlert({key: 'notification.invalidVerificationCode'})
     return
   }
-  applyActionCode(firebaseAuth, props.oobCode)
+  verifyEmail(props.oobCode)
       .then(() => {
         showSuccessAlert({key: 'notification.emailVerified'})
       })
@@ -40,6 +35,6 @@ onMounted(() => {
     <span>{{ t('common.processing') }}</span>
   </section>
   <section v-if="alertMessage" class="mt-5">
-    <AppAlert :alert-message="alertMessage" :close-alert="closeAlert"/>
+    <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert"/>
   </section>
 </template>

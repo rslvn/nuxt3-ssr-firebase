@@ -2,7 +2,6 @@ import {defineStore} from 'pinia'
 import {AuthState, AuthUser} from "~/types";
 
 export const useAuthStore = defineStore('auth-store', {
-
     state: (): AuthState => {
         return {
             authUser: null

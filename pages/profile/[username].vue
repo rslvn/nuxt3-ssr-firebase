@@ -1,11 +1,9 @@
 <script setup lang="ts">
 
-import {useAppGlobals} from "~/composables/useAppGlobals";
-
 const {seoMetaInputByUserProfile} = useAppSeoMeta()
 
 const {t} = useI18n()
-const {getUserProfileByUsername, getUserProfile} = useUserProfileCollection()
+const {getUserProfileByUsername} = useUserProfileCollection()
 const {userProfile} = useAppGlobals()
 const {params} = useRoute()
 const authStore = useAuthStore()
@@ -18,6 +16,7 @@ if (!username) {
 await getUserProfileByUsername(username)
     .then((profile) => {
       if (!profile) {
+        console.log('>>>> no profile found by username', username)
         throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
       }
       userProfile.value = profile
@@ -26,6 +25,7 @@ await getUserProfileByUsername(username)
       if (reason?.code === 'permission-denied') {
         throw createError({statusCode: 403, statusMessage: t('page.accessDenied'), fatal: true})
       }
+      console.log('>>>> error when profile loading',reason)
       throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
     })
 

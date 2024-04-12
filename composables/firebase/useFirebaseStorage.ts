@@ -1,9 +1,8 @@
-import {getDownloadURL, ref as storageRef, UploadMetadata} from "@firebase/storage";
+import {getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable, UploadMetadata} from "@firebase/storage";
 import {getNewFileName} from "~/service/firebase/fire-storage-service";
 import {AlbumType} from "~/types";
 
 export default function () {
-    const firebaseStorage = useFirebaseStorage()
     const {notifyByError, showErrorToaster} = useNotifyUser()
     const {reloadUserProfile} = useAppGlobals()
     const {saveUserProfile, getUserProfile} = useUserProfileCollection()
@@ -11,14 +10,13 @@ export default function () {
     const {saveAlbumImage} = useAlbumImageCollection()
 
     const uploadingFile = ref(false)
-    // const fileForUpload = ref(null as File)
     const authStore = useAuthStore()
 
     const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string, file: File) => {
         console.log('>>> uploadFileToFirebaseStorage albumType:', albumType)
         const filePath = `${parentPath}${getNewFileName(file.name)}`
-        const fileUploadRef = storageRef(firebaseStorage, filePath)
-        const {uploadTask, upload} = useStorageFile(fileUploadRef)
+        const fileUploadRef = storageRef(getStorage(), filePath)
+        const userId = authStore.authUser.userId
 
         uploadingFile.value = true
 
@@ -30,15 +28,10 @@ export default function () {
                 albumType,
             }
         }
-        upload(file, imageMeta)
-            .catch(notifyByError)
 
-        if (!uploadTask.value) {
-            uploadingFile.value = false
-            return
-        }
+        const uploadTask = uploadBytesResumable(fileUploadRef, file, imageMeta);
 
-        uploadTask.value.on('state_changed', (snapshot) => {
+        uploadTask.on('state_changed', (snapshot) => {
                 switch (snapshot.state) {
                     case 'running':
                         break
@@ -53,9 +46,9 @@ export default function () {
                 notifyByError(reason)
             },
             () => {
-                getDownloadURL(uploadTask.value.snapshot.ref)
+                getDownloadURL(uploadTask.snapshot.ref)
                     .then(async (downloadURL) => {
-                        const album = await getOrAddAlbum(authStore.authUser.userId, albumType)
+                        const album = await getOrAddAlbum(userId, albumType)
                         console.log('>>>> Found album: ', album, 'albumType: ', albumType)
                         const savedAlbumImage = await saveAlbumImage({
                             albumId: album.id,
@@ -64,7 +57,7 @@ export default function () {
                                 src: downloadURL,
                             }
                         })
-                        await getUserProfile(authStore.authUser.userId)
+                        await getUserProfile(userId)
                             .then(async (profile) => {
                                 if (albumType === AlbumType.PROFILE) {
                                     profile.profilePhoto = savedAlbumImage
@@ -90,13 +83,14 @@ export default function () {
         if (!albumType || !photo) {
             console.log('>>>>> Cannot be uploaded')
         }
+        const userId = authStore.authUser.userId
 
         console.log(`>>>>> Uploading ${albumType}:`, photo.name)
         switch (albumType) {
             case AlbumType.PROFILE:
-                return uploadFileToFirebaseStorage(albumType, `users/${authStore.authUser.userId}/profilePhotos/`, photo)
+                return uploadFileToFirebaseStorage(albumType, `users/${userId}/profilePhotos/`, photo)
             case AlbumType.COVER:
-                return uploadFileToFirebaseStorage(albumType, `users/${authStore.authUser.userId}/coverPhotos/`, photo)
+                return uploadFileToFirebaseStorage(albumType, `users/${userId}/coverPhotos/`, photo)
             case AlbumType.CUSTOM:
             default:
                 console.log('>>>>> Unknown albumType: ', albumType)

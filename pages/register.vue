@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {createUserWithEmailAndPassword, sendEmailVerification} from "firebase/auth";
 import {PAGES} from "~/types";
 import {computed} from "vue";
 
@@ -11,7 +10,7 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.REGISTER))
 
 const {t, locale} = useI18n()
-const firebaseAuth = useFirebaseAuth();
+const {registerWithPassword} = useFirebaseAuth();
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {email, password, confirmPassword, getSchema} = useFormFields()
 const loading = ref(false)
@@ -53,10 +52,7 @@ const googleRegister = () => {
 
 const handleRegister = async (data: any) => {
   loading.value = true
-  await createUserWithEmailAndPassword(firebaseAuth, data.email, data.password)
-      .then(async (userCredentials) => {
-        await sendEmailVerification(userCredentials.user)
-      })
+  await registerWithPassword(data.email, data.password)
       .then(() => {
         showSuccessToaster({key: 'notification.verificationMailSent'})
       })

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import {signOut} from "firebase/auth"
 
 const {t} = useI18n()
-const firebaseAuth = useFirebaseAuth()
+const {logout} = useFirebaseAuth();
 const {isHeaderDialogOpen} = useUIState()
 const authStore = useAuthStore()
 
@@ -10,8 +9,8 @@ const closeDialog = () => {
   isHeaderDialogOpen.value = false
 }
 
-const logOff = () => {
-  signOut(firebaseAuth)
+const signOut = () => {
+  logout()
   closeDialog()
 }
 
@@ -44,7 +43,7 @@ const logOff = () => {
       <RegisterBar v-if="!authStore.authUser" block/>
       <!--      <RegisterBar v-if="!user?.emailVerified" block/>-->
       <UButton v-if="authStore.authUser" :label="t('common.SignOut')" color="green" variant="ghost"
-               @click="logOff" block/>
+               @click="signOut" block/>
     </template>
   </UHeader>
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {UserProfile} from "~/types";
-import {useAppGlobals} from "~/composables/useAppGlobals";
 
 const props = defineProps<{
   userProfile: UserProfile
