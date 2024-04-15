@@ -18,6 +18,8 @@ export default {
         Profile: 'Profil',
         Settings: 'Ayarlar',
         Verify: 'Dogrula',
+        Connect: 'Baglan',
+        Disconnect: 'Kaldir'
     },
 
 }

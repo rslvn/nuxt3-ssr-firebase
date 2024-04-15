@@ -27,7 +27,7 @@ export default {
         },
         password: {
             label: 'Password',
-            placeholder: 'enter password',
+            placeholder: 'enter a password',
             description: 'Your password'
         },
         oldPassword: {
@@ -59,6 +59,11 @@ export default {
             label: 'Username',
             placeholder: 'enter a username',
             description: 'Your username in your profile url'
+        },
+        about: {
+            label: 'About',
+            placeholder: 'tell something about you',
+            description: 'About you'
         },
     },
 }

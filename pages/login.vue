@@ -12,41 +12,14 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.LOGIN))
 
 const {loginWithPassword} = useFirebaseAuth();
+const {getLoginProviders} = useAuthProviders()
 const {notifyByError, showWarningToaster} = useNotifyUser()
 const {email, password, getSchema} = useFormFields()
 
 const loading = ref(false)
 const providers = computed(() => {
-      return locale
-          ? [
-            {
-              label: t('page.login.provider', {provider: 'Google'}),
-              icon: 'i-simple-icons-google',
-              color: 'red' as const,
-              click: () => googleLogin
-            },
-            {
-              label: t('page.login.provider', {provider: 'Facebook'}),
-              icon: 'i-simple-icons-facebook',
-              color: 'blue' as const,
-              click: () => facebookLogin
-            },
-            {
-              label: t('page.login.provider', {provider: 'Twitter'}),
-              icon: 'i-simple-icons-twitter',
-              color: 'sky' as const,
-              click: () => twitterLogin
-            }
-          ]
-          : null
-    }
-)
-const facebookLogin = () => {
-}
-const twitterLogin = () => {
-}
-const googleLogin = () => {
-}
+  return locale ? getLoginProviders() : []
+})
 
 const fields = computed(() => [email.value, password.value])
 const schema = computed(() => getSchema(fields.value))

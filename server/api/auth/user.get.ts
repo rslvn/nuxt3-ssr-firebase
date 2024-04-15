@@ -52,7 +52,6 @@ export default defineEventHandler(async (event) => {
         console.log('>>>> no extracted user found')
         return
     }
-
     const userProfile = await createOrGetUserProfile(user);
     const authUser = toAuthUser(user, userProfile)
     console.log('sending authUser:', !!authUser)

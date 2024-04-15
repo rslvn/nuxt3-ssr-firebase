@@ -8,11 +8,18 @@ export interface Image {
 }
 
 // auth types
-export enum ProviderIdType {
-    PASSWORD = 'password',
-    GOOGLE = 'google.com',
-    TWITTER = 'twitter.com',
-    FACEBOOK = 'facebook.com',
+export interface ProviderConfig {
+    providerId: string
+    name: string
+    color: string
+    icon: string
+}
+
+export const PROVIDER_CONFIGS = {
+    PASSWORD: {providerId: 'password',name: 'Password', color: 'fuchsia', icon: 'i-heroicons-envelope'} as ProviderConfig,
+    GOOGLE: {providerId: 'google.com',name: 'Google', color: 'red', icon: 'i-simple-icons-google'} as ProviderConfig,
+    FACEBOOK: {providerId: 'facebook.com',name: 'Facebook', color: 'blue', icon: 'i-simple-icons-facebook'} as ProviderConfig,
+    TWITTER: {providerId: 'twitter.com',name: 'Twitter', color: 'sky', icon: 'i-simple-icons-twitter'} as ProviderConfig,
 }
 
 export interface AuthUser {

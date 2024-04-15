@@ -133,6 +133,21 @@ export default function () {
         }
     })
 
+    const about = computed(() => {
+        if (!locale) {
+            return null
+        }
+        return {
+            name: 'about',
+            type: 'text',
+            label: t('field.about.label'),
+            placeholder: t('field.about.placeholder'),
+            description: t('field.about.description'),
+            color: 'gray',
+            required: false
+        }
+    })
+
     const schemaConfig: any = {
         email: z.string().email(),
         password: z.string().min(6).max(32),
@@ -145,6 +160,7 @@ export default function () {
             message: t('validation.username', {username}),
         })),
         country: z.string(),
+        about: z.optional(z.string().max(512)),
 
     }
 
@@ -174,6 +190,7 @@ export default function () {
         middleName,
         lastName,
         username,
+        about,
         getSchema
     }
 }

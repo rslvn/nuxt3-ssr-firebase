@@ -18,6 +18,10 @@ export default {
         profileUrlCopied: 'Profil linki kopyalandi',
         noEmailAuthentication: 'Henuz bir e-posta parola girisiniz yok',
         photoUploadFailed: 'Fotograf yuklemesi basarisiz',
-        uploadFileSizeTooBig: 'Yuklenecek fotograf buyuklugu {fileSize} MB\'dan buyuk olamaz'
+        uploadFileSizeTooBig: 'Yuklenecek fotograf buyuklugu {fileSize} MB\'dan buyuk olamaz',
+        accountProviderLinked: '{provider} hesabiniz baglandi. {provider} ile giris yapabilirsiniz',
+        accountProviderUnlinked: '{provider} hesabiniz kaldirildi. Artik {provider} ile giris yapamazsiniz',
+        cantUnlinkTheLastProvider: '{provider} kaldirilamaz cunku sadece {provider}, hesabiniza giris icin baglanmis',
+        cantUnlinkCurrentSignInProvider: '{provider} kaldirilamaz cunku {provider} ile giris yaptiniz',
     },
 }

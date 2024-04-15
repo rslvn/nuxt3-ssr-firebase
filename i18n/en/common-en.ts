@@ -21,5 +21,7 @@ export default {
         Profile: 'Profile',
         Settings: 'Settings',
         Verify: 'Verify',
+        Connect: 'Connect',
+        Disconnect: 'Disconnect'
     }
 }

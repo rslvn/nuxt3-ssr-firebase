@@ -36,14 +36,14 @@ const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?
 </script>
 
 <template>
-  <UDashboardPage>
-    <UDashboardPanel grow>
+<!--  <UDashboardPage>-->
+<!--    <UDashboardPanel grow>-->
       <section>
         <ProfileHeader v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
         <ProfileHeaderSkeleton v-else/>
       </section>
 
       <ProfileModules v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
-    </UDashboardPanel>
-  </UDashboardPage>
+<!--    </UDashboardPanel>-->
+  <!--  </UDashboardPage>-->
 </template>

@@ -5,24 +5,23 @@ const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {password, confirmPassword, oldPassword, getSchema} = useFormFields()
+const {password, confirmPassword, getSchema} = useFormFields()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {t} = useI18n()
-const {updateUserPassword} = useFirebaseAuth()
+const {linkPassword} = useFirebaseAuth()
 
 const loading = ref(false)
 const state = reactive({
   password: '',
-  confirmPassword: '',
-  oldPassword: '',
+  confirmPassword: ''
 })
-const fields = computed(() => [password.value, confirmPassword.value, oldPassword.value])
+const fields = computed(() => [password.value, confirmPassword.value])
 const schema = computed(() => getSchema(fields.value))
 
-const changePassword = async () => {
+const addPassword = async () => {
   loading.value = true
 
-  await updateUserPassword(props.userProfile.email, state.oldPassword, state.password)
+  await linkPassword(props.userProfile.email, state.password)
       .then(() => {
         showSuccessToaster({key: 'notification.profilePasswordUpdated'})
       })
@@ -33,25 +32,19 @@ const changePassword = async () => {
 </script>
 
 <template>
-  <UForm :state="state" :schema="schema" @submit="changePassword">
-    <UDashboardSection :title="t('button.ChangePassword')">
-      <UFormGroup :label="oldPassword.label" :name="oldPassword.name" :description="oldPassword.description"
-                  :required="oldPassword.required"
-                  class="grid grid-cols-1 sm:grid-cols-2 gap-2"
-                  :ui="{ container: '', error: 'text-sm' }">
-        <UInput :type="oldPassword.type" :placeholder="oldPassword.placeholder" v-model="state.oldPassword"/>
-      </UFormGroup>
+  <UForm :state="state" :schema="schema" @submit="addPassword">
+    <UDashboardSection :title="t('button.AddPassword')">
 
-      <UFormGroup :label="t('field.newPassword.label')" :name="password.name"
-                  :description="t('field.newPassword.description')"
+      <UFormGroup :label="t('field.password.label')" :name="password.name"
+                  :description="t('field.password.description')"
                   :required="password.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
         <UInput :type="password.type" :placeholder="t('field.newPassword.placeholder')" v-model="state.password"/>
       </UFormGroup>
 
-      <UFormGroup :label="t('field.newPasswordConfirm.label')" :name="confirmPassword.name"
-                  :description="t('field.newPasswordConfirm.description')"
+      <UFormGroup :label="t('field.confirmPassword.label')" :name="confirmPassword.name"
+                  :description="t('field.confirmPassword.description')"
                   :required="confirmPassword.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
@@ -59,11 +52,17 @@ const changePassword = async () => {
                 v-model="state.confirmPassword"/>
       </UFormGroup>
 
+      <template #links>
+        <UBadge color="orange" variant="soft">
+          {{ t('notification.noEmailAuthentication') }}
+        </UBadge>
+      </template>
+
     </UDashboardSection>
 
     <UDashboardSection>
       <template #links>
-        <UButton type="submit" :label="t('button.ChangePassword')" :loading="loading"
+        <UButton type="submit" :label="t('button.AddPassword')" :loading="loading"
                  :disabled="loading"/>
       </template>
     </UDashboardSection>
