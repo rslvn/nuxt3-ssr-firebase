@@ -3,15 +3,23 @@ import {
     confirmPasswordReset,
     createUserWithEmailAndPassword,
     EmailAuthProvider,
+    FacebookAuthProvider,
     getAuth,
+    GoogleAuthProvider,
+    linkWithCredential,
+    linkWithPopup,
     reauthenticateWithCredential,
     sendEmailVerification,
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
+    signInWithPopup,
     signOut,
+    TwitterAuthProvider,
+    unlink,
     updatePassword,
-    verifyPasswordResetCode
+    verifyPasswordResetCode,
 } from "firebase/auth";
+import {PROVIDER_CONFIGS} from "~/types";
 
 export default function () {
 
@@ -66,7 +74,62 @@ export default function () {
             })
     }
 
+    const getAuthProvider = (providerId: string) => {
+        switch (providerId) {
+            case PROVIDER_CONFIGS.GOOGLE.providerId:
+                return new GoogleAuthProvider()
+
+            case PROVIDER_CONFIGS.FACEBOOK.providerId:
+                return new FacebookAuthProvider()
+
+            case PROVIDER_CONFIGS.TWITTER.providerId:
+                return new TwitterAuthProvider()
+
+            default:
+                throw new Error(
+                    `No social auth provider for provider id ${providerId}`
+                )
+        }
+    }
+
+    const signInWithSocialProvider = (providerId: string) => {
+        return signInWithPopup(getAuth(), getAuthProvider(providerId))
+    }
+
+    const linkPassword = async (email: string, password: string) => {
+        const emailProvider = EmailAuthProvider.credential(email, password)
+        return await linkWithCredential(getAuth().currentUser, emailProvider)
+            .then(async () => {
+                await refreshToken()
+            })
+    }
+
+    const linkProviderId = async (providerId: string) => {
+        return await linkWithPopup(getAuth().currentUser, getAuthProvider(providerId))
+            .then(async () => {
+                await refreshToken()
+            })
+    }
+
+    const unlinkProviderId = async (providerId: string) => {
+        return await unlink(getAuth().currentUser, providerId)
+            .then(async () => {
+                await refreshToken()
+            })
+    }
+
+    const getCurrentProviderId = async () => {
+        return await Promise.resolve(getAuth().currentUser)
+            .then(async (user) => await user?.getIdTokenResult().then(idTokenResult => idTokenResult.signInProvider))
+    }
+
+
+    // await getAuth()?.currentUser?.getIdTokenResult().then(idTokenResult => idTokenResult.signInProvider )
+
     return {
+        getCurrentProviderId,
+        linkProviderId,
+        linkPassword,
         loginWithPassword,
         logout,
         refreshToken,
@@ -74,6 +137,8 @@ export default function () {
         resetPassword,
         sendEmailVerificationMail,
         sendResetPasswordMail,
+        signInWithSocialProvider,
+        unlinkProviderId,
         updateUserPassword,
         verifyEmail,
         firebaseAuth: getAuth()

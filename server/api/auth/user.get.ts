@@ -37,11 +37,13 @@ const addUserProfile = (user: UserRecord) => {
 }
 
 async function createOrGetUserProfile(user: UserRecord) {
+    console.log('>>>> get user profile with uid:', user.uid)
     let userProfile = await getUserProfile(user.uid)
     if (!userProfile) {
         console.log('>>>> no user profile for uid', user.uid)
         userProfile = await addUserProfile(user)
     }
+    console.log('>>>> Found profile:', !!userProfile)
     return userProfile;
 }
 
@@ -52,7 +54,6 @@ export default defineEventHandler(async (event) => {
         console.log('>>>> no extracted user found')
         return
     }
-
     const userProfile = await createOrGetUserProfile(user);
     const authUser = toAuthUser(user, userProfile)
     console.log('sending authUser:', !!authUser)

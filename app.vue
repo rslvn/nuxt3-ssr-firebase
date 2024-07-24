@@ -12,25 +12,12 @@ import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from "~/types";
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
-const {setAuthUserByHeader, removeAuthUser} = useAuthUser()
-
-// const forceTokenRefresh = (user: User) => {
-//   const forceRefresh = localStorage.getItem('forceRefresh')
-//   if (forceRefresh) {
-//     localStorage.removeItem('forceRefresh')
-//     user.getIdToken(true)
-//         .then((token: string) => {
-//           setAuthUserByHeader(token)
-//         })
-//   }
-// }
 
 const userChanged = async (user: User) => {
   if (user) {
     await user.getIdToken()
         .then(async (token) => {
-          await setAuthUserByHeader(token)
-          // forceTokenRefresh(user)
+          await authStore.setAuthUserByHeader(token)
         })
 
     if (typeof route.query.redirect === 'string') {
@@ -46,7 +33,7 @@ const userChanged = async (user: User) => {
     }
 
   } else {
-    await removeAuthUser()
+    await authStore.removeAuthUser()
     console.log(new Date(), '>>>> user logged out')
     if (authStore.authUser && !AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
       return router.push(PAGES.LOGIN.path)

@@ -25,6 +25,13 @@ export default {
         },
         resetPassword: {
             description: 'Set your new password'
+        },
+        profileSettings: {
+            linkedAccounts: {
+                title: 'Linked accounts',
+                description: 'The accounts that can use link your account and login with',
+                currentLogin: 'You have logged in with {provider}'
+            }
         }
     }
 }

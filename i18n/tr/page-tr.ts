@@ -24,6 +24,14 @@ export default {
         },
         resetPassword: {
             description: 'Set your new password'
+        },
+        profileSettings: {
+            linkedAccounts: {
+                title: 'Bagli hesaplar',
+                description: 'Hesabiniza login olmak icin kullanabileceginiz yontemler',
+                currentLogin: 'Hesabiniza {provider} ile giris yaptiniz'
+            }
         }
+
     }
 }

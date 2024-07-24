@@ -25,7 +25,7 @@ await getUserProfileByUsername(username)
       if (reason?.code === 'permission-denied') {
         throw createError({statusCode: 403, statusMessage: t('page.accessDenied'), fatal: true})
       }
-      console.log('>>>> error when profile loading',reason)
+      console.log('>>>> error when profile loading', reason)
       throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
     })
 
@@ -36,14 +36,13 @@ const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?
 </script>
 
 <template>
-  <UDashboardPage>
-    <UDashboardPanel grow>
-      <section>
-        <ProfileHeader v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
-        <ProfileHeaderSkeleton v-else/>
-      </section>
+  <section>
+    <ProfileHeader v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
+    <ProfileHeaderSkeleton v-else/>
+  </section>
 
-      <ProfileModules v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
-    </UDashboardPanel>
-  </UDashboardPage>
+  <section>
+
+    <ProfileModules v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
+  </section>
 </template>

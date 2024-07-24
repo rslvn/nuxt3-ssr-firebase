@@ -6,7 +6,7 @@
   </UMain>
 
   <UFooter>
-    <template #left>
+    <template #center>
       Copyright© {{ thisYear }} nuxt3-ssr-firebase.com
     </template>
   </UFooter>

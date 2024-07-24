@@ -2,7 +2,7 @@
 
 import {UserProfile} from "~/types";
 
-const props = defineProps<{
+defineProps<{
   userProfile: UserProfile
   isMyProfile?: boolean
 }>()

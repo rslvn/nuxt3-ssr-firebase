@@ -6,14 +6,23 @@ defineProps<{
   isMyProfile?: boolean
 }>()
 
+const authStore = useAuthStore()
+const {getPasswordProvider} = useAuthProviders()
+
+const noPasswordProvider = computed(() => !getPasswordProvider(authStore.authUser?.providers))
+
 </script>
 
 <template>
-  <UContainer>
-    <UDashboardPanelContent class="pb-24">
+  <UContainer :ui="{padding: 'px-2'}">
+    <UDashboardPanelContent class="pb-24" :ui="{wrapper: 'p-2'}">
 
       <UCard>
-        <UpdateProfileNameForm :user-profile="userProfile"/>
+        <EmailSettings :user-profile="userProfile" :is-my-profile="isMyProfile"/>
+      </UCard>
+
+      <UCard class="mt-5">
+        <UpdateProfileForm :user-profile="userProfile"/>
       </UCard>
 
       <UCard class="mt-5">
@@ -25,7 +34,12 @@ defineProps<{
       </UCard>
 
       <UCard class="mt-5">
-        <ChangePasswordForm :user-profile="userProfile"/>
+        <AddPasswordForm v-if="noPasswordProvider" :user-profile="userProfile"/>
+        <ChangePasswordForm v-else :user-profile="userProfile"/>
+      </UCard>
+
+      <UCard class="mt-5">
+        <LinkedAccounts/>
       </UCard>
 
     </UDashboardPanelContent>

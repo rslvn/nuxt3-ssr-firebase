@@ -10,45 +10,17 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.REGISTER))
 
 const {t, locale} = useI18n()
-const {registerWithPassword} = useFirebaseAuth();
+const {registerWithPassword, signInWithSocialProvider} = useFirebaseAuth();
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {email, password, confirmPassword, getSchema} = useFormFields()
+const {getRegisterProviders} = useAuthProviders()
 const loading = ref(false)
 const providers = computed(() => {
-      return locale
-          ? [
-            {
-              label: t('page.register.provider', {provider: 'Google'}),
-              icon: 'i-simple-icons-google',
-              color: 'red' as const,
-              click: () => googleRegister
-            },
-            {
-              label: t('page.register.provider', {provider: 'Facebook'}),
-              icon: 'i-simple-icons-facebook',
-              color: 'blue' as const,
-              click: () => facebookRegister
-            },
-            {
-              label: t('page.register.provider', {provider: 'Twitter'}),
-              icon: 'i-simple-icons-twitter',
-              color: 'sky' as const,
-              click: () => twitterRegister
-            }
-          ]
-          : null
-    }
-)
+  return locale ? getRegisterProviders() : []
+})
 
 const fields = computed(() => [email.value, password.value, confirmPassword.value])
 const schema = computed(() => getSchema(fields.value))
-
-const facebookRegister = () => {
-}
-const twitterRegister = () => {
-}
-const googleRegister = () => {
-}
 
 const handleRegister = async (data: any) => {
   loading.value = true
