@@ -37,11 +37,13 @@ const addUserProfile = (user: UserRecord) => {
 }
 
 async function createOrGetUserProfile(user: UserRecord) {
+    console.log('>>>> get user profile with uid:', user.uid)
     let userProfile = await getUserProfile(user.uid)
     if (!userProfile) {
         console.log('>>>> no user profile for uid', user.uid)
         userProfile = await addUserProfile(user)
     }
+    console.log('>>>> Found profile:', !!userProfile)
     return userProfile;
 }
 
