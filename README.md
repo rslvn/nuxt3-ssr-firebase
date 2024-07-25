@@ -38,6 +38,7 @@ Firebase storage:
 Other:
 
 * Dark Mode
+* SEO
 * NuxtUI
 * NuxtUI-pro
 * tailwindcss
