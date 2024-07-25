@@ -40,7 +40,7 @@ Other:
 * Dark Mode
 * NuxtUI
 * NuxtUI-pro
-* tailwind
+* tailwindcss
 * iconify
 * i18n
 * sitemap
@@ -48,21 +48,37 @@ Other:
 
 ## Setup
 
-## .env configuration
+### .env configuration
 
-create `.env` file with content below and update your firebase configuration
+- copy `.env.example` file as `.env`
+
+```shell
+cp .env.example .env
+```
+
+- update `.env` file content with your firebase configuration
 
 > GOOGLE_APPLICATION_CREDENTIALS must be the single line of the service account file
 > content [Admin-SDK](https://vuefire.vuejs.org/nuxt/environment-variables.html#Admin-SDK)
 
-```properties
-FIREBASE_API_KEY=...
-FIREBASE_AUTH_DOMAIN=...
-FIREBASE_PROJECT_ID=....
-FIREBASE_STORAGE_BUCKET=...
-FIREBASE_MESSAGING_SENDER_ID=...
-FIREBASE_APP_ID=...
-FIREBASE_MEASUREMENT_ID=...
-GOOGLE_APPLICATION_CREDENTIALS='{"type":"service_account","project_id":"***","private_key_id":"***","client_email":"f***","client_id":"***","auth_uri":"***","token_uri":"***","auth_provider_x509_cert_url":"***","client_x509_cert_url":"***","universe_domain":"***"}'
-WEBSITE_URL=....
+### Run
+
+```shell
+# install the npm modules
+npm install
 ```
+
+```shell
+# run the app
+npm run dev
+
+```
+
+## Command shortcuts
+
+* `dev`: start the app on local
+* `clear`: delete .nuxt .output .firebase folders
+* `clear-all`: node_modules .nuxt .output .firebase folders and package-lock.json file
+* `emulator`: run the app in firebase emulators
+* `deploy`: deploy the app to the prod
+* `upgrade`: upgrade all npm modules and install all
