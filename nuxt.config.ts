@@ -126,8 +126,6 @@ export default defineNuxtConfig({
           cookieKey: 'i18n_redirected',
           redirectOn: 'root',  // recommended
       },
-      // seo: true,
-      baseUrl: process.env.WEBSITE_URL || 'http://localhost:3000',
   },
 
   typescript: {

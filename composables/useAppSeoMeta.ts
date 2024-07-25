@@ -6,7 +6,6 @@ export default function () {
     const {t} = useI18n()
     const runtimeConfig = useRuntimeConfig()
     const requestURL = useRequestURL()
-    // const {fullPath} = useRoute()
 
     const getSeoMetaInput = (title: string, description: string, image: string): UseSeoMetaInput => {
         return {
