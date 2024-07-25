@@ -3,7 +3,8 @@ export default {
         notFound: 'Sayfa bulunamadi',
         home: {
             title: 'NUXT3 firebase\'e hosgeldiniz',
-            description: 'Firebase hosting ve authentication ile Nuxt3 uygulamasi'
+            description: 'Firebase hosting ve authentication ile Nuxt3 uygulamasi',
+            goToGithub: ' Github uzerinde kaynak koda ulas'
         },
         auth: {
             title: 'Dogrulama',
@@ -31,7 +32,7 @@ export default {
                 description: 'Hesabiniza login olmak icin kullanabileceginiz yontemler',
                 currentLogin: 'Hesabiniza {provider} ile giris yaptiniz'
             }
-        }
-
+        },
+        welcome: 'Nuxt3 SSR Firebase\'e hosgeldiniz'
     }
 }

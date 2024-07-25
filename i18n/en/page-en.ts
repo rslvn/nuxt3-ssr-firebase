@@ -4,7 +4,8 @@ export default {
         accessDenied: 'OPPS! you don\'t have access for the page',
         home: {
             title: 'Welcome to NUXT3 firebase',
-            description: 'Nuxt3 application with firebase hosting and authentication'
+            description: 'Nuxt3 application with firebase hosting and authentication',
+            goToGithub: 'Go to the source code on Github'
         },
         auth: {
             title: 'Authentication',
@@ -32,6 +33,6 @@ export default {
                 description: 'The accounts that can use link your account and login with',
                 currentLogin: 'You have logged in with {provider}'
             }
-        }
+        },
     }
 }
