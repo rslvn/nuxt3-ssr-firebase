@@ -10,14 +10,8 @@ export default withNuxt({
 
     // enable and verify sometimes
     '@stylistic/padded-blocks': 'off',
-
     'vue/max-attributes-per-line': 'off', // each attribute goes new line
 
-    // check those rule whether we need or not
-
-    'vue/html-comment-content-spacing': 'off',
-
-    // real off rules
     'vue/singleline-html-element-content-newline': 'off',
     '@stylistic/object-curly-spacing': 'off',
     '@stylistic/eol-last': 'off',

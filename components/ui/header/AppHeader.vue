@@ -23,13 +23,9 @@ const signOut = () => {
 
     <template #right>
       <RegisterBar v-if="!authStore.authUser" class="hidden lg:flex" />
-      <!--      <RegisterBar v-if="!user?.emailVerified" class="hidden lg:flex"/>-->
-
       <UColorModeButton class="hidden md:block" />
-
       <LanguageSelectDropdown class="hidden md:block" />
       <NavUser v-if="authStore.authUser" />
-      <!--        <NavUser v-if="user && user.emailVerified"/>-->
     </template>
 
     <template #panel>
@@ -39,7 +35,6 @@ const signOut = () => {
       </div>
       <UDivider class="my-6" />
       <RegisterBar v-if="!authStore.authUser" block />
-      <!--      <RegisterBar v-if="!user?.emailVerified" block/>-->
       <UButton v-if="authStore.authUser" :label="t('common.SignOut')" color="green" variant="ghost"
                block @click="signOut" />
     </template>
