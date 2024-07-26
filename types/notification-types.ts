@@ -6,7 +6,7 @@ export enum NotificationTarget {
 }
 
 export interface NotificationTypeConfig {
-  icon: string,
+  icon: string
   color: string
   title: TranslationConfig
 }

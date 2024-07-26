@@ -14,9 +14,9 @@ enum ProfileModuleType {
 }
 
 interface ProfileModuleConfig {
-  type: ProfileModuleType,
-  component: any,
-  private: boolean,
+  type: ProfileModuleType
+  component: any
+  private: boolean
   link: any
 }
 

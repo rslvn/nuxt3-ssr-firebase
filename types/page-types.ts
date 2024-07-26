@@ -1,8 +1,8 @@
 import {TranslationConfig} from '~/types/index'
 
 export interface PageConfig {
-  title: TranslationConfig,
-  description: TranslationConfig,
+  title: TranslationConfig
+  description: TranslationConfig
   path: string
 }
 
