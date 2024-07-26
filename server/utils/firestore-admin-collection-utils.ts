@@ -102,6 +102,7 @@ export async function getModelsByOrderByAndWhereClauses<T extends BaseModel>(
         .then(querySnapshot => toBaseModelArray(querySnapshot))
 }
 
+// @ts-expect-error: library method
 export async function getModelById<T extends BaseModel>(collection: string, modelId: string) {
     return await getFirestore()
         .collection(collection)
@@ -112,6 +113,7 @@ export async function getModelById<T extends BaseModel>(collection: string, mode
         })
 }
 
+// @ts-expect-error: library method
 export async function getModelByIds<T extends BaseModel[]>(collection: string, ...modelIds: string[]) {
     const idsInWhereClause: WhereClause = {
         field: CollectionField.COMMON.id,
@@ -121,6 +123,7 @@ export async function getModelByIds<T extends BaseModel[]>(collection: string, .
     return await getModelsByWhereClauses(collection, idsInWhereClause)
 }
 
+// @ts-ignore
 export async function getAllModels<T extends BaseModel[]>(collectionName: string) {
     return await getFirestore()
         .collection(collectionName)
@@ -128,6 +131,7 @@ export async function getAllModels<T extends BaseModel[]>(collectionName: string
         .then(toBaseModelArray)
 }
 
+// @ts-ignore
 export const deleteModel = <T extends BaseModel>(collection: string, model: T) => {
     return getFirestore()
         .collection(collection)
