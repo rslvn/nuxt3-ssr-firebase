@@ -17,7 +17,7 @@ const signOut = () => {
 </script>
 
 <template>
-  <UHeader :ui="{logo: 'text-2xl'}">
+  <UHeader :ui="{ logo: 'text-2xl' }">
     <template #logo>
       nuxt3-ssr
       <UBadge label="firebase" variant="subtle" class="mb-0.5 hidden md:flex" />

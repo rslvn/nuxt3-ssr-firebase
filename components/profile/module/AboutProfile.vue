@@ -13,7 +13,7 @@ const {t} = useI18n()
   <UContainer>
     <UDashboardPanelContent>
       <UDashboardSection :title="t('field.about.label')" orientation="horizontal"
-                         :ui="{container: 'flex items-center justify-center sm:justify-between sm:flex-row gap-4'}">
+                         :ui="{ container: 'flex items-center justify-center sm:justify-between sm:flex-row gap-4' }">
         <UCard>
           <span>{{ userProfile.about }}</span>
         </UCard>

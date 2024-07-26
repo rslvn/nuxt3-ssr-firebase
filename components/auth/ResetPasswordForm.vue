@@ -43,7 +43,7 @@ const handleResetPassword = async (data: any) => {
           :fields="fields"
           :schema="schema"
           :loading="loading"
-          :submit-button="{  label: t('common.ResetPassword')}"
+          :submit-button="{  label: t('common.ResetPassword') }"
           :ui="{ base: 'text-center', footer: 'text-center' }"
           @submit="handleResetPassword"
         >

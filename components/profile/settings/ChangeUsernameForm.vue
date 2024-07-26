@@ -60,7 +60,7 @@ const sanitizeUsername = () => {
       <UFormGroup :label="username.label" :name="username.name" :description="username.description"
                   :required="username.required" eager-validation
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2 items-center"
-                  :ui="{ container: ''}">
+                  :ui="{ container: '' }">
         <UInput v-model="state.username" :type="username.type" :placeholder="username.placeholder"
                 :required="username.required"
                 @keyup="sanitizeUsername" />

@@ -75,7 +75,7 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
                 <template #panel>
                   <div class="p-4">
                     <span>{{
-                      t('page.profileSettings.linkedAccounts.currentLogin', {provider: providerConfig.name})
+                      t('page.profileSettings.linkedAccounts.currentLogin', { provider: providerConfig.name })
                     }}</span>
                   </div>
                 </template>
@@ -87,8 +87,8 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
           <ConfirmButton
             v-if="currentProviderIds.includes(providerConfig.providerId)"
             :label="t('common.Disconnect')"
-            :confirm-title="t('dialog.unlinkAccount.title', {provider: providerConfig.name})"
-            :confirm-description="t('dialog.unlinkAccount.description', {provider: providerConfig.name})"
+            :confirm-title="t('dialog.unlinkAccount.title', { provider: providerConfig.name })"
+            :confirm-description="t('dialog.unlinkAccount.description', { provider: providerConfig.name })"
             :on-confirm="() => unlinkAccount(providerConfig)"
             :confirm-button-label="t('common.Disconnect')"
           />

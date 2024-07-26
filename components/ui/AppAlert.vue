@@ -16,7 +16,7 @@ const {t} = useI18n()
     :color="alertMessage.type.color"
     :title="t(alertMessage.title.key, alertMessage.title.params)"
     :description="t(alertMessage.message.key, alertMessage.message.params)"
-    :close-button="{onClick: closeAlert}"
+    :close-button="{ onClick: closeAlert }"
     :timeout="0"
   />
 </template>

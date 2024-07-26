@@ -48,7 +48,7 @@ const handleLogin = async (data: any) => {
         :providers="providers"
         :schema="schema"
         :loading="loading"
-        :submit-button="{  label: t('common.Login')}"
+        :submit-button="{ label: t('common.Login') }"
         :ui="{ base: 'text-center', footer: 'text-center' }"
         @submit="handleLogin"
       >
