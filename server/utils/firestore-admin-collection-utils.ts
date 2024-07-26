@@ -26,7 +26,7 @@ const getQueryByWhereClauses = (
   return query
 }
 
-const updateBaseModel = <T extends BaseModel>(model: T, requestedBy ?: string) => {
+const updateBaseModel = <T extends BaseModel>(model: T, requestedBy?: string) => {
   const date = new Date()
   if (!model.createdAt) {
     model.createdAt = date
@@ -44,7 +44,7 @@ const updateBaseModel = <T extends BaseModel>(model: T, requestedBy ?: string) =
 
 }
 
-const setModel = <T extends BaseModel>(collectionName: string, model: T, requestedBy ?: string) => {
+const setModel = <T extends BaseModel>(collectionName: string, model: T, requestedBy?: string) => {
   updateBaseModel(model, requestedBy)
 
   const docRef = getFirestore().collection(collectionName).doc(model.id as string)
@@ -61,13 +61,13 @@ export const createDocument = (collectionName: string) => {
   return getFirestore().collection(collectionName).doc().id
 }
 
-const addModel = <T extends BaseModel>(collectionName: string, model: T, requestedBy ?: string) => {
+const addModel = <T extends BaseModel>(collectionName: string, model: T, requestedBy?: string) => {
   model.id = createDocument(collectionName)
 
   return setModel(collectionName, model, requestedBy)
 }
 
-export const saveModel = <T extends BaseModel>(collectionName: string, model: T, requestedBy ?: string) => {
+export const saveModel = <T extends BaseModel>(collectionName: string, model: T, requestedBy?: string) => {
   return model.id
     ? setModel(collectionName, model, requestedBy)
     : addModel(collectionName, model, requestedBy)

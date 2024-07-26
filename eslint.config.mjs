@@ -12,7 +12,7 @@ export default withNuxt({
 
     // '@stylistic/member-delimiter-style': 'off',
     // '@stylistic/no-multiple-empty-lines': 'off',
-    '@stylistic/type-annotation-spacing': 'off',
+    // '@stylistic/type-annotation-spacing': 'off',
     '@stylistic/brace-style': 'off',
     'import/order': 'off',
     '@stylistic/padded-blocks': 'off',
