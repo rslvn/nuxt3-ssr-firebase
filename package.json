@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "npm run lint",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -10,6 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "postinstall": "nuxt prepare",
+    "prebuild:firebase": "npm run lint",
     "build:firebase": "npm run build -- --preset=firebase",
     "preemulator": "npm run build:firebase",
     "emulator": "firebase emulators:start",
