@@ -11,9 +11,10 @@ export default withNuxt({
     // enable and verify sometimes
     '@stylistic/padded-blocks': 'off',
 
+    'vue/max-attributes-per-line': 'off', // each attribute goes new line
+
     // check those rule whether we need or not
 
-    'vue/max-attributes-per-line': 'off',
     'vue/html-indent': 'off',
     'vue/html-closing-bracket-spacing': 'off',
     'vue/object-curly-spacing': 'off',
