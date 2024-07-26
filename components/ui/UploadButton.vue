@@ -17,7 +17,7 @@ function onFileChange(e: Event) {
   }
   const fileSize = input.files[0].size / 1024 / 1024
   console.log(`originalFile size ${fileSize} MB`);
-  if(fileSize > 5){
+  if (fileSize > 5) {
     showErrorToaster({key: 'notification.uploadFileSizeTooBig', params: {fileSize: 5}})
     return;
   }

@@ -1,15 +1,15 @@
-const separatedChunks = ['@firebase'];
+const separatedChunks = ['@firebase']
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const ONE_DAY = 60 * 60 * 24 * 1000;
-const ONE_WEEK = ONE_DAY * 7;
+const ONE_DAY = 60 * 60 * 24 * 1000
+const ONE_WEEK = ONE_DAY * 7
 export default defineNuxtConfig({
     ssr: true,
 
     devtools: {
         enabled: true,
         timeline: {
-            enabled: true
-        }
+            enabled: true,
+        },
     },
 
     modules: [
@@ -19,27 +19,27 @@ export default defineNuxtConfig({
         '@nuxtjs/sitemap',
         '@vueuse/nuxt',
         '@nuxt/image',
-        "@nuxt/eslint",
+        '@nuxt/eslint',
         [
             '@pinia/nuxt',
             {
-                autoImports: ['defineStore', 'acceptHMRUpdate']
-            }
-        ]
+                autoImports: ['defineStore', 'acceptHMRUpdate'],
+            },
+        ],
     ],
 
     extends: ['@nuxt/ui-pro'],
 
     ui: {
-        icons: ['heroicons', 'simple-icons', 'emojione']
+        icons: ['heroicons', 'simple-icons', 'emojione'],
     },
 
     colorMode: {
-        preference: 'system'
+        preference: 'system',
     },
 
     gtag: {
-        id: 'G-2KY53M5NEN'
+        id: 'G-2KY53M5NEN',
     },
 
     components: [
@@ -55,7 +55,7 @@ export default defineNuxtConfig({
         // public config
         public: {
             appName: 'nuxt3-ssr-firebase',
-            authCookieName: "__session",
+            authCookieName: '__session',
             authCookieExpires: parseInt(ONE_WEEK.toString(), 10),
             firebase: {
                 apiKey: process.env.FIREBASE_API_KEY,
@@ -66,6 +66,12 @@ export default defineNuxtConfig({
                 appId: process.env.FIREBASE_APP_ID,
                 measurementId: process.env.FIREBASE_MEASUREMENT_ID,
             },
+        },
+    },
+
+    eslint: {
+        config: {
+            stylistic: true,
         },
     },
 
@@ -86,7 +92,7 @@ export default defineNuxtConfig({
     },
 
     imports: {
-        dirs: ['stores']
+        dirs: ['stores'],
     },
 
     i18n: {
@@ -118,7 +124,7 @@ export default defineNuxtConfig({
                     'tr/page-tr.ts',
                     'tr/dialog-tr.ts',
                 ],
-            }
+            },
         ],
         defaultLocale: 'en',
         langDir: './i18n/',
@@ -127,7 +133,7 @@ export default defineNuxtConfig({
         detectBrowserLanguage: {
             useCookie: true,
             cookieKey: 'i18n_redirected',
-            redirectOn: 'root',  // recommended
+            redirectOn: 'root', // recommended
         },
     },
 
@@ -136,29 +142,31 @@ export default defineNuxtConfig({
             compilerOptions:
                 {
                     strictNullChecks: false,
-                    verbatimModuleSyntax: false
-                }
-        }
+                    verbatimModuleSyntax: false,
+                },
+        },
     },
 
     postcss: {
         plugins: {
             'tailwindcss/nesting': 'postcss-nesting',
-            tailwindcss: {},
-            autoprefixer: {},
-            ...(process.env.NODE_ENV === 'production' ? {
-                cssnano: {
-                    preset: [
-                        "default",
-                        {
-                            discardComments: {
-                                removeAll: true,
+            'tailwindcss': {},
+            'autoprefixer': {},
+            ...(process.env.NODE_ENV === 'production'
+                ? {
+                    cssnano: {
+                        preset: [
+                            'default',
+                            {
+                                discardComments: {
+                                    removeAll: true,
+                                },
                             },
-                        },
-                    ],
+                        ],
+                    },
                 }
-            } : {})
-        }
+                : {}),
+        },
     },
 
     vite: {
@@ -166,15 +174,15 @@ export default defineNuxtConfig({
             rollupOptions: {
                 output: {
                     manualChunks(id: any) {
-                        const separateModule = separatedChunks.find(module => id.includes(module));
-                        if (separateModule) return separateModule;
-                    }
-                }
+                        const separateModule = separatedChunks.find(module => id.includes(module))
+                        if (separateModule) return separateModule
+                    },
+                },
             },
         },
         optimizeDeps: {
-            exclude: separatedChunks
-        }
+            exclude: separatedChunks,
+        },
     },
 
     compatibilityDate: '2024-07-24',

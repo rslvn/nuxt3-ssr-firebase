@@ -4,6 +4,7 @@
     <UNotifications/>
   </NuxtLayout>
 </template>
+
 <script setup lang="ts">
 
 import {User} from "@firebase/auth";
