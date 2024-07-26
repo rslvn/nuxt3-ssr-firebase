@@ -53,21 +53,21 @@ const updateProfile = () => {
                   :required="firstName.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
-        <UInput :type="firstName.type" :placeholder="firstName.placeholder" v-model="state.firstName"/>
+        <UInput v-model="state.firstName" :type="firstName.type" :placeholder="firstName.placeholder"/>
       </UFormGroup>
 
       <UFormGroup :label="middleName.label" :name="middleName.name" :description="middleName.description"
                   :required="middleName.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
-        <UInput :type="middleName.type" :placeholder="middleName.placeholder" v-model="state.middleName"/>
+        <UInput v-model="state.middleName" :type="middleName.type" :placeholder="middleName.placeholder"/>
       </UFormGroup>
 
       <UFormGroup :label="lastName.label" :name="lastName.name" :description="lastName.description"
                   :required="lastName.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '', error: 'text-sm' }">
-        <UInput :type="lastName.type" :placeholder="lastName.placeholder" v-model="state.lastName"/>
+        <UInput v-model="state.lastName" :type="lastName.type" :placeholder="lastName.placeholder"/>
       </UFormGroup>
 
       <UFormGroup :label="about.label" :name="about.name" :description="about.description"

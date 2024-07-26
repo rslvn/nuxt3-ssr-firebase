@@ -32,9 +32,9 @@ const handleForgotPassword = async (data: any) => {
           :fields="fields"
           :schema="schema"
           :loading="loading"
-          @submit="handleForgotPassword"
           :submit-button="{  label: t('common.ResetPassword')}"
           :ui="{ base: 'text-center', footer: 'text-center' }"
+          @submit="handleForgotPassword"
       >
         <template #footer>
           {{ t('page.auth.rememberedPassword') }}

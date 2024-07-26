@@ -36,7 +36,7 @@ const changePassword = async () => {
                   :required="oldPassword.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '', error: 'text-sm' }">
-        <UInput :type="oldPassword.type" :placeholder="oldPassword.placeholder" v-model="state.oldPassword"/>
+        <UInput v-model="state.oldPassword" :type="oldPassword.type" :placeholder="oldPassword.placeholder"/>
       </UFormGroup>
 
       <UFormGroup :label="t('field.newPassword.label')" :name="password.name"
@@ -44,7 +44,7 @@ const changePassword = async () => {
                   :required="password.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
-        <UInput :type="password.type" :placeholder="t('field.newPassword.placeholder')" v-model="state.password"/>
+        <UInput v-model="state.password" :type="password.type" :placeholder="t('field.newPassword.placeholder')"/>
       </UFormGroup>
 
       <UFormGroup :label="t('field.newPasswordConfirm.label')" :name="confirmPassword.name"
@@ -52,8 +52,8 @@ const changePassword = async () => {
                   :required="confirmPassword.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
-        <UInput :type="confirmPassword.type" :placeholder="t('field.newPasswordConfirm.placeholder')"
-                v-model="state.confirmPassword"/>
+        <UInput v-model="state.confirmPassword" :type="confirmPassword.type"
+                :placeholder="t('field.newPasswordConfirm.placeholder')"/>
       </UFormGroup>
 
     </UDashboardSection>

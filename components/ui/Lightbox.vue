@@ -35,8 +35,8 @@ const previousImage = () => {
       <UButton icon="i-heroicons-arrow-left-20-solid" class="absolute left-0 sm:left-10" color="gray"
                @click="previousImage"/>
       <div class="flex items-center justify-center h-screen w-screen" @click="showLightbox = false">
-        <NuxtImg class="object-scale-down h-4/5" :src="albumImage.image.src" :alt="albumImage.image.alt" @click.stop=""
-                 placeholder/>
+        <NuxtImg class="object-scale-down h-4/5" :src="albumImage.image.src" :alt="albumImage.image.alt" placeholder
+                 @click.stop=""/>
       </div>
       <UButton icon="i-heroicons-arrow-right-20-solid" class="absolute right-0 sm:right-10" color="gray"
                @click="nextImage"/>

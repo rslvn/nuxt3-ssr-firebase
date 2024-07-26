@@ -43,9 +43,9 @@ const handleResetPassword = async (data: any) => {
             :fields="fields"
             :schema="schema"
             :loading="loading"
-            @submit="handleResetPassword"
             :submit-button="{  label: t('common.ResetPassword')}"
             :ui="{ base: 'text-center', footer: 'text-center' }"
+            @submit="handleResetPassword"
         >
           <template #footer>
             {{ t('page.auth.rememberedPassword') }}
