@@ -41,7 +41,6 @@ const updateBaseModel = <T extends BaseModel>(model: T, requestedBy?: string) =>
 
   model.updatedAt = date
   model.updatedBy = requestedBy || SYSTEM
-
 }
 
 const setModel = <T extends BaseModel>(collectionName: string, model: T, requestedBy?: string) => {

@@ -8,10 +8,11 @@ export default withNuxt({
     'vue/first-attribute-linebreak': 'off',
     'vue/no-multiple-template-root': 'off',
 
+    // enable and verify sometimes
+    // '@stylistic/padded-blocks': 'off',
+
     // check those rule whether we need or not
 
-    // 'import/order': 'off',
-    '@stylistic/padded-blocks': 'off',
     'vue/max-attributes-per-line': 'off',
     'vue/html-indent': 'off',
     'vue/html-closing-bracket-spacing': 'off',

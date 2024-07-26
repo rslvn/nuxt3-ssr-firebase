@@ -1,5 +1,4 @@
 export default function () {
-
   const getAuthUserByCookie = async () => {
     const headers = useRequestHeaders(['cookie'])
     return await $fetch('/api/auth/user', {headers})

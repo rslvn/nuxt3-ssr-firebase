@@ -22,7 +22,6 @@ import {
 import {PROVIDER_CONFIGS} from '~/types'
 
 export default function () {
-
   const loginWithPassword = (email: string, password: string) => {
     return signInWithEmailAndPassword(getAuth(), email, password)
   }
