@@ -11,7 +11,7 @@ export default withNuxt({
     // check those rule whether we need or not
 
     // '@stylistic/member-delimiter-style': 'off',
-    '@stylistic/no-multiple-empty-lines': 'off',
+    // '@stylistic/no-multiple-empty-lines': 'off',
     '@stylistic/type-annotation-spacing': 'off',
     '@stylistic/brace-style': 'off',
     'import/order': 'off',

@@ -123,9 +123,6 @@ export default function () {
       .then(async (user) => await user?.getIdTokenResult().then(idTokenResult => idTokenResult.signInProvider))
   }
 
-
-  // await getAuth()?.currentUser?.getIdTokenResult().then(idTokenResult => idTokenResult.signInProvider )
-
   return {
     getCurrentProviderId,
     linkProviderId,
