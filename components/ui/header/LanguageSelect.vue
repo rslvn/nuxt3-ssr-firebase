@@ -18,7 +18,7 @@ const currentLanguage = ref(languages.find(language => language.code === locale.
 <template>
   <USelectMenu v-model="currentLanguage" :options="languages" @change="changeLocale">
     <template #leading>
-      <span class="text-2xl">{{currentLanguage.flag}}  </span>
+      <span class="text-2xl">{{ currentLanguage.flag }}  </span>
     </template>
 
     <template #option="{ option: languageOption }">

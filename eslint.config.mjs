@@ -15,8 +15,6 @@ export default withNuxt({
 
     // check those rule whether we need or not
 
-
-    'vue/mustache-interpolation-spacing': 'off',
     'vue/html-comment-content-spacing': 'off',
 
     // real off rules
