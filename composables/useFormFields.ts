@@ -156,7 +156,7 @@ export default function () {
     firstName: z.string().min(2).max(32),
     middleName: z.optional(z.string().max(64)),
     lastName: z.string().min(2).max(64),
-    username: z.string().min(5).max(32).refine(async (username: string) => !(await getUserProfileByUsername(username)), (username) => ({
+    username: z.string().min(5).max(32).refine(async (username: string) => !(await getUserProfileByUsername(username)), username => ({
       message: t('validation.username', {username}),
     })),
     country: z.string(),
@@ -170,7 +170,7 @@ export default function () {
       return previousValue
     }, {})
     const schema = z.object(shape)
-    const confirmPasswordField = fields.find((field) => field.name === confirmPassword.value.name)
+    const confirmPasswordField = fields.find(field => field.name === confirmPassword.value.name)
     if (!confirmPasswordField) {
       return schema
     }

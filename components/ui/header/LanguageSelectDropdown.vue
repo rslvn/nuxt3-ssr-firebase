@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const {locales, setLocale, locale} = useI18n()
-const languages = computed(() => locales.value.map((item) => ({
+const languages = computed(() => locales.value.map(item => ({
   label: item.name,
   flag: item.flag,
   value: item.code,

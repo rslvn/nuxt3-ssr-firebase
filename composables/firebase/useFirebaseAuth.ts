@@ -119,7 +119,7 @@ export default function () {
 
   const getCurrentProviderId = async () => {
     return await Promise.resolve(getAuth().currentUser)
-      .then(async (user) => await user?.getIdTokenResult().then(idTokenResult => idTokenResult.signInProvider))
+      .then(async user => await user?.getIdTokenResult().then(idTokenResult => idTokenResult.signInProvider))
   }
 
   return {

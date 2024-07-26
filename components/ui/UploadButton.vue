@@ -29,7 +29,7 @@ function onFileChange(e: Event) {
   }
 
   imageCompression(input.files[0], options)
-    .then(compressedFile => {
+    .then((compressedFile) => {
       console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`)
       uploadSinglePhoto(props.albumType, compressedFile)
     })

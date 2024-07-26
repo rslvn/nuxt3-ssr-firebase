@@ -24,7 +24,7 @@ const loadProfileImages = () => {
       console.log('>>>> found profile images', albumImages.length)
       profileAlbumImages.value = albumImages
       if (albumImages.length) {
-        currentProfileImageIndex.value = albumImages.findIndex((image) => image.id === props.userProfile.profilePhoto.id)
+        currentProfileImageIndex.value = albumImages.findIndex(image => image.id === props.userProfile.profilePhoto.id)
       }
       showProfileLightbox.value = true
     })

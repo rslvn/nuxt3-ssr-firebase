@@ -41,7 +41,7 @@ export default function () {
           showErrorToaster({key: 'notification.photoUploadFailed'})
       }
     },
-    reason => {
+    (reason) => {
       uploadingFile.value = false
       notifyByError(reason)
     },
