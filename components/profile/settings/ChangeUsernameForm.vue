@@ -13,7 +13,7 @@ const {reloadUserProfile} = useAppGlobals()
 const requestURL = useRequestURL()
 
 const {t} = useI18n()
-const loading = ref(false)
+const showConfirmModal = ref(false)
 const state = reactive({
   username: props.userProfile?.username || ''
 })
@@ -21,8 +21,7 @@ const fields = computed(() => [username.value])
 const schema = computed(() => getSchema(fields.value))
 
 const updateUsername = () => {
-  loading.value = true
-  getUserProfile(props.userProfile.id)
+  return getUserProfile(props.userProfile.id)
       .then(async (profile) => {
         profile.username = state.username.trim()
         return await saveUserProfile(profile)
@@ -35,11 +34,10 @@ const updateUsername = () => {
         }
       })
       .catch(notifyByError)
-      .finally(() => loading.value = false)
 }
 
 const source = ref(requestURL.href)
-const {text, copy, copied} = useClipboard({source})
+const {copy, copied} = useClipboard({source})
 
 const copyClipboard = () => {
   copy(source.value)
@@ -57,7 +55,7 @@ const sanitizeUsername = () => {
 </script>
 
 <template>
-  <UForm :state="state" :schema="schema" @submit="updateUsername">
+  <UForm :state="state" :schema="schema" @submit="showConfirmModal = true">
     <UDashboardSection :title="t('button.ChangeUsername')">
       <UFormGroup :label="username.label" :name="username.name" :description="username.description"
                   :required="username.required" eager-validation
@@ -85,8 +83,14 @@ const sanitizeUsername = () => {
 
     <UDashboardSection>
       <template #links>
-        <UButton type="submit" :label="t('button.ChangeUsername')" :loading="loading" :disabled="loading"/>
+        <UButton type="submit" :label="t('button.ChangeUsername')" :loading="showConfirmModal"
+                 :disabled="showConfirmModal"/>
       </template>
     </UDashboardSection>
+    <ConfirmDialogModal v-model="showConfirmModal"
+                        :title="t('dialog.changeUsername.title')"
+                        :description="t('dialog.changeUsername.description')"
+                        :on-confirm="updateUsername"
+                        :confirm-button-label="t('button.ChangeUsername')"/>
   </UForm>
 </template>

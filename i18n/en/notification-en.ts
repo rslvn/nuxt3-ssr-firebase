@@ -20,7 +20,7 @@ export default {
         photoUploadFailed: 'Photo upload is failed',
         uploadFileSizeTooBig: 'File size can not be bigger than {fileSize} MB',
         accountProviderLinked: '{provider} account is connected to your account. You can login with {provider}',
-        accountProviderUnlinked: '{provider} account is disconnected from your account.  You can\t login with {provider} anymore',
+        accountProviderUnlinked: '{provider} account is disconnected from your account.  You can\'t login with {provider} anymore',
         cantUnlinkTheLastProvider: 'You can\'t disconnect {provider} because {provider} is the only login method to your account',
         cantUnlinkCurrentSignInProvider: 'You can\'t disconnect {provider} because you have logged in with it',
     },

@@ -22,6 +22,8 @@ export default {
         Settings: 'Settings',
         Verify: 'Verify',
         Connect: 'Connect',
-        Disconnect: 'Disconnect'
+        Disconnect: 'Disconnect',
+        Cancel: 'Cancel',
+        Confirm: 'Confirm'
     }
 }

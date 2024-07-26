@@ -1,65 +1,51 @@
 <script setup lang="ts">
 
 import {PROVIDER_CONFIGS, ProviderConfig} from "~/types";
-import pro from "@nuxt/ui-pro/modules/pro";
 
 const {notifyByError, showWarningToaster, showSuccessToaster} = useNotifyUser()
-const {getCurrentProviderIds,socialProviderConfigs, isPasswordProvider} = useAuthProviders()
-const {linkProviderId, unlinkProviderId, getCurrentProviderId, sendResetPasswordMail} = useFirebaseAuth();
+const {getCurrentProviderIds, isPasswordProvider} = useAuthProviders()
+const {linkProviderId, unlinkProviderId, getCurrentProviderId} = useFirebaseAuth();
 const authStore = useAuthStore();
 const {t} = useI18n()
 
-const busy = ref(false)
+const linkAccountBusy = ref(false)
 const currentProviderId = ref(await getCurrentProviderId())
 const currentProviderIds = computed(() => getCurrentProviderIds(authStore.authUser))
-console.log('>>>> currentProviderId', currentProviderId)
 
 const linkAccount = (providerConfig: ProviderConfig) => {
-  if (busy.value) {
-    return
-  }
-
-  busy.value = true
   if (isPasswordProvider(providerConfig.providerId)) {
     return
   }
 
+  linkAccountBusy.value = true
   return linkProviderId(providerConfig.providerId)
       .then(async () => {
         showSuccessToaster({key: 'notification.accountProviderLinked', params: {provider: providerConfig.name}})
         currentProviderId.value = await getCurrentProviderId()
       })
       .catch(notifyByError)
-      .finally(() => {
-        busy.value = false
-      })
+      .finally(() => linkAccountBusy.value = false)
 }
 
 const unlinkAccount = (providerConfig: ProviderConfig) => {
-  if (busy.value) {
+  if (currentProviderIds.value.length <= 1) {
+    showWarningToaster({key: 'notification.cantUnlinkTheLastProvider', params: {provider: providerConfig.name}})
     return
   }
 
-  if (currentProviderIds.value.length <= 1) {
-    return showWarningToaster({key: 'notification.cantUnlinkTheLastProvider', params: {provider: providerConfig.name}})
-  }
-
   if (providerConfig.providerId === currentProviderId.value) {
-    return showWarningToaster({
+    showWarningToaster({
       key: 'notification.cantUnlinkCurrentSignInProvider',
       params: {provider: providerConfig.name}
     })
+    return
   }
 
-  busy.value = true
   return unlinkProviderId(providerConfig.providerId)
       .then(() => {
         showSuccessToaster({key: 'notification.accountProviderUnlinked', params: {provider: providerConfig.name}})
       })
       .catch(notifyByError)
-      .finally(() => {
-        busy.value = false
-      })
 }
 
 </script>
@@ -81,13 +67,16 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
         >
           <template #label>
             <div class="flex flex-row items-center justify-center">
-              <UIcon :name="providerConfig.icon" :class="'text-'+providerConfig.color+'-500'" class="text-2xl sm:text-3xl" dynamic/>
+              <UIcon :name="providerConfig.icon" :class="'text-'+providerConfig.color+'-500'"
+                     class="text-2xl sm:text-3xl" dynamic/>
               <span class="ml-2"> {{ providerConfig.name }} </span>
               <UPopover v-if="currentProviderId === providerConfig.providerId" class="ml-2" mode="hover">
                 <UButton icon="i-heroicons-star-16-solid" color="green" variant="soft"/>
                 <template #panel>
                   <div class="p-4">
-                    <span>{{t('page.profileSettings.linkedAccounts.currentLogin', {provider: providerConfig.name})}}</span>
+                    <span>{{
+                        t('page.profileSettings.linkedAccounts.currentLogin', {provider: providerConfig.name})
+                      }}</span>
                   </div>
                 </template>
               </UPopover>
@@ -95,15 +84,22 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
 
           </template>
 
-          <span v-if="isPasswordProvider(providerConfig.providerId) && !currentProviderIds.includes(providerConfig.providerId)"></span>
+          <ConfirmButton
+              v-if="currentProviderIds.includes(providerConfig.providerId)"
+              :label="t('common.Disconnect')"
+              :confirm-title="t('dialog.unlinkAccount.title', {provider: providerConfig.name})"
+              :confirm-description="t('dialog.unlinkAccount.description', {provider: providerConfig.name})"
+              :on-confirm="() => unlinkAccount(providerConfig)"
+              :confirm-button-label="t('common.Disconnect')"
+          />
 
-          <UButton v-else-if="currentProviderIds.includes(providerConfig.providerId)" color="gray" variant="ghost"
-                   :loading="busy" :disabled="busy" @click="() => unlinkAccount(providerConfig)">
-            {{ t('common.Disconnect') }}
-          </UButton>
-          <UButton v-else variant="ghost" :loading="busy" :disabled="busy"  @click="() => linkAccount(providerConfig)">
+          <UButton
+              v-else-if="!isPasswordProvider(providerConfig.providerId) && !currentProviderIds.includes(providerConfig.providerId)"
+              variant="ghost" :loading="linkAccountBusy" :disabled="linkAccountBusy"
+              @click="() => linkAccount(providerConfig)">
             {{ t('common.Connect') }}
           </UButton>
+
         </UFormGroup>
       </UCard>
     </UDashboardSection>

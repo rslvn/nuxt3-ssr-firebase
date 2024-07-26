@@ -101,6 +101,7 @@ export default defineNuxtConfig({
                   'en/field-en.ts',
                   'en/notification-en.ts',
                   'en/page-en.ts',
+                  'en/dialog-en.ts',
               ],
           },
           {
@@ -114,6 +115,7 @@ export default defineNuxtConfig({
                   'tr/field-tr.ts',
                   'tr/notification-tr.ts',
                   'tr/page-tr.ts',
+                  'tr/dialog-tr.ts',
               ],
           }
       ],

@@ -10,7 +10,7 @@ const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {t} = useI18n()
 const {updateUserPassword} = useFirebaseAuth()
 
-const loading = ref(false)
+const showConfirmModal = ref(false)
 const state = reactive({
   password: '',
   confirmPassword: '',
@@ -20,20 +20,17 @@ const fields = computed(() => [password.value, confirmPassword.value, oldPasswor
 const schema = computed(() => getSchema(fields.value))
 
 const changePassword = async () => {
-  loading.value = true
-
   await updateUserPassword(props.userProfile.email, state.oldPassword, state.password)
       .then(() => {
         showSuccessToaster({key: 'notification.profilePasswordUpdated'})
       })
       .catch(notifyByError)
-      .finally(() => loading.value = false)
 }
 
 </script>
 
 <template>
-  <UForm :state="state" :schema="schema" @submit="changePassword">
+  <UForm :state="state" :schema="schema" @submit="showConfirmModal = true">
     <UDashboardSection :title="t('button.ChangePassword')">
       <UFormGroup :label="oldPassword.label" :name="oldPassword.name" :description="oldPassword.description"
                   :required="oldPassword.required"
@@ -63,9 +60,15 @@ const changePassword = async () => {
 
     <UDashboardSection>
       <template #links>
-        <UButton type="submit" :label="t('button.ChangePassword')" :loading="loading"
-                 :disabled="loading"/>
+        <UButton type="submit" :label="t('button.ChangePassword')" :loading="showConfirmModal"
+                 :disabled="showConfirmModal"/>
       </template>
     </UDashboardSection>
+    <ConfirmDialogModal v-model="showConfirmModal"
+                        :title="t('dialog.changePassword.title')"
+                        :description="t('dialog.changePassword.description')"
+                        :on-confirm="changePassword"
+                        :confirm-button-label="t('button.ChangePassword')"
+    />
   </UForm>
 </template>

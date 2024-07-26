@@ -19,7 +19,9 @@ export default {
         Settings: 'Ayarlar',
         Verify: 'Dogrula',
         Connect: 'Baglan',
-        Disconnect: 'Kaldir'
+        Disconnect: 'Kaldir',
+        Cancel: 'Iptal et',
+        Confirm: 'Onayla'
     },
 
 }
