@@ -55,7 +55,6 @@ const changePassword = async () => {
         <UInput v-model="state.confirmPassword" :type="confirmPassword.type"
                 :placeholder="t('field.newPasswordConfirm.placeholder')" />
       </UFormGroup>
-
     </UDashboardSection>
 
     <UDashboardSection>

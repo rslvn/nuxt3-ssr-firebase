@@ -30,6 +30,5 @@ const currentLanguage = computed(() => languages.value.find((language: any) => l
       <UIcon v-if="item.value === currentLanguage.value" name="i-heroicons-check-solid"
              class="flex-shrink-0 ms-auto text-xl" />
     </template>
-
   </UDropdown>
 </template>

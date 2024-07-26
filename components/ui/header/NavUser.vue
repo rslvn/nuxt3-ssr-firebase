@@ -50,6 +50,5 @@ const items = computed(() => [
            :src="authStore.authUser.profilePhoto.src" alt="asdasd">
       <span> {{ authStore.authUser?.displayName || 'Profile' }}</span>
     </template>
-
   </UDropdown>
 </template>

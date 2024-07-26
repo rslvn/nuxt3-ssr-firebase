@@ -15,7 +15,6 @@ export default withNuxt({
 
     // check those rule whether we need or not
 
-    'vue/multiline-html-element-content-newline': 'off',
     'vue/key-spacing': 'off',
     'vue/block-tag-newline': 'off',
     '@stylistic/arrow-parens': 'off',

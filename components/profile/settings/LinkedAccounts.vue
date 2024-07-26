@@ -81,7 +81,6 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
                 </template>
               </UPopover>
             </div>
-
           </template>
 
           <ConfirmButton
@@ -99,12 +98,10 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
             @click="() => linkAccount(providerConfig)">
             {{ t('common.Connect') }}
           </UButton>
-
         </UFormGroup>
       </UCard>
     </UDashboardSection>
   </UDashboardPanelContent>
-
 </template>
 
 <style scoped>

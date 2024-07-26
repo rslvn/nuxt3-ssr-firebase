@@ -77,7 +77,6 @@ const sanitizeUsername = () => {
           {{ t('button.CopyProfileUrl') }}
         </UButton>
       </template>
-
     </UDashboardSection>
 
     <UDashboardSection>

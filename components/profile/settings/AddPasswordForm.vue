@@ -34,7 +34,6 @@ const addPassword = async () => {
 <template>
   <UForm :state="state" :schema="schema" @submit="addPassword">
     <UDashboardSection :title="t('button.AddPassword')">
-
       <UFormGroup :label="t('field.password.label')" :name="password.name"
                   :description="t('field.password.description')"
                   :required="password.required"
@@ -57,7 +56,6 @@ const addPassword = async () => {
           {{ t('notification.noEmailAuthentication') }}
         </UBadge>
       </template>
-
     </UDashboardSection>
 
     <UDashboardSection>

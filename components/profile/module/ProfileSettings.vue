@@ -16,7 +16,6 @@ const noPasswordProvider = computed(() => !getPasswordProvider(authStore.authUse
 <template>
   <UContainer :ui="{ padding: 'px-2' }">
     <UDashboardPanelContent class="pb-24" :ui="{ wrapper: 'p-2' }">
-
       <UCard>
         <EmailSettings :user-profile="userProfile" :is-my-profile="isMyProfile" />
       </UCard>
@@ -41,7 +40,6 @@ const noPasswordProvider = computed(() => !getPasswordProvider(authStore.authUse
       <UCard class="mt-5">
         <LinkedAccounts />
       </UCard>
-
     </UDashboardPanelContent>
   </UContainer>
 </template>

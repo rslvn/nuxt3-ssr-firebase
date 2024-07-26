@@ -9,7 +9,6 @@ const {t} = useI18n()
 <template>
   <div>
     <UContainer class="mt-5">
-
       <ULandingHero
         :title="t('page.home.title')"
         :description="t('page.home.description')"

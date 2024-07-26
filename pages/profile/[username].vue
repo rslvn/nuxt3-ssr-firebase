@@ -42,7 +42,6 @@ const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?
   </section>
 
   <section>
-
     <ProfileModules v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile" />
   </section>
 </template>
