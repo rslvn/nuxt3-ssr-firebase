@@ -15,7 +15,7 @@ export default withNuxt({
 
     // check those rule whether we need or not
 
-    'vue/html-closing-bracket-newline': 'off',
+
     'vue/mustache-interpolation-spacing': 'off',
     'vue/html-comment-content-spacing': 'off',
 
@@ -26,5 +26,6 @@ export default withNuxt({
     '@stylistic/comma-dangle': 'off',
     'vue/comma-dangle': 'off',
     '@stylistic/brace-style': 'off',
+    'vue/html-closing-bracket-newline': 'off',
   }
 })
