@@ -136,4 +136,3 @@ export const deleteModel = <T extends BaseModel>(collection: string, model: T) =
     .doc(model.id as string)
     .delete()
 }
-

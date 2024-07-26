@@ -36,7 +36,6 @@ export const generateUsernameById = (id: string) => {
   return id.replace(dashAllRegex, '')
 }
 
-
 export const generateUsernameByEmail = (email: string) => {
   const usernamePrefix = email.replace(/@.*$/, '')
   return sanitizeUrlContext(usernamePrefix)
@@ -47,4 +46,3 @@ export const generateUsernameByEmailWith4DigitSuffix = (email: string) => {
 }
 
 export const removeHttpProtocol = (url: string) => url.replace(httpProtocolRegex, '')
-
