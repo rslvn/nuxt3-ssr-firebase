@@ -47,6 +47,6 @@ function onFileClick() {
              :disabled="uploadingFile"
              :loading="uploadingFile"
              @click="onFileClick"/>
-    <input ref="fileRef" type="file" class="hidden" accept="image/*" @change="onFileChange"/>
+    <input ref="fileRef" type="file" class="hidden" accept="image/*" @change="onFileChange">
   </div>
 </template>

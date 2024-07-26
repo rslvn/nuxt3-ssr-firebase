@@ -8,6 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "postinstall": "nuxt prepare",
     "build:firebase": "npm run build -- --preset=firebase",
     "preemulator": "npm run build:firebase",

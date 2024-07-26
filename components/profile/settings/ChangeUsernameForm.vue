@@ -63,8 +63,7 @@ const sanitizeUsername = () => {
                   :ui="{ container: ''}">
         <UInput v-model="state.username" :type="username.type" :placeholder="username.placeholder"
                 :required="username.required"
-                @keyup="sanitizeUsername">
-        </UInput>
+                @keyup="sanitizeUsername"/>
       </UFormGroup>
 
       <template #links>
