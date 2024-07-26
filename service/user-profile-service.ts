@@ -13,7 +13,7 @@ export const getProfilePhotoImage = (userProfile: UserProfile, displayName: stri
   }
 }
 
-export const getCoverPhotoImage = (userProfile: UserProfile,displayName: string):Image => {
+export const getCoverPhotoImage = (userProfile: UserProfile, displayName: string):Image => {
   return {
     src: userProfile?.coverPhoto?.image?.src || DEFAULT_COVER_PHOTO,
     alt: userProfile?.coverPhoto?.image?.alt || `the cover photo of ${displayName || 'the profile'}`

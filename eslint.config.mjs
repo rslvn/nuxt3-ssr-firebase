@@ -9,12 +9,7 @@ export default withNuxt({
     'vue/no-multiple-template-root': 'off',
 
     // check those rule whether we need or not
-    // '@stylistic/quotes': 'off',
-    // '@stylistic/semi': 'off',
-    // '@stylistic/indent': 'off',
-    '@stylistic/eol-last': 'off',
-    '@stylistic/comma-dangle': 'off',
-    '@stylistic/comma-spacing': 'off',
+
     '@stylistic/member-delimiter-style': 'off',
     '@stylistic/no-multiple-empty-lines': 'off',
     '@stylistic/type-annotation-spacing': 'off',
@@ -38,5 +33,7 @@ export default withNuxt({
     // real off rules
     'vue/singleline-html-element-content-newline': 'off',
     '@stylistic/object-curly-spacing': 'off',
+    '@stylistic/eol-last': 'off',
+    '@stylistic/comma-dangle': 'off',
   }
 })

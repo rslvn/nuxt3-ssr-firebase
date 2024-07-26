@@ -16,10 +16,10 @@ export interface ProviderConfig {
 }
 
 export const PROVIDER_CONFIGS = {
-  PASSWORD: {providerId: 'password',name: 'Password', color: 'fuchsia', icon: 'i-heroicons-envelope'} as ProviderConfig,
-  GOOGLE: {providerId: 'google.com',name: 'Google', color: 'red', icon: 'i-simple-icons-google'} as ProviderConfig,
-  FACEBOOK: {providerId: 'facebook.com',name: 'Facebook', color: 'blue', icon: 'i-simple-icons-facebook'} as ProviderConfig,
-  TWITTER: {providerId: 'twitter.com',name: 'Twitter', color: 'sky', icon: 'i-simple-icons-twitter'} as ProviderConfig,
+  PASSWORD: {providerId: 'password', name: 'Password', color: 'fuchsia', icon: 'i-heroicons-envelope'} as ProviderConfig,
+  GOOGLE: {providerId: 'google.com', name: 'Google', color: 'red', icon: 'i-simple-icons-google'} as ProviderConfig,
+  FACEBOOK: {providerId: 'facebook.com', name: 'Facebook', color: 'blue', icon: 'i-simple-icons-facebook'} as ProviderConfig,
+  TWITTER: {providerId: 'twitter.com', name: 'Twitter', color: 'sky', icon: 'i-simple-icons-twitter'} as ProviderConfig,
 }
 
 export interface AuthUser {
