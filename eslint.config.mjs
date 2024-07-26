@@ -15,7 +15,6 @@ export default withNuxt({
 
     // check those rule whether we need or not
 
-    'vue/comma-dangle': 'off',
     'vue/multiline-html-element-content-newline': 'off',
     'vue/key-spacing': 'off',
     'vue/block-tag-newline': 'off',
@@ -29,6 +28,7 @@ export default withNuxt({
     '@stylistic/object-curly-spacing': 'off',
     '@stylistic/eol-last': 'off',
     '@stylistic/comma-dangle': 'off',
+    'vue/comma-dangle': 'off',
     '@stylistic/brace-style': 'off',
   }
 })
