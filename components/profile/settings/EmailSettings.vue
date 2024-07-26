@@ -33,7 +33,7 @@ const sendVerificationLink = () => {
       <template v-if="isMyProfile && authStore.authUser">
         <UIcon v-if="authStore.authUser?.emailVerified" name="i-heroicons-check-circle-solid"
                class="text-green-700 h-7 w-7"
-               dynamic/>
+               dynamic />
         <UButton
           v-else
           color="orange"

@@ -10,6 +10,6 @@ defineProps<{
 </script>
 
 <template>
-  <ProfileCover :user-profile="userProfile" :is-my-profile="isMyProfile"/>
-  <ProfileSummary :user-profile="userProfile" :is-my-profile="isMyProfile"/>
+  <ProfileCover :user-profile="userProfile" :is-my-profile="isMyProfile" />
+  <ProfileSummary :user-profile="userProfile" :is-my-profile="isMyProfile" />
 </template>

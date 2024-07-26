@@ -12,7 +12,7 @@ const oobCode = route.query.oobCode as string
 <template>
   <UContainer>
     <client-only>
-      <LazyVerifyEmail :oob-code="oobCode"/>
+      <LazyVerifyEmail :oob-code="oobCode" />
     </client-only>
   </UContainer>
 </template>

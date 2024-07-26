@@ -1,10 +1,10 @@
 <template>
   <div>
-    <AppHeader/>
+    <AppHeader />
     <UContainer>
       <UMain>
         <UPage>
-          <UPageError :error="error"/>
+          <UPageError :error="error" />
         </UPage>
       </UMain>
     </UContainer>

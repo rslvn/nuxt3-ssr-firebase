@@ -18,28 +18,28 @@ const noPasswordProvider = computed(() => !getPasswordProvider(authStore.authUse
     <UDashboardPanelContent class="pb-24" :ui="{wrapper: 'p-2'}">
 
       <UCard>
-        <EmailSettings :user-profile="userProfile" :is-my-profile="isMyProfile"/>
+        <EmailSettings :user-profile="userProfile" :is-my-profile="isMyProfile" />
       </UCard>
 
       <UCard class="mt-5">
-        <UpdateProfileForm :user-profile="userProfile"/>
+        <UpdateProfileForm :user-profile="userProfile" />
       </UCard>
 
       <UCard class="mt-5">
-        <ChangeUsernameForm :user-profile="userProfile"/>
+        <ChangeUsernameForm :user-profile="userProfile" />
       </UCard>
 
       <UCard class="mt-5">
-        <ProfileAddressForm :user-profile="userProfile"/>
+        <ProfileAddressForm :user-profile="userProfile" />
       </UCard>
 
       <UCard class="mt-5">
-        <AddPasswordForm v-if="noPasswordProvider" :user-profile="userProfile"/>
-        <ChangePasswordForm v-else :user-profile="userProfile"/>
+        <AddPasswordForm v-if="noPasswordProvider" :user-profile="userProfile" />
+        <ChangePasswordForm v-else :user-profile="userProfile" />
       </UCard>
 
       <UCard class="mt-5">
-        <LinkedAccounts/>
+        <LinkedAccounts />
       </UCard>
 
     </UDashboardPanelContent>

@@ -37,13 +37,13 @@ const loadProfileImages = () => {
     <div class="bg-gray-400 rounded-full h-52 w-52">
       <NuxtImg class="object-cover rounded-full h-52 w-52 border-solid border-2 border-gray-300 dark:border-gray-900"
                :class="{'cursor-pointer': userProfile?.profilePhoto?.id}" :src="profilePhoto.src"
-               :alt="profilePhoto.alt" placeholder @click="loadProfileImages"/>
+               :alt="profilePhoto.alt" placeholder @click="loadProfileImages" />
       <client-only>
         <div v-if="isMyProfile" class="absolute text-2xl -my-9 mx-40 opacity-100">
-          <UploadButton :album-type="AlbumType.PROFILE"/>
+          <UploadButton :album-type="AlbumType.PROFILE" />
         </div>
         <Lightbox v-if="showProfileLightbox" v-model="showProfileLightbox" :starting-index="currentProfileImageIndex"
-                  :album-images="profileAlbumImages"/>
+                  :album-images="profileAlbumImages" />
       </client-only>
     </div>
     <div class="mt-2 sm:mt-24">

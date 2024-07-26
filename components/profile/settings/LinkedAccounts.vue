@@ -68,10 +68,10 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
           <template #label>
             <div class="flex flex-row items-center justify-center">
               <UIcon :name="providerConfig.icon" :class="'text-'+providerConfig.color+'-500'"
-                     class="text-2xl sm:text-3xl" dynamic/>
+                     class="text-2xl sm:text-3xl" dynamic />
               <span class="ml-2"> {{ providerConfig.name }} </span>
               <UPopover v-if="currentProviderId === providerConfig.providerId" class="ml-2" mode="hover">
-                <UButton icon="i-heroicons-star-16-solid" color="green" variant="soft"/>
+                <UButton icon="i-heroicons-star-16-solid" color="green" variant="soft" />
                 <template #panel>
                   <div class="p-4">
                     <span>{{

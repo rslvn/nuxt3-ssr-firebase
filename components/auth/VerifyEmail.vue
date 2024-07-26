@@ -31,10 +31,10 @@ onMounted(() => {
 
 <template>
   <section v-if="!verified" class="mt-5 text-center">
-    <USkeleton class="h-20"/>
+    <USkeleton class="h-20" />
     <span>{{ t('common.processing') }}</span>
   </section>
   <section v-if="alertMessage" class="mt-5">
-    <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert"/>
+    <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert" />
   </section>
 </template>

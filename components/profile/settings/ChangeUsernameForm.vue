@@ -63,7 +63,7 @@ const sanitizeUsername = () => {
                   :ui="{ container: ''}">
         <UInput v-model="state.username" :type="username.type" :placeholder="username.placeholder"
                 :required="username.required"
-                @keyup="sanitizeUsername"/>
+                @keyup="sanitizeUsername" />
       </UFormGroup>
 
       <template #links>
@@ -83,13 +83,13 @@ const sanitizeUsername = () => {
     <UDashboardSection>
       <template #links>
         <UButton type="submit" :label="t('button.ChangeUsername')" :loading="showConfirmModal"
-                 :disabled="showConfirmModal"/>
+                 :disabled="showConfirmModal" />
       </template>
     </UDashboardSection>
     <ConfirmDialogModal v-model="showConfirmModal"
                         :title="t('dialog.changeUsername.title')"
                         :description="t('dialog.changeUsername.description')"
                         :on-confirm="updateUsername"
-                        :confirm-button-label="t('button.ChangeUsername')"/>
+                        :confirm-button-label="t('button.ChangeUsername')" />
   </UForm>
 </template>

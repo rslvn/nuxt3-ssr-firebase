@@ -37,12 +37,12 @@ const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?
 
 <template>
   <section>
-    <ProfileHeader v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
-    <ProfileHeaderSkeleton v-else/>
+    <ProfileHeader v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile" />
+    <ProfileHeaderSkeleton v-else />
   </section>
 
   <section>
 
-    <ProfileModules v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile"/>
+    <ProfileModules v-if="userProfile" :user-profile="userProfile" :is-my-profile="isMyProfile" />
   </section>
 </template>

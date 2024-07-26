@@ -42,17 +42,17 @@ const loadCoverImages = () => {
   <div>
     <client-only>
       <div v-if="isMyProfile" class="absolute z-10 mt-2 ml-2">
-        <UploadButton :album-type="AlbumType.COVER"/>
+        <UploadButton :album-type="AlbumType.COVER" />
       </div>
     </client-only>
     <UCarousel v-slot="{ item }" :items="images" :ui="{ item: 'basis-full' }"
                class="rounded-lg overflow-hidden z-0" :class="{'cursor-pointer': userProfile?.coverPhoto?.id}">
       <NuxtImg :src="item.src" draggable="false" :alt="item.alt" placeholder class="h-80 w-full object-cover"
-               @click="loadCoverImages"/>
+               @click="loadCoverImages" />
     </UCarousel>
     <client-only>
       <Lightbox v-if="showCoverLightbox" v-model="showCoverLightbox" :starting-index="currentCoverImageIndex"
-                :album-images="coverAlbumImages"/>
+                :album-images="coverAlbumImages" />
     </client-only>
   </div>
 </template>

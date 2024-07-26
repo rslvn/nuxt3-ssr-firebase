@@ -46,7 +46,7 @@ function onFileClick() {
              icon="i-heroicons-camera-solid" variant="outline" :ui="{ rounded: 'rounded-full' }" color="white"
              :disabled="uploadingFile"
              :loading="uploadingFile"
-             @click="onFileClick"/>
+             @click="onFileClick" />
     <input ref="fileRef" type="file" class="hidden" accept="image/*" @change="onFileChange">
   </div>
 </template>

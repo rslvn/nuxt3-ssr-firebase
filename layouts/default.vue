@@ -1,8 +1,8 @@
 <template>
-  <AppHeader/>
+  <AppHeader />
 
   <UMain>
-    <slot/>
+    <slot />
   </UMain>
 
   <UFooter>

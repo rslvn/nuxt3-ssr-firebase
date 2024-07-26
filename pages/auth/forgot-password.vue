@@ -9,7 +9,7 @@ definePageMeta({
 <template>
   <UContainer class=" max-w-4xl mt-5 md:mt-10">
     <client-only>
-      <LazyForgetPasswordForm/>
+      <LazyForgetPasswordForm />
     </client-only>
   </UContainer>
 </template>

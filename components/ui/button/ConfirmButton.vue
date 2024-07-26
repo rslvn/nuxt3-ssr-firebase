@@ -24,5 +24,5 @@ defineProps<{
                       :description="confirmDescription"
                       :on-confirm="onConfirm"
                       :confirm-button-label="confirmButtonLabel"
-                      :cancel-button-label="cancelButtonLabel"/>
+                      :cancel-button-label="cancelButtonLabel" />
 </template>

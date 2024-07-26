@@ -46,7 +46,7 @@ const handleForgotPassword = async (data: any) => {
     </section>
 
     <section v-if="alertMessage" class="mt-5">
-      <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert"/>
+      <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert" />
     </section>
   </div>
 </template>

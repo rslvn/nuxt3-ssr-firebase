@@ -57,7 +57,7 @@ const handleResetPassword = async (data: any) => {
       </client-only>
     </section>
     <section v-if="alertMessage" class="mt-5">
-      <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert"/>
+      <AppAlert :alert-message="alertMessage" :close-alert="() => closeAlert" />
     </section>
   </UContainer>
 </template>

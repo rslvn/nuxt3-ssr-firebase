@@ -48,7 +48,7 @@ const selectedCountry = computed(() => {
 
 <template>
   <UForm :state="state" :schema="schema" @submit="updateAddress">
-    <UDashboardSection :title="t('button.UpdateAddress')"/>
+    <UDashboardSection :title="t('button.UpdateAddress')" />
     <UFormGroup :label="country.label" :name="country.name" :description="country.description"
                 :required="country.required"
                 class="grid grid-cols-1 sm:grid-cols-2 gap-2"
@@ -79,7 +79,7 @@ const selectedCountry = computed(() => {
 
     <UDashboardSection>
       <template #links>
-        <UButton type="submit" :label="t('button.UpdateAddress')" :loading="loading" :disabled="loading"/>
+        <UButton type="submit" :label="t('button.UpdateAddress')" :loading="loading" :disabled="loading" />
       </template>
     </UDashboardSection>
   </UForm>

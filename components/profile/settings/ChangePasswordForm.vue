@@ -36,7 +36,7 @@ const changePassword = async () => {
                   :required="oldPassword.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '', error: 'text-sm' }">
-        <UInput v-model="state.oldPassword" :type="oldPassword.type" :placeholder="oldPassword.placeholder"/>
+        <UInput v-model="state.oldPassword" :type="oldPassword.type" :placeholder="oldPassword.placeholder" />
       </UFormGroup>
 
       <UFormGroup :label="t('field.newPassword.label')" :name="password.name"
@@ -44,7 +44,7 @@ const changePassword = async () => {
                   :required="password.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
-        <UInput v-model="state.password" :type="password.type" :placeholder="t('field.newPassword.placeholder')"/>
+        <UInput v-model="state.password" :type="password.type" :placeholder="t('field.newPassword.placeholder')" />
       </UFormGroup>
 
       <UFormGroup :label="t('field.newPasswordConfirm.label')" :name="confirmPassword.name"
@@ -53,7 +53,7 @@ const changePassword = async () => {
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
         <UInput v-model="state.confirmPassword" :type="confirmPassword.type"
-                :placeholder="t('field.newPasswordConfirm.placeholder')"/>
+                :placeholder="t('field.newPasswordConfirm.placeholder')" />
       </UFormGroup>
 
     </UDashboardSection>
@@ -61,7 +61,7 @@ const changePassword = async () => {
     <UDashboardSection>
       <template #links>
         <UButton type="submit" :label="t('button.ChangePassword')" :loading="showConfirmModal"
-                 :disabled="showConfirmModal"/>
+                 :disabled="showConfirmModal" />
       </template>
     </UDashboardSection>
     <ConfirmDialogModal v-model="showConfirmModal"

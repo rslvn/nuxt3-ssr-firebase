@@ -20,30 +20,30 @@ const signOut = () => {
   <UHeader :ui="{logo: 'text-2xl'}">
     <template #logo>
       nuxt3-ssr
-      <UBadge label="firebase" variant="subtle" class="mb-0.5 hidden md:flex"/>
+      <UBadge label="firebase" variant="subtle" class="mb-0.5 hidden md:flex" />
     </template>
 
     <template #right>
-      <RegisterBar v-if="!authStore.authUser" class="hidden lg:flex"/>
+      <RegisterBar v-if="!authStore.authUser" class="hidden lg:flex" />
       <!--      <RegisterBar v-if="!user?.emailVerified" class="hidden lg:flex"/>-->
 
-      <UColorModeButton class="hidden md:block"/>
+      <UColorModeButton class="hidden md:block" />
 
-      <LanguageSelectDropdown class="hidden md:block"/>
-      <NavUser v-if="authStore.authUser"/>
+      <LanguageSelectDropdown class="hidden md:block" />
+      <NavUser v-if="authStore.authUser" />
       <!--        <NavUser v-if="user && user.emailVerified"/>-->
     </template>
 
     <template #panel>
       <div class="grid grid-cols-2 gap-x-2">
-        <UColorModeSelect/>
-        <LanguageSelect/>
+        <UColorModeSelect />
+        <LanguageSelect />
       </div>
-      <UDivider class="my-6"/>
-      <RegisterBar v-if="!authStore.authUser" block/>
+      <UDivider class="my-6" />
+      <RegisterBar v-if="!authStore.authUser" block />
       <!--      <RegisterBar v-if="!user?.emailVerified" block/>-->
       <UButton v-if="authStore.authUser" :label="t('common.SignOut')" color="green" variant="ghost"
-               block @click="signOut"/>
+               block @click="signOut" />
     </template>
   </UHeader>
 </template>

@@ -40,7 +40,7 @@ const addPassword = async () => {
                   :required="password.required"
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
-        <UInput v-model="state.password" :type="password.type" :placeholder="t('field.newPassword.placeholder')"/>
+        <UInput v-model="state.password" :type="password.type" :placeholder="t('field.newPassword.placeholder')" />
       </UFormGroup>
 
       <UFormGroup :label="t('field.confirmPassword.label')" :name="confirmPassword.name"
@@ -49,7 +49,7 @@ const addPassword = async () => {
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                   :ui="{ container: '' }">
         <UInput v-model="state.confirmPassword" :type="confirmPassword.type"
-                :placeholder="t('field.newPasswordConfirm.placeholder')"/>
+                :placeholder="t('field.newPasswordConfirm.placeholder')" />
       </UFormGroup>
 
       <template #links>
@@ -63,7 +63,7 @@ const addPassword = async () => {
     <UDashboardSection>
       <template #links>
         <UButton type="submit" :label="t('button.AddPassword')" :loading="loading"
-                 :disabled="loading"/>
+                 :disabled="loading" />
       </template>
     </UDashboardSection>
   </UForm>
