@@ -10,7 +10,7 @@ export default withNuxt({
 
     // check those rule whether we need or not
 
-    'import/order': 'off',
+    // 'import/order': 'off',
     '@stylistic/padded-blocks': 'off',
     'vue/max-attributes-per-line': 'off',
     'vue/html-indent': 'off',

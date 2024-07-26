@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from 'uuid'
 import {
   ERROR_TRANSLATIONS,
   NOTIFICATION_TYPES,
@@ -7,7 +8,6 @@ import {
   NotificationTypeConfig,
   TranslationConfig
 } from '~/types'
-import {v4 as uuidv4} from 'uuid'
 
 export default function () {
   const toast = useToast()

@@ -1,5 +1,5 @@
-import {AuthUser, PROVIDER_CONFIGS} from '~/types'
 import {UserInfo} from '@firebase/auth'
+import {AuthUser, PROVIDER_CONFIGS} from '~/types'
 
 export default function () {
   const {t} = useI18n()

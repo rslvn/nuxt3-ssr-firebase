@@ -15,9 +15,9 @@ import {
   where
 } from 'firebase/firestore'
 
-import {BaseModel, OrderBy, WhereClause} from '~/types'
-import {getIdsInWhereClause, sliceIntoChunks} from '../firebase-type-util'
 import {Auth} from '@firebase/auth'
+import {getIdsInWhereClause, sliceIntoChunks} from '../firebase-type-util'
+import {BaseModel, OrderBy, WhereClause} from '~/types'
 
 const getQueryConstraintByWhereClauses = (...whereClauses: WhereClause[]) => {
   return whereClauses.map(clause => where(clause.field, clause.operator, clause.value))

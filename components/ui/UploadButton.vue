@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {AlbumType} from '~/types'
 import imageCompression from 'browser-image-compression'
+import {AlbumType} from '~/types'
 
 const props = defineProps<{
   albumType: AlbumType

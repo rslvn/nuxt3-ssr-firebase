@@ -1,7 +1,7 @@
+import {UserRecord} from 'firebase-admin/auth'
 import {getUserProfile, saveUserProfile} from '~/server/utils/user-profile-admin-collection'
 import {AuthUser, UserProfile} from '~/types'
 import {generateUsernameByEmailWith4DigitSuffix, generateUsernameById} from '~/service/user-profile-service'
-import {UserRecord} from 'firebase-admin/auth'
 
 const toAuthUser = (user: UserRecord, userProfile: UserProfile): AuthUser => {
   return {

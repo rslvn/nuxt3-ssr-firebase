@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import {Country} from 'country-state-city'
 import {AlbumType, UserProfile} from '~/types'
 import {getDisplayName, getProfilePhotoImage} from '~/service/user-profile-service'
-import {Country} from 'country-state-city'
 
 const props = defineProps<{
   userProfile: UserProfile

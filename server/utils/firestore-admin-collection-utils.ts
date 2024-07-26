@@ -1,5 +1,5 @@
-import {BaseModel, CollectionField, FirebaseQueryOperator, OrderBy, WhereClause} from '~/types'
 import {getFirestore, QuerySnapshot} from 'firebase-admin/firestore'
+import {BaseModel, CollectionField, FirebaseQueryOperator, OrderBy, WhereClause} from '~/types'
 
 const SYSTEM = 'SYSTEM'
 

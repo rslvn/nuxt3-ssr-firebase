@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {PAGES} from '~/types'
 import {computed} from 'vue'
+import {PAGES} from '~/types'
 
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
