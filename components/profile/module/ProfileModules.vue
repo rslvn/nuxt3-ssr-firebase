@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {UserProfile} from "~/types";
-import AboutProfile from "~/components/profile/module/AboutProfile.vue";
-import ProfileSettings from "~/components/profile/module/ProfileSettings.vue";
+import {UserProfile} from '~/types'
+import AboutProfile from '~/components/profile/module/AboutProfile.vue'
+import ProfileSettings from '~/components/profile/module/ProfileSettings.vue'
 
 const props = defineProps<{
   userProfile: UserProfile

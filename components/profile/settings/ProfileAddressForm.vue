@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {UserProfile} from "~/types";
-import {Country} from 'country-state-city';
+import {UserProfile} from '~/types'
+import {Country} from 'country-state-city'
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -22,20 +22,20 @@ const schema = computed(() => getSchema(fields.value))
 const updateAddress = () => {
   loading.value = true
   getUserProfile(props.userProfile.id)
-      .then(async (profile) => {
-        profile.address = {
-          country: state.country ? state.country.trim() : ''
-        }
-        return await saveUserProfile(profile)
-      })
-      .then((profile) => {
-        if (profile) {
-          reloadUserProfile()
-          showSuccessToaster({key: 'notification.profileAddressUpdated'})
-        }
-      })
-      .catch(notifyByError)
-      .finally(() => loading.value = false)
+    .then(async (profile) => {
+      profile.address = {
+        country: state.country ? state.country.trim() : ''
+      }
+      return await saveUserProfile(profile)
+    })
+    .then((profile) => {
+      if (profile) {
+        reloadUserProfile()
+        showSuccessToaster({key: 'notification.profileAddressUpdated'})
+      }
+    })
+    .catch(notifyByError)
+    .finally(() => loading.value = false)
 }
 
 const countries = ref(Country.getAllCountries())

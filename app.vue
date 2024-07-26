@@ -7,8 +7,8 @@
 
 <script setup lang="ts">
 
-import {User} from "@firebase/auth";
-import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from "~/types";
+import {User} from '@firebase/auth'
+import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from '~/types'
 
 const router = useRouter()
 const route = useRoute()
@@ -17,9 +17,9 @@ const authStore = useAuthStore()
 const userChanged = async (user: User) => {
   if (user) {
     await user.getIdToken()
-        .then(async (token) => {
-          await authStore.setAuthUserByHeader(token)
-        })
+      .then(async (token) => {
+        await authStore.setAuthUserByHeader(token)
+      })
 
     if (typeof route.query.redirect === 'string') {
       // user logged in

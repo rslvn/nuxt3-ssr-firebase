@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {AlbumType} from "~/types";
-import imageCompression from 'browser-image-compression';
+import {AlbumType} from '~/types'
+import imageCompression from 'browser-image-compression'
 
 const props = defineProps<{
   albumType: AlbumType
@@ -16,10 +16,10 @@ function onFileChange(e: Event) {
     return
   }
   const fileSize = input.files[0].size / 1024 / 1024
-  console.log(`originalFile size ${fileSize} MB`);
+  console.log(`originalFile size ${fileSize} MB`)
   if (fileSize > 5) {
     showErrorToaster({key: 'notification.uploadFileSizeTooBig', params: {fileSize: 5}})
-    return;
+    return
   }
 
   const options = {
@@ -29,10 +29,10 @@ function onFileChange(e: Event) {
   }
 
   imageCompression(input.files[0], options)
-      .then(compressedFile => {
-        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`);
-        uploadSinglePhoto(props.albumType, compressedFile)
-      })
+    .then(compressedFile => {
+      console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`)
+      uploadSinglePhoto(props.albumType, compressedFile)
+    })
 }
 
 function onFileClick() {

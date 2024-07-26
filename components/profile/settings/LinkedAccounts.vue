@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-import {PROVIDER_CONFIGS, ProviderConfig} from "~/types";
+import {PROVIDER_CONFIGS, ProviderConfig} from '~/types'
 
 const {notifyByError, showWarningToaster, showSuccessToaster} = useNotifyUser()
 const {getCurrentProviderIds, isPasswordProvider} = useAuthProviders()
-const {linkProviderId, unlinkProviderId, getCurrentProviderId} = useFirebaseAuth();
-const authStore = useAuthStore();
+const {linkProviderId, unlinkProviderId, getCurrentProviderId} = useFirebaseAuth()
+const authStore = useAuthStore()
 const {t} = useI18n()
 
 const linkAccountBusy = ref(false)
@@ -19,12 +19,12 @@ const linkAccount = (providerConfig: ProviderConfig) => {
 
   linkAccountBusy.value = true
   return linkProviderId(providerConfig.providerId)
-      .then(async () => {
-        showSuccessToaster({key: 'notification.accountProviderLinked', params: {provider: providerConfig.name}})
-        currentProviderId.value = await getCurrentProviderId()
-      })
-      .catch(notifyByError)
-      .finally(() => linkAccountBusy.value = false)
+    .then(async () => {
+      showSuccessToaster({key: 'notification.accountProviderLinked', params: {provider: providerConfig.name}})
+      currentProviderId.value = await getCurrentProviderId()
+    })
+    .catch(notifyByError)
+    .finally(() => linkAccountBusy.value = false)
 }
 
 const unlinkAccount = (providerConfig: ProviderConfig) => {
@@ -42,10 +42,10 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
   }
 
   return unlinkProviderId(providerConfig.providerId)
-      .then(() => {
-        showSuccessToaster({key: 'notification.accountProviderUnlinked', params: {provider: providerConfig.name}})
-      })
-      .catch(notifyByError)
+    .then(() => {
+      showSuccessToaster({key: 'notification.accountProviderUnlinked', params: {provider: providerConfig.name}})
+    })
+    .catch(notifyByError)
 }
 
 </script>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {PAGES} from "~/types";
+import {PAGES} from '~/types'
 
 const props = defineProps({
   oobCode: {
@@ -10,7 +10,7 @@ const props = defineProps({
 })
 const {notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert} = useNotifyUser()
 const {t} = useI18n()
-const {resetPassword} = useFirebaseAuth();
+const {resetPassword} = useFirebaseAuth()
 const {password, confirmPassword, getSchema} = useFormFields()
 const loading = ref(false)
 if (!props.oobCode) {
@@ -23,11 +23,11 @@ const schema = computed(() => getSchema(fields.value))
 const handleResetPassword = async (data: any) => {
   loading.value = true
   await resetPassword(props.oobCode, data.password)
-      .then(() => {
-        showSuccessAlert({key: 'notification.passwordUpdated'})
-      })
-      .catch(notifyByError)
-      .finally(() => loading.value = false)
+    .then(() => {
+      showSuccessAlert({key: 'notification.passwordUpdated'})
+    })
+    .catch(notifyByError)
+    .finally(() => loading.value = false)
 }
 </script>
 

@@ -1,30 +1,30 @@
 import {CollectionField, FirebaseQueryOperator, WhereClause} from '~/types'
 
 export const getWhereClause = (field: string, operator: FirebaseQueryOperator, value: any): WhereClause => {
-    return {
-        field,
-        operator,
-        value,
-    }
+  return {
+    field,
+    operator,
+    value,
+  }
 }
 
 export const sliceIntoChunks = (arr: any[], chunkSize: number) => {
-    const res = [];
-    for (let i = 0; i < arr.length; i += chunkSize) {
-        const chunk = arr.slice(i, i + chunkSize);
-        res.push(chunk);
-    }
-    return res;
+  const res = []
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    const chunk = arr.slice(i, i + chunkSize)
+    res.push(chunk)
+  }
+  return res
 }
 
 export const getEqualsWhereClause = (field: string, value: any): WhereClause => {
-    return getWhereClause(field, FirebaseQueryOperator.EQ, value)
+  return getWhereClause(field, FirebaseQueryOperator.EQ, value)
 }
 
 export const getInWhereClause = (field: string, values: any[]): WhereClause => {
-    return getWhereClause(field, FirebaseQueryOperator.IN, values)
+  return getWhereClause(field, FirebaseQueryOperator.IN, values)
 }
 
 export const getIdsInWhereClause = (values: any[]): WhereClause => {
-    return getWhereClause(CollectionField.COMMON.id, FirebaseQueryOperator.IN, values)
+  return getWhereClause(CollectionField.COMMON.id, FirebaseQueryOperator.IN, values)
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UserProfile} from "~/types";
+import {UserProfile} from '~/types'
 
 defineProps<{
   userProfile: UserProfile
@@ -16,11 +16,11 @@ const loading = ref(false)
 const sendVerificationLink = () => {
   loading.value = true
   sendEmailVerificationMail()
-      .then(() => {
-        showSuccessToaster({key: 'notification.verificationMailSent'})
-      })
-      .catch(notifyByError)
-      .finally(() => loading.value = false)
+    .then(() => {
+      showSuccessToaster({key: 'notification.verificationMailSent'})
+    })
+    .catch(notifyByError)
+    .finally(() => loading.value = false)
 }
 
 </script>

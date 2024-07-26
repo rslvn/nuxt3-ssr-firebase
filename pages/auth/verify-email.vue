@@ -5,7 +5,7 @@ definePageMeta({
   middleware: ['authenticated-not-allowed'],
 })
 
-const route = useRoute();
+const route = useRoute()
 const oobCode = route.query.oobCode as string
 </script>
 

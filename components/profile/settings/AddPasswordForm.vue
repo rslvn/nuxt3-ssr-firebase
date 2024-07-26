@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UserProfile} from "~/types";
+import {UserProfile} from '~/types'
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -22,11 +22,11 @@ const addPassword = async () => {
   loading.value = true
 
   await linkPassword(props.userProfile.email, state.password)
-      .then(() => {
-        showSuccessToaster({key: 'notification.profilePasswordUpdated'})
-      })
-      .catch(notifyByError)
-      .finally(() => loading.value = false)
+    .then(() => {
+      showSuccessToaster({key: 'notification.profilePasswordUpdated'})
+    })
+    .catch(notifyByError)
+    .finally(() => loading.value = false)
 }
 
 </script>

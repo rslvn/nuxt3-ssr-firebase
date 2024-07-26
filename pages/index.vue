@@ -1,5 +1,5 @@
 <script setup>
-import {PAGES} from "~/types";
+import {PAGES} from '~/types'
 
 const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.HOME))

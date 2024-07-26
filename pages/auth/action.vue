@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {PAGES} from "~/types";
+import {PAGES} from '~/types'
 
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
 })
 
 const {t} = useI18n()
-const route = useRoute();
+const route = useRoute()
 const mode = route.query.mode
 
 switch (mode) {

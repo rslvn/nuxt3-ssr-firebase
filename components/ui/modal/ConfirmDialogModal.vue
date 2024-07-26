@@ -20,11 +20,11 @@ const loading = ref(false)
 const confirmed = () => {
   loading.value = true
   Promise.resolve()
-      .then(props.onConfirm)
-      .finally(() => {
-        loading.value = false
-        model.value = false
-      })
+    .then(props.onConfirm)
+    .finally(() => {
+      loading.value = false
+      model.value = false
+    })
 }
 </script>
 

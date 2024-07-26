@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {NotificationMessage} from '~/types';
+import {NotificationMessage} from '~/types'
 
 defineProps<{
   alertMessage: NotificationMessage

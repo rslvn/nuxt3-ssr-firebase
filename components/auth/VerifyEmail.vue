@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {NotificationTarget} from "~/types";
+import {NotificationTarget} from '~/types'
 
 const props = defineProps({
   oobCode: {
@@ -9,7 +9,7 @@ const props = defineProps({
   },
 })
 const {t} = useI18n()
-const {verifyEmail} = useFirebaseAuth();
+const {verifyEmail} = useFirebaseAuth()
 const {notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert} = useNotifyUser()
 
 const verified = ref(false)
@@ -21,11 +21,11 @@ onMounted(() => {
     return
   }
   verifyEmail(props.oobCode)
-      .then(() => {
-        showSuccessAlert({key: 'notification.emailVerified'})
-      })
-      .catch(reason => notifyByError(reason, {target: NotificationTarget.ALERT}))
-      .finally(() => verified.value = true)
+    .then(() => {
+      showSuccessAlert({key: 'notification.emailVerified'})
+    })
+    .catch(reason => notifyByError(reason, {target: NotificationTarget.ALERT}))
+    .finally(() => verified.value = true)
 })
 </script>
 

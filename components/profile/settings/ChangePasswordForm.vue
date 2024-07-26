@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UserProfile} from "~/types";
+import {UserProfile} from '~/types'
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -21,10 +21,10 @@ const schema = computed(() => getSchema(fields.value))
 
 const changePassword = async () => {
   await updateUserPassword(props.userProfile.email, state.oldPassword, state.password)
-      .then(() => {
-        showSuccessToaster({key: 'notification.profilePasswordUpdated'})
-      })
-      .catch(notifyByError)
+    .then(() => {
+      showSuccessToaster({key: 'notification.profilePasswordUpdated'})
+    })
+    .catch(notifyByError)
 }
 
 </script>

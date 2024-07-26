@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {PAGES} from "~/types";
-import {computed} from "vue";
+import {PAGES} from '~/types'
+import {computed} from 'vue'
 
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
@@ -11,7 +11,7 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 
 useSeoMeta(seoMetaInputByPageConfig(PAGES.LOGIN))
 
-const {loginWithPassword} = useFirebaseAuth();
+const {loginWithPassword} = useFirebaseAuth()
 const {getLoginProviders} = useAuthProviders()
 const {notifyByError, showWarningToaster} = useNotifyUser()
 const {email, password, getSchema} = useFormFields()
@@ -27,13 +27,13 @@ const schema = computed(() => getSchema(fields.value))
 const handleLogin = async (data: any) => {
   loading.value = true
   await loginWithPassword(data.email, data.password)
-      .then((userCredentials) => {
-        if (!userCredentials?.user?.emailVerified) {
-          showWarningToaster({key: 'notification.emailNotVerified'})
-        }
-      })
-      .catch(notifyByError)
-      .finally(() => loading.value = false)
+    .then((userCredentials) => {
+      if (!userCredentials?.user?.emailVerified) {
+        showWarningToaster({key: 'notification.emailNotVerified'})
+      }
+    })
+    .catch(notifyByError)
+    .finally(() => loading.value = false)
 }
 </script>
 

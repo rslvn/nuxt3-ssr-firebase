@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {PAGES} from "~/types";
-import {computed} from "vue";
+import {PAGES} from '~/types'
+import {computed} from 'vue'
 
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
@@ -10,7 +10,7 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.REGISTER))
 
 const {t, locale} = useI18n()
-const {registerWithPassword} = useFirebaseAuth();
+const {registerWithPassword} = useFirebaseAuth()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {email, password, confirmPassword, getSchema} = useFormFields()
 const {getRegisterProviders} = useAuthProviders()
@@ -25,11 +25,11 @@ const schema = computed(() => getSchema(fields.value))
 const handleRegister = async (data: any) => {
   loading.value = true
   await registerWithPassword(data.email, data.password)
-      .then(() => {
-        showSuccessToaster({key: 'notification.verificationMailSent'})
-      })
-      .catch(notifyByError)
-      .finally(() => loading.value = false)
+    .then(() => {
+      showSuccessToaster({key: 'notification.verificationMailSent'})
+    })
+    .catch(notifyByError)
+    .finally(() => loading.value = false)
 }
 </script>
 

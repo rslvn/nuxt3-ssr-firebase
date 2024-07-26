@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {PAGES, UserProfile} from "~/types";
-import {sanitizeUrlContext} from "~/service/url-service";
+import {PAGES, UserProfile} from '~/types'
+import {sanitizeUrlContext} from '~/service/url-service'
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -22,18 +22,18 @@ const schema = computed(() => getSchema(fields.value))
 
 const updateUsername = () => {
   return getUserProfile(props.userProfile.id)
-      .then(async (profile) => {
-        profile.username = state.username.trim()
-        return await saveUserProfile(profile)
-      })
-      .then((profile) => {
-        if (profile) {
-          reloadUserProfile()
-          showSuccessToaster({key: 'notification.profileUsernameUpdated'})
-          navigateTo(`${PAGES.PROFILE.path}/${profile.username}`, {replace: true})
-        }
-      })
-      .catch(notifyByError)
+    .then(async (profile) => {
+      profile.username = state.username.trim()
+      return await saveUserProfile(profile)
+    })
+    .then((profile) => {
+      if (profile) {
+        reloadUserProfile()
+        showSuccessToaster({key: 'notification.profileUsernameUpdated'})
+        navigateTo(`${PAGES.PROFILE.path}/${profile.username}`, {replace: true})
+      }
+    })
+    .catch(notifyByError)
 }
 
 const source = ref(requestURL.href)

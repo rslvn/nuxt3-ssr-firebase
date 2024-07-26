@@ -4,6 +4,6 @@ export * from './firebase-types'
 export * from './store-types'
 
 export interface TranslationConfig {
-    key: string
-    params?: any
+  key: string
+  params?: any
 }

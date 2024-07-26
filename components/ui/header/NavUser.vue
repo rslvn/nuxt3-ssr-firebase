@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {PAGES} from "~/types";
+import {PAGES} from '~/types'
 
 const {t} = useI18n()
 const authStore = useAuthStore()
@@ -15,7 +15,7 @@ const items = computed(() => [
   [
     {
       label: authStore.authUser?.username || authStore.authUser?.email,
-      icon: "i-heroicons-user",
+      icon: 'i-heroicons-user',
       slot: 'profile',
       click: navigateToProfile
     }
@@ -26,7 +26,7 @@ const items = computed(() => [
       icon: 'i-heroicons-arrow-left-on-rectangle',
       click: async () => {
         await logout()
-            .catch(notifyByError)
+          .catch(notifyByError)
       }
     }
   ]

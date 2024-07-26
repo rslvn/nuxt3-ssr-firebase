@@ -1,9 +1,9 @@
-import slugify from "slugify";
+import slugify from 'slugify'
 
 export const SLUG_DELIMITER = '-'
 
 export const sanitizeUrlContext = (urlContext: string) => slugify(urlContext, {
-    lower: true,
-    replacement: SLUG_DELIMITER,
-    remove: /[*+~.,?#=()'"!:@]/g
+  lower: true,
+  replacement: SLUG_DELIMITER,
+  remove: /[*+~.,?#=()'"!:@]/g
 })

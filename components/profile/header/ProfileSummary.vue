@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {AlbumType, UserProfile} from "~/types";
-import {getDisplayName, getProfilePhotoImage} from "~/service/user-profile-service";
-import {Country} from "country-state-city";
+import {AlbumType, UserProfile} from '~/types'
+import {getDisplayName, getProfilePhotoImage} from '~/service/user-profile-service'
+import {Country} from 'country-state-city'
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -20,14 +20,14 @@ const loadProfileImages = () => {
     return
   }
   getAlbumImagesByAlbumId(props.userProfile.profilePhoto.albumId)
-      .then((albumImages) => {
-        console.log('>>>> found profile images', albumImages.length)
-        profileAlbumImages.value = albumImages
-        if (albumImages.length) {
-          currentProfileImageIndex.value = albumImages.findIndex((image) => image.id === props.userProfile.profilePhoto.id)
-        }
-        showProfileLightbox.value = true
-      })
+    .then((albumImages) => {
+      console.log('>>>> found profile images', albumImages.length)
+      profileAlbumImages.value = albumImages
+      if (albumImages.length) {
+        currentProfileImageIndex.value = albumImages.findIndex((image) => image.id === props.userProfile.profilePhoto.id)
+      }
+      showProfileLightbox.value = true
+    })
 }
 </script>
 

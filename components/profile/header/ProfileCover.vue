@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {AlbumType, UserProfile} from "~/types";
-import {getCoverPhotoImage, getDisplayName} from "~/service/user-profile-service";
+import {AlbumType, UserProfile} from '~/types'
+import {getCoverPhotoImage, getDisplayName} from '~/service/user-profile-service'
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -26,14 +26,14 @@ const loadCoverImages = () => {
     return
   }
   getAlbumImagesByAlbumId(props.userProfile.coverPhoto.albumId)
-      .then((albumImages) => {
-        console.log('>>>> found cover images', albumImages.length)
-        coverAlbumImages.value = albumImages
-        if (albumImages.length) {
-          currentCoverImageIndex.value = albumImages.findIndex((image) => image.id === props.userProfile.coverPhoto.id)
-        }
-        showCoverLightbox.value = true
-      })
+    .then((albumImages) => {
+      console.log('>>>> found cover images', albumImages.length)
+      coverAlbumImages.value = albumImages
+      if (albumImages.length) {
+        currentCoverImageIndex.value = albumImages.findIndex((image) => image.id === props.userProfile.coverPhoto.id)
+      }
+      showCoverLightbox.value = true
+    })
 }
 
 </script>

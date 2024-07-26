@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 const {t} = useI18n()
-const {logout} = useFirebaseAuth();
+const {logout} = useFirebaseAuth()
 const {isHeaderDialogOpen} = useUIState()
 const authStore = useAuthStore()
 

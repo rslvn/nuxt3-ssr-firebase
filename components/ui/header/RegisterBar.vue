@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {PAGES} from "~/types";
+import {PAGES} from '~/types'
 
 defineProps({
   block: {

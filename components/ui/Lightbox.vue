@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {AlbumImage} from "~/types";
+import {AlbumImage} from '~/types'
 
 const props = defineProps<{
   startingIndex: number
