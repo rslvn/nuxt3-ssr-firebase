@@ -7,7 +7,7 @@ const model = defineModel({
 const props = defineProps<{
   title: string
   description: string
-  onConfirm: () => {}
+  onConfirm: () => void
   icon?: string
   confirmButtonLabel?: string
   cancelButtonLabel?: string

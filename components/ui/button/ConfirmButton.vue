@@ -5,7 +5,7 @@ defineProps<{
   label: string
   confirmTitle: string
   confirmDescription: string
-  onConfirm: () => {}
+  onConfirm: () => void
   modalIcon?: string
   confirmButtonLabel?: string
   cancelButtonLabel?: string

@@ -3,7 +3,7 @@ import {NotificationMessage} from '~/types';
 
 defineProps<{
   alertMessage: NotificationMessage
-  closeAlert?: () => {}
+  closeAlert?: () => void
 }>()
 
 const {t} = useI18n()
