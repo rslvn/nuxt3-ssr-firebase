@@ -36,16 +36,16 @@ const handleResetPassword = async (data: any) => {
     <section v-if="oobCode" class="flex justify-center items-center">
       <client-only>
         <UAuthForm
-            :title="t(PAGES.RESET_PASSWORD.title.key, PAGES.RESET_PASSWORD.title.params)"
-            :description="t(PAGES.RESET_PASSWORD.description.key, PAGES.RESET_PASSWORD.description.params)"
-            align="bottom"
-            icon="i-heroicons-user-circle"
-            :fields="fields"
-            :schema="schema"
-            :loading="loading"
-            :submit-button="{  label: t('common.ResetPassword')}"
-            :ui="{ base: 'text-center', footer: 'text-center' }"
-            @submit="handleResetPassword"
+          :title="t(PAGES.RESET_PASSWORD.title.key, PAGES.RESET_PASSWORD.title.params)"
+          :description="t(PAGES.RESET_PASSWORD.description.key, PAGES.RESET_PASSWORD.description.params)"
+          align="bottom"
+          icon="i-heroicons-user-circle"
+          :fields="fields"
+          :schema="schema"
+          :loading="loading"
+          :submit-button="{  label: t('common.ResetPassword')}"
+          :ui="{ base: 'text-center', footer: 'text-center' }"
+          @submit="handleResetPassword"
         >
           <template #footer>
             {{ t('page.auth.rememberedPassword') }}

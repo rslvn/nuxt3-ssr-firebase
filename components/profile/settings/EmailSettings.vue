@@ -35,14 +35,14 @@ const sendVerificationLink = () => {
                class="text-green-700 h-7 w-7"
                dynamic/>
         <UButton
-            v-else
-            color="orange"
-            square
-            variant="ghost"
-            class="hover:bg-gray-50 dark:hover:bg-gray-800"
-            icon="heroicons:exclamation-triangle-20-solid"
-            :loading="loading"
-            @click="sendVerificationLink"
+          v-else
+          color="orange"
+          square
+          variant="ghost"
+          class="hover:bg-gray-50 dark:hover:bg-gray-800"
+          icon="heroicons:exclamation-triangle-20-solid"
+          :loading="loading"
+          @click="sendVerificationLink"
         >
           {{ t('common.Verify') }}
         </UButton>

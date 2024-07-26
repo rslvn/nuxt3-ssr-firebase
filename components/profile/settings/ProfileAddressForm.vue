@@ -54,13 +54,13 @@ const selectedCountry = computed(() => {
                 class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                 :ui="{ container: '' }">
       <USelectMenu
-          v-model="state.country"
-          searchable
-          selected-icon="i-heroicons-check-solid"
-          :placeholder="country.placeholder"
-          :options="countries"
-          option-attribute="name"
-          value-attribute="isoCode"
+        v-model="state.country"
+        searchable
+        selected-icon="i-heroicons-check-solid"
+        :placeholder="country.placeholder"
+        :options="countries"
+        option-attribute="name"
+        value-attribute="isoCode"
       >
         <template #label>
           <template v-if="selectedCountry">

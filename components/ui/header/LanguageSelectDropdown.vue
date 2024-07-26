@@ -13,10 +13,10 @@ const currentLanguage = computed(() => languages.value.find((language: any) => l
 <template>
   <UDropdown :items="[languages]">
     <UButton
-        color="gray"
-        square
-        variant="ghost"
-        class="hover:bg-gray-50 dark:hover:bg-gray-800 text-3xl content-center"
+      color="gray"
+      square
+      variant="ghost"
+      class="hover:bg-gray-50 dark:hover:bg-gray-800 text-3xl content-center"
     >
       <span>{{ currentLanguage?.flag }}</span>
     </UButton>

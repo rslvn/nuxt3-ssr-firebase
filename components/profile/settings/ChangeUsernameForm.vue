@@ -68,11 +68,11 @@ const sanitizeUsername = () => {
 
       <template #links>
         <UButton
-            :icon="copied ? 'i-heroicons-check-20-solid' : 'i-heroicons-clipboard-20-solid'"
-            :color="copied ? 'green': 'primary'"
-            variant="ghost"
-            :disabled="copyProfileUrlDisabled"
-            @click="copyClipboard()"
+          :icon="copied ? 'i-heroicons-check-20-solid' : 'i-heroicons-clipboard-20-solid'"
+          :color="copied ? 'green': 'primary'"
+          variant="ghost"
+          :disabled="copyProfileUrlDisabled"
+          @click="copyClipboard()"
         >
           {{ t('button.CopyProfileUrl') }}
         </UButton>

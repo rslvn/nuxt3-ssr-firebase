@@ -36,10 +36,10 @@ const items = computed(() => [
 <template>
   <UDropdown :items="items" :ui="{ item: { icon: {base: 'w-6 h-6'}, size:'text-md' } }">
     <UButton
-        color="gray"
-        square
-        variant="ghost"
-        :ui="{icon: {size: {sm: 'w-6 h-6'}}}"
+      color="gray"
+      square
+      variant="ghost"
+      :ui="{icon: {size: {sm: 'w-6 h-6'}}}"
     >
       <img class="object-cover rounded-full bg-center h-7 w-7"
            :src="authStore.authUser.profilePhoto.src" alt="asdasd">

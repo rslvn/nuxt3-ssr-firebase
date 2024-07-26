@@ -41,16 +41,16 @@ const handleLogin = async (data: any) => {
   <UContainer class="flex items-center justify-center mt-5 md:mt-10">
     <client-only>
       <UAuthForm
-          :title="t(PAGES.LOGIN.title.key, PAGES.LOGIN.title.params)"
-          align="bottom"
-          icon="i-heroicons-user-circle"
-          :fields="fields"
-          :providers="providers"
-          :schema="schema"
-          :loading="loading"
-          :submit-button="{  label: t('common.Login')}"
-          :ui="{ base: 'text-center', footer: 'text-center' }"
-          @submit="handleLogin"
+        :title="t(PAGES.LOGIN.title.key, PAGES.LOGIN.title.params)"
+        align="bottom"
+        icon="i-heroicons-user-circle"
+        :fields="fields"
+        :providers="providers"
+        :schema="schema"
+        :loading="loading"
+        :submit-button="{  label: t('common.Login')}"
+        :ui="{ base: 'text-center', footer: 'text-center' }"
+        @submit="handleLogin"
       >
         <template #password-hint>
           <NuxtLink to="/auth/forgot-password" class="text-primary font-medium">{{ t('common.ForgotPassword') }}?

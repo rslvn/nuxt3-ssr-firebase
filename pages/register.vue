@@ -38,16 +38,16 @@ const handleRegister = async (data: any) => {
     <section class="flex justify-center items-center">
       <client-only>
         <UAuthForm
-            :title="t(PAGES.REGISTER.title.key, PAGES.REGISTER.title.params)"
-            align="bottom"
-            icon="i-heroicons-user-circle"
-            :fields="fields"
-            :providers="providers"
-            :schema="schema"
-            :loading="loading"
-            :submit-button="{  label: t('common.Register')}"
-            :ui="{ base: 'text-center', footer: 'text-center' }"
-            @submit="handleRegister"
+          :title="t(PAGES.REGISTER.title.key, PAGES.REGISTER.title.params)"
+          align="bottom"
+          icon="i-heroicons-user-circle"
+          :fields="fields"
+          :providers="providers"
+          :schema="schema"
+          :loading="loading"
+          :submit-button="{  label: t('common.Register')}"
+          :ui="{ base: 'text-center', footer: 'text-center' }"
+          @submit="handleRegister"
         >
           <template #footer>
             {{ t('page.register.alreadyRegistered') }}

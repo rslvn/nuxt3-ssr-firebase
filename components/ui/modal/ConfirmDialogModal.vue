@@ -30,13 +30,13 @@ const confirmed = () => {
 
 <template>
   <UDashboardModal
-      v-model="model"
-      :title="title"
-      :description="description"
-      :icon="icon || 'i-heroicons-exclamation-circle'"
-      prevent-close
-      :close-button="null"
-      :ui="{
+    v-model="model"
+    :title="title"
+    :description="description"
+    :icon="icon || 'i-heroicons-exclamation-circle'"
+    prevent-close
+    :close-button="null"
+    :ui="{
       icon: {
         base: 'text-red-500 dark:text-red-400'
       } as any,
@@ -47,15 +47,15 @@ const confirmed = () => {
   >
     <template #footer>
       <UButton
-          color="red"
-          :label="confirmButtonLabel || t('common.Confirm')"
-          :loading="loading"
-          @click="confirmed"
+        color="red"
+        :label="confirmButtonLabel || t('common.Confirm')"
+        :loading="loading"
+        @click="confirmed"
       />
       <UButton
-          color="white"
-          :label="cancelButtonLabel || t('common.Cancel')"
-          @click="model = false"
+        color="white"
+        :label="cancelButtonLabel || t('common.Cancel')"
+        @click="model = false"
       />
     </template>
   </UDashboardModal>

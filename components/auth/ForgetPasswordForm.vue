@@ -25,16 +25,16 @@ const handleForgotPassword = async (data: any) => {
   <div>
     <section class="flex justify-center items-center">
       <UAuthForm
-          :title="t(PAGES.FORGOT_PASSWORD.title.key, PAGES.FORGOT_PASSWORD.title.params)"
-          :description="t(PAGES.FORGOT_PASSWORD.description.key, PAGES.FORGOT_PASSWORD.description.params)"
-          align="bottom"
-          icon="i-heroicons-user-circle"
-          :fields="fields"
-          :schema="schema"
-          :loading="loading"
-          :submit-button="{  label: t('common.ResetPassword')}"
-          :ui="{ base: 'text-center', footer: 'text-center' }"
-          @submit="handleForgotPassword"
+        :title="t(PAGES.FORGOT_PASSWORD.title.key, PAGES.FORGOT_PASSWORD.title.params)"
+        :description="t(PAGES.FORGOT_PASSWORD.description.key, PAGES.FORGOT_PASSWORD.description.params)"
+        align="bottom"
+        icon="i-heroicons-user-circle"
+        :fields="fields"
+        :schema="schema"
+        :loading="loading"
+        :submit-button="{  label: t('common.ResetPassword')}"
+        :ui="{ base: 'text-center', footer: 'text-center' }"
+        @submit="handleForgotPassword"
       >
         <template #footer>
           {{ t('page.auth.rememberedPassword') }}

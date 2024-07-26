@@ -53,17 +53,17 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
 <template>
   <UDashboardPanelContent class="p-0 pb-24 divide-y divide-gray-200 dark:divide-gray-800">
     <UDashboardSection
-        :title="t('page.profileSettings.linkedAccounts.title')"
-        :description="t('page.profileSettings.linkedAccounts.description')"
-        orientation="horizontal"
+      :title="t('page.profileSettings.linkedAccounts.title')"
+      :description="t('page.profileSettings.linkedAccounts.description')"
+      orientation="horizontal"
     >
       <UCard :ui="{ body: { base: 'divide-y divide-gray-200 dark:divide-gray-800 gap-4 flex flex-col' } }">
         <UFormGroup
-            v-for="providerConfig in PROVIDER_CONFIGS"
-            :key="providerConfig.providerId"
-            :name="providerConfig.name"
-            class="flex flex-row items-center justify-between pt-4 first:pt-0 gap-2"
-            :ui="{ container: 'flex' }"
+          v-for="providerConfig in PROVIDER_CONFIGS"
+          :key="providerConfig.providerId"
+          :name="providerConfig.name"
+          class="flex flex-row items-center justify-between pt-4 first:pt-0 gap-2"
+          :ui="{ container: 'flex' }"
         >
           <template #label>
             <div class="flex flex-row items-center justify-center">
@@ -75,8 +75,8 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
                 <template #panel>
                   <div class="p-4">
                     <span>{{
-                        t('page.profileSettings.linkedAccounts.currentLogin', {provider: providerConfig.name})
-                      }}</span>
+                      t('page.profileSettings.linkedAccounts.currentLogin', {provider: providerConfig.name})
+                    }}</span>
                   </div>
                 </template>
               </UPopover>
@@ -85,18 +85,18 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
           </template>
 
           <ConfirmButton
-              v-if="currentProviderIds.includes(providerConfig.providerId)"
-              :label="t('common.Disconnect')"
-              :confirm-title="t('dialog.unlinkAccount.title', {provider: providerConfig.name})"
-              :confirm-description="t('dialog.unlinkAccount.description', {provider: providerConfig.name})"
-              :on-confirm="() => unlinkAccount(providerConfig)"
-              :confirm-button-label="t('common.Disconnect')"
+            v-if="currentProviderIds.includes(providerConfig.providerId)"
+            :label="t('common.Disconnect')"
+            :confirm-title="t('dialog.unlinkAccount.title', {provider: providerConfig.name})"
+            :confirm-description="t('dialog.unlinkAccount.description', {provider: providerConfig.name})"
+            :on-confirm="() => unlinkAccount(providerConfig)"
+            :confirm-button-label="t('common.Disconnect')"
           />
 
           <UButton
-              v-else-if="!isPasswordProvider(providerConfig.providerId) && !currentProviderIds.includes(providerConfig.providerId)"
-              variant="ghost" :loading="linkAccountBusy" :disabled="linkAccountBusy"
-              @click="() => linkAccount(providerConfig)">
+            v-else-if="!isPasswordProvider(providerConfig.providerId) && !currentProviderIds.includes(providerConfig.providerId)"
+            variant="ghost" :loading="linkAccountBusy" :disabled="linkAccountBusy"
+            @click="() => linkAccount(providerConfig)">
             {{ t('common.Connect') }}
           </UButton>
 
