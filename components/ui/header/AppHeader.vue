@@ -43,7 +43,7 @@ const signOut = () => {
       <RegisterBar v-if="!authStore.authUser" block/>
       <!--      <RegisterBar v-if="!user?.emailVerified" block/>-->
       <UButton v-if="authStore.authUser" :label="t('common.SignOut')" color="green" variant="ghost"
-               @click="signOut" block/>
+               block @click="signOut"/>
     </template>
   </UHeader>
 </template>

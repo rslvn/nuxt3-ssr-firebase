@@ -45,7 +45,7 @@ const items = computed(() => [
            :src="authStore.authUser.profilePhoto.src" alt="asdasd">
     </UButton>
 
-    <template #profile="{ item }">
+    <template #profile>
       <img class="object-cover rounded-full bg-center h-6 w-6"
            :src="authStore.authUser.profilePhoto.src" alt="asdasd">
       <span> {{ authStore.authUser?.displayName || 'Profile' }}</span>

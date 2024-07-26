@@ -48,9 +48,9 @@ const handleLogin = async (data: any) => {
           :providers="providers"
           :schema="schema"
           :loading="loading"
-          @submit="handleLogin"
           :submit-button="{  label: t('common.Login')}"
           :ui="{ base: 'text-center', footer: 'text-center' }"
+          @submit="handleLogin"
       >
         <template #password-hint>
           <NuxtLink to="/auth/forgot-password" class="text-primary font-medium">{{ t('common.ForgotPassword') }}?

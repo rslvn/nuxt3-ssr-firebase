@@ -47,12 +47,12 @@ const loadCoverImages = () => {
     </client-only>
     <UCarousel v-slot="{ item }" :items="images" :ui="{ item: 'basis-full' }"
                class="rounded-lg overflow-hidden z-0" :class="{'cursor-pointer': userProfile?.coverPhoto?.id}">
-      <NuxtImg :src="item.src" draggable="false" :alt="item.alt" @click="loadCoverImages" placeholder
-               class="h-80 w-full object-cover"/>
+      <NuxtImg :src="item.src" draggable="false" :alt="item.alt" placeholder class="h-80 w-full object-cover"
+               @click="loadCoverImages"/>
     </UCarousel>
     <client-only>
-      <Lightbox v-if="showCoverLightbox" v-model="showCoverLightbox" :startingIndex="currentCoverImageIndex"
-                :albumImages="coverAlbumImages"/>
+      <Lightbox v-if="showCoverLightbox" v-model="showCoverLightbox" :starting-index="currentCoverImageIndex"
+                :album-images="coverAlbumImages"/>
     </client-only>
   </div>
 </template>

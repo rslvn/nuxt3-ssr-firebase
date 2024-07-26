@@ -1,10 +1,5 @@
 import {CollectionField, FirebaseQueryOperator, WhereClause} from '~/types'
 
-export interface KeyValuePair {
-    key: string,
-    value: string
-}
-
 export const getWhereClause = (field: string, operator: FirebaseQueryOperator, value: any): WhereClause => {
     return {
         field,

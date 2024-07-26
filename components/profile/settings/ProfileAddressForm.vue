@@ -48,8 +48,7 @@ const selectedCountry = computed(() => {
 
 <template>
   <UForm :state="state" :schema="schema" @submit="updateAddress">
-    <UDashboardSection :title="t('button.UpdateAddress')">
-    </UDashboardSection>
+    <UDashboardSection :title="t('button.UpdateAddress')"/>
     <UFormGroup :label="country.label" :name="country.name" :description="country.description"
                 :required="country.required"
                 class="grid grid-cols-1 sm:grid-cols-2 gap-2"
@@ -71,9 +70,9 @@ const selectedCountry = computed(() => {
           <span v-else>{{ country.placeholder }}</span>
         </template>
 
-        <template #option="{ option: country }">
-          <span class="text-2xl">{{ country.flag }}</span>
-          <span>{{ country.name }}</span>
+        <template #option="{ option: countryOption }">
+          <span class="text-2xl">{{ countryOption.flag }}</span>
+          <span>{{ countryOption.name }}</span>
         </template>
       </USelectMenu>
     </UFormGroup>

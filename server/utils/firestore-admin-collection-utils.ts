@@ -112,6 +112,7 @@ export async function getModelById<T extends BaseModel>(collection: string, mode
         })
 }
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export async function getModelByIds<T extends BaseModel[]>(collection: string, ...modelIds: string[]) {
     const idsInWhereClause: WhereClause = {
         field: CollectionField.COMMON.id,
@@ -121,6 +122,7 @@ export async function getModelByIds<T extends BaseModel[]>(collection: string, .
     return await getModelsByWhereClauses(collection, idsInWhereClause)
 }
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export async function getAllModels<T extends BaseModel[]>(collectionName: string) {
     return await getFirestore()
         .collection(collectionName)

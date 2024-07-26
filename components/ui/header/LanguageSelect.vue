@@ -22,9 +22,9 @@ const currentLanguage = ref(languages.find(language => language.code === locale.
       <span class="text-2xl">{{currentLanguage.flag}}  </span>
     </template>
 
-    <template #option="{ option: languages }">
-      <span class="text-2xl">{{ languages.flag }}</span>
-      <span>{{ languages.label }}</span>
+    <template #option="{ option: languageOption }">
+      <span class="text-2xl">{{ languageOption.flag }}</span>
+      <span>{{ languageOption.label }}</span>
     </template>
 
   </USelectMenu>
