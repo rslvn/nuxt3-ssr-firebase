@@ -71,7 +71,7 @@ const selectedModule = computed(() => modules.value.find(module => module.type =
     <UContainer :ui="{ constrained: 'max-w-2xl' }">
       <UDashboardToolbar class="mt-44 sm:mt-24 xl:mt-16 py-0 px-1.5 overflow-x-auto">
         <UHorizontalNavigation :links="links"
-                               :ui="{ wrapper: 'justify-center', label:'text-lg', icon: { base: 'w-7 h-7' } }" />
+                               :ui="{ wrapper: 'justify-center', label: 'text-lg', icon: { base: 'w-7 h-7' } }" />
       </UDashboardToolbar>
     </UContainer>
 

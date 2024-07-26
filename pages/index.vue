@@ -17,8 +17,8 @@ const {t} = useI18n()
           icon: 'i-simple-icons-github',
           color: 'gray',
           size: 'lg',
-          to:'https://github.com/rslvn/nuxt3-ssr-firebase',
-          target:'_blank'
+          to: 'https://github.com/rslvn/nuxt3-ssr-firebase',
+          target: '_blank'
         }]"
       />
     </UContainer>

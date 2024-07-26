@@ -34,7 +34,7 @@ const items = computed(() => [
 </script>
 
 <template>
-  <UDropdown :items="items" :ui="{ item: { icon: { base: 'w-6 h-6' }, size:'text-md' } }">
+  <UDropdown :items="items" :ui="{ item: { icon: { base: 'w-6 h-6' }, size: 'text-md' } }">
     <UButton
       color="gray"
       square
