@@ -46,7 +46,7 @@ const getUserFromHeader = async (event: H3Event<EventHandlerRequest>) => {
 
         return await decodeIdToken(sessionCookie)
     } catch (error) {
-
+        console.log('>>>> getUserFromHeader error:',error)
     }
 }
 

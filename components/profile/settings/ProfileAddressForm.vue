@@ -71,9 +71,9 @@ const selectedCountry = computed(() => {
           <span v-else>{{ country.placeholder }}</span>
         </template>
 
-        <template #option="{ option: country }">
-          <span class="text-2xl">{{ country.flag }}</span>
-          <span>{{ country.name }}</span>
+        <template #option="{ option: countryOption }">
+          <span class="text-2xl">{{ countryOption.flag }}</span>
+          <span>{{ countryOption.name }}</span>
         </template>
       </USelectMenu>
     </UFormGroup>

@@ -12,7 +12,7 @@ const oobCode = route.query.oobCode as string
 <template>
   <UContainer class="max-w-4xl mt-5 md:mt-10">
     <client-only>
-      <LazyResetPasswordForm :oobCode="oobCode"/>
+      <LazyResetPasswordForm :oob-code="oobCode"/>
     </client-only>
   </UContainer>
 </template>

@@ -10,7 +10,7 @@ const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.REGISTER))
 
 const {t, locale} = useI18n()
-const {registerWithPassword, signInWithSocialProvider} = useFirebaseAuth();
+const {registerWithPassword} = useFirebaseAuth();
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {email, password, confirmPassword, getSchema} = useFormFields()
 const {getRegisterProviders} = useAuthProviders()

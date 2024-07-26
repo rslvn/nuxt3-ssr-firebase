@@ -5,7 +5,7 @@ const props = defineProps<{
   startingIndex: number
   albumImages: AlbumImage[]
 }>()
-const showLightbox = defineModel()
+const showLightbox = defineModel({type: Boolean})
 
 const imageIndex = ref(props.startingIndex > props.albumImages.length || props.startingIndex < 0 ? 0 : props.startingIndex)
 const albumImage = computed(() => props.albumImages.length && props.albumImages[imageIndex.value])

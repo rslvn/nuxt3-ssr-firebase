@@ -49,7 +49,7 @@ async function createOrGetUserProfile(user: UserRecord) {
 
 export default defineEventHandler(async (event) => {
     // try {
-    let user = event.context.user;
+    const user = event.context.user;
     if (!user) {
         console.log('>>>> no extracted user found')
         return
