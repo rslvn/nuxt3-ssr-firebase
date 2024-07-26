@@ -42,7 +42,6 @@ const updateProfile = () => {
     .catch(notifyByError)
     .finally(() => loading.value = false)
 }
-
 </script>
 
 <template>

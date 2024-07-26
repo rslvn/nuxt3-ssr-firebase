@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang="ts">
-
 import {User} from '@firebase/auth'
 import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from '~/types'
 
@@ -52,5 +51,4 @@ onErrorCaptured((error, instance, info) => {
   //   throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
   // }
 })
-
 </script>

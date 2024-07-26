@@ -10,7 +10,6 @@ defineProps<{
   confirmButtonLabel?: string
   cancelButtonLabel?: string
 }>()
-
 </script>
 
 <template>

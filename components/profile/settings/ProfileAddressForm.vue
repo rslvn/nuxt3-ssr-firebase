@@ -43,7 +43,6 @@ const countries = ref(Country.getAllCountries())
 const selectedCountry = computed(() => {
   return countries.value.find(country => country.isoCode === state.country)
 })
-
 </script>
 
 <template>

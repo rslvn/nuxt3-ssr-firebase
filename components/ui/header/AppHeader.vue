@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const {t} = useI18n()
 const {logout} = useFirebaseAuth()
 const {isHeaderDialogOpen} = useUIState()
@@ -13,7 +12,6 @@ const signOut = () => {
   logout()
   closeDialog()
 }
-
 </script>
 
 <template>

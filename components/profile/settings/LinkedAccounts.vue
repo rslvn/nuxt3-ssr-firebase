@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import {PROVIDER_CONFIGS, ProviderConfig} from '~/types'
 
 const {notifyByError, showWarningToaster, showSuccessToaster} = useNotifyUser()
@@ -47,7 +46,6 @@ const unlinkAccount = (providerConfig: ProviderConfig) => {
     })
     .catch(notifyByError)
 }
-
 </script>
 
 <template>

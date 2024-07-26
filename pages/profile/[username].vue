@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const {seoMetaInputByUserProfile} = useAppSeoMeta()
 
 const {t} = useI18n()
@@ -32,7 +31,6 @@ await getUserProfileByUsername(username)
 useSeoMeta(seoMetaInputByUserProfile(userProfile.value))
 
 const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?.userId)
-
 </script>
 
 <template>

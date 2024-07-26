@@ -6,7 +6,6 @@ defineProps<{
   isMyProfile?: boolean
 }>()
 const {t} = useI18n()
-
 </script>
 
 <template>

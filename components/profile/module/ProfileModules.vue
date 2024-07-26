@@ -63,7 +63,6 @@ const modules = computed(() => {
 
 const links = computed(() => modules.value.map(module => [module.link]))
 const selectedModule = computed(() => modules.value.find(module => module.type === selectedModuleType.value))
-
 </script>
 
 <template>

@@ -28,7 +28,6 @@ const addPassword = async () => {
     .catch(notifyByError)
     .finally(() => loading.value = false)
 }
-
 </script>
 
 <template>

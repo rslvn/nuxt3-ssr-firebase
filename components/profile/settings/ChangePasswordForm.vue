@@ -26,7 +26,6 @@ const changePassword = async () => {
     })
     .catch(notifyByError)
 }
-
 </script>
 
 <template>

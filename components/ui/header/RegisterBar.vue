@@ -11,7 +11,6 @@ defineProps({
 
 const {isHeaderDialogOpen} = useUIState()
 const {t} = useI18n()
-
 </script>
 
 <template>

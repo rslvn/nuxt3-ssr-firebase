@@ -51,7 +51,6 @@ const copyProfileUrlDisabled = computed(() => {
 const sanitizeUsername = () => {
   state.username = sanitizeUrlContext(state.username)
 }
-
 </script>
 
 <template>

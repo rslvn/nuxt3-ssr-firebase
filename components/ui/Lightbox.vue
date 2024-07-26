@@ -24,7 +24,6 @@ const previousImage = () => {
     imageIndex.value--
   }
 }
-
 </script>
 
 <template>

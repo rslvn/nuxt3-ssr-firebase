@@ -15,7 +15,6 @@ export default withNuxt({
 
     // check those rule whether we need or not
 
-    'vue/block-tag-newline': 'off',
     '@stylistic/arrow-parens': 'off',
     'vue/html-closing-bracket-newline': 'off',
     'vue/mustache-interpolation-spacing': 'off',

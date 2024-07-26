@@ -10,7 +10,6 @@ const authStore = useAuthStore()
 const {getPasswordProvider} = useAuthProviders()
 
 const noPasswordProvider = computed(() => !getPasswordProvider(authStore.authUser?.providers))
-
 </script>
 
 <template>

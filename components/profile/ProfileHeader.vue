@@ -1,12 +1,10 @@
 <script setup lang="ts">
-
 import {UserProfile} from '~/types'
 
 defineProps<{
   userProfile: UserProfile
   isMyProfile?: boolean
 }>()
-
 </script>
 
 <template>

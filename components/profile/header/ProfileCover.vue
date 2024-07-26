@@ -35,7 +35,6 @@ const loadCoverImages = () => {
       showCoverLightbox.value = true
     })
 }
-
 </script>
 
 <template>

@@ -23,5 +23,4 @@ switch (mode) {
   default:
     throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
 }
-
 </script>
