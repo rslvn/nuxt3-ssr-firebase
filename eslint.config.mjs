@@ -15,7 +15,6 @@ export default withNuxt({
 
     // check those rule whether we need or not
 
-    'vue/no-multi-spaces': 'off',
     'vue/comma-dangle': 'off',
     'vue/multiline-html-element-content-newline': 'off',
     'vue/key-spacing': 'off',

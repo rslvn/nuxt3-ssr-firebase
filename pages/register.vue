@@ -45,7 +45,7 @@ const handleRegister = async (data: any) => {
           :providers="providers"
           :schema="schema"
           :loading="loading"
-          :submit-button="{  label: t('common.Register') }"
+          :submit-button="{ label: t('common.Register') }"
           :ui="{ base: 'text-center', footer: 'text-center' }"
           @submit="handleRegister"
         >
