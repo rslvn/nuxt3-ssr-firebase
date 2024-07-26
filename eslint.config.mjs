@@ -9,7 +9,7 @@ export default withNuxt({
     'vue/no-multiple-template-root': 'off',
 
     // enable and verify sometimes
-    // '@stylistic/padded-blocks': 'off',
+    '@stylistic/padded-blocks': 'off',
 
     // check those rule whether we need or not
 
