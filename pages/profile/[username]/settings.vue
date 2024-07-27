@@ -1,4 +1,7 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: ['profile-owner-only'],
+})
 const {t} = useI18n()
 const {getUserProfileByUsername} = useUserProfileCollection()
 const {userProfile} = useAppGlobals()
@@ -26,12 +29,9 @@ await getUserProfileByUsername(username)
     throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
   })
 
-const isMyProfile = computed(() => userProfile.value?.id === authStore.authUser?.userId)
-
-const {seoMetaInputByUserProfile} = useAppSeoMeta()
-useSeoMeta(seoMetaInputByUserProfile(userProfile.value))
+const isMyProfile = computed(() => userProfile?.value?.id === authStore.authUser?.userId)
 </script>
 
 <template>
-  <ProfileSettings :user-profile="userProfile" :is-my-profile="isMyProfile" />
+  <ProfileSettings v-if="isMyProfile" :user-profile="userProfile" :is-my-profile="isMyProfile" />
 </template>

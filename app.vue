@@ -34,9 +34,12 @@ const userChanged = async (user: User) => {
 
   } else {
     await authStore.removeAuthUser()
-    console.log(new Date(), '>>>> user logged out')
     if (authStore.authUser && !AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
       return router.push(PAGES.LOGIN.path)
+    } else if (PAGES.HOME.path !== route.path) {
+      // re-trigger middleware of the current page if the path is not home in case of logout
+      console.log('>>> Force reload because signed out from a page that is not home page. the page path:', route.path)
+      reloadNuxtApp()
     }
   }
 }
