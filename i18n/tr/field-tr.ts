@@ -59,6 +59,11 @@ export default {
       label: 'Kullanici adi',
       placeholder: 'bir kullanici adi giriniz',
       description: 'Profile baglantinizdaki kullanici adiniz'
-    }
+    },
+    about: {
+      label: 'Hakkinda',
+      placeholder: 'Sizinle ilgili bir seyler soyleyin',
+      description: 'Hakkinda'
+    },
   },
 }
