@@ -46,6 +46,7 @@ Other:
 * i18n
 * sitemap
 * gtag
+* eslint + stylistic
 
 ## Setup
 
