@@ -52,7 +52,6 @@ const leftLinks = computed(() => {
 const links = computed(() => {
   return [leftLinks.value]
 })
-console.log('[username].vue processed', profilePageState.value)
 </script>
 
 <template>
