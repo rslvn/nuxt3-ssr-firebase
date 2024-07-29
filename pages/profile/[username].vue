@@ -9,25 +9,25 @@ if (!username) {
   throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
 }
 
-const {profilePageState, setUserProfileInProfilePageStateByUsername, clearProfilePageState, isMyProfile} = useUserProfileState()
-await setUserProfileInProfilePageStateByUsername(username)
+const {userProfileRef, setUserProfileByUsername, clearUserProfile, isMyProfile} = useUserProfileState()
+await setUserProfileByUsername(username)
   .catch((reason: any) => {
     if (reason?.code === 'permission-denied') {
       throw createError({statusCode: 403, statusMessage: t('page.accessDenied'), fatal: true})
     }
   })
 
-if (!profilePageState.value) {
+if (!userProfileRef.value) {
   console.log('>>>> no profile found by username', username)
   throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
 }
 
 onBeforeRouteLeave(() => {
-  clearProfilePageState()
+  clearUserProfile()
 })
 
 const {seoMetaInputByUserProfile} = useAppSeoMeta()
-useSeoMeta(seoMetaInputByUserProfile(profilePageState.value))
+useSeoMeta(seoMetaInputByUserProfile(userProfileRef.value))
 
 const leftLinks = computed(() => {
   if (!locale) {
@@ -36,7 +36,7 @@ const leftLinks = computed(() => {
   const aboutLink = {
     label: t('common.About'),
     icon: 'i-heroicons-user-circle',
-    to: `${PAGES.PROFILE.path}/${profilePageState.value.username}`,
+    to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}`,
     exact: true
   }
 
@@ -44,7 +44,7 @@ const leftLinks = computed(() => {
     ? [aboutLink, {
         label: t('common.Settings'),
         icon: 'i-heroicons-cog-6-tooth',
-        to: `${PAGES.PROFILE.path}/${profilePageState.value.username}/settings`
+        to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}/settings`
       }]
     : [aboutLink]
 })
@@ -56,8 +56,7 @@ const links = computed(() => {
 
 <template>
   <section>
-    <ProfileHeader v-if="profilePageState" :user-profile="profilePageState" :is-my-profile="isMyProfile" />
-    <ProfileHeaderSkeleton v-else />
+    <ProfileHeader :user-profile="userProfileRef" :is-my-profile="isMyProfile" />
   </section>
 
   <section>

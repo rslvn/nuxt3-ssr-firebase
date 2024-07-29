@@ -28,6 +28,10 @@ export default {
       description: 'Set your new password'
     },
     profileSettings: {
+      navigator: {
+        profileSettings: 'Profile settings',
+        accountSettings: 'Account settings',
+      },
       linkedAccounts: {
         title: 'Linked accounts',
         description: 'The accounts that can use link your account and login with',

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const {profilePageState, isMyProfile} = useUserProfileState()
+const {userProfileRef, isMyProfile} = useUserProfileState()
 </script>
 
 <template>
-  <ProfileAbout :user-profile="profilePageState" :is-my-profile="isMyProfile" />
+  <ProfileAbout :user-profile="userProfileRef" :is-my-profile="isMyProfile" />
 </template>
