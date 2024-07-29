@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {Country} from 'country-state-city'
 import {UserProfile} from '~/types'
+import useUserProfileState from '~/composables/state/useUserProfileState'
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -9,7 +10,7 @@ const props = defineProps<{
 const {country, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
-const {reloadUserProfile} = useAppGlobals()
+const {reloadUserProfile} = useUserProfileState()
 const {t} = useI18n()
 
 const loading = ref(false)

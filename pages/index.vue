@@ -4,6 +4,7 @@ import {PAGES} from '~/types'
 const {seoMetaInputByPageConfig} = useAppSeoMeta()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.HOME))
 const {t} = useI18n()
+const profilePage = useState('profilePage')
 </script>
 
 <template>
@@ -22,5 +23,6 @@ const {t} = useI18n()
         }]"
       />
     </UContainer>
+    <pre>{{ profilePage }}</pre>
   </div>
 </template>
