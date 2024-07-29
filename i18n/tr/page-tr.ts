@@ -27,12 +27,15 @@ export default {
       description: 'Set your new password'
     },
     profileSettings: {
+      navigator: {
+        profileSettings: 'Profil ayarlari',
+        accountSettings: 'Hesap ayarlari',
+      },
       linkedAccounts: {
         title: 'Bagli hesaplar',
         description: 'Hesabiniza login olmak icin kullanabileceginiz yontemler',
         currentLogin: 'Hesabiniza {provider} ile giris yaptiniz'
       }
-    },
-    welcome: 'Nuxt3 SSR Firebase\'e hosgeldiniz'
+    }
   }
 }
