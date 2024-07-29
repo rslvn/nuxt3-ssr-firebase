@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {PAGES, UserProfile} from '~/types'
 import {sanitizeUrlContext} from '~/service/url-service'
+import useUserProfileState from '~/composables/state/useUserProfileState'
 
 const props = defineProps<{
   userProfile: UserProfile
@@ -9,7 +10,7 @@ const props = defineProps<{
 const {username, getSchema} = useFormFields()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
-const {reloadUserProfile} = useAppGlobals()
+const {reloadUserProfile} = useUserProfileState()
 const requestURL = useRequestURL()
 
 const {t} = useI18n()

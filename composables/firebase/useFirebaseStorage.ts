@@ -1,10 +1,11 @@
 import {getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable, UploadMetadata} from '@firebase/storage'
 import {getNewFileName} from '~/service/firebase/fire-storage-service'
 import {AlbumType} from '~/types'
+import useUserProfileState from '~/composables/state/useUserProfileState'
 
 export default function () {
   const {notifyByError, showErrorToaster} = useNotifyUser()
-  const {reloadUserProfile} = useAppGlobals()
+  const {reloadUserProfile} = useUserProfileState()
   const {saveUserProfile, getUserProfile} = useUserProfileCollection()
   const {getOrAddAlbum} = useAlbumCollection()
   const {saveAlbumImage} = useAlbumImageCollection()

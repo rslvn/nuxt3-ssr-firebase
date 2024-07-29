@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {PAGES} from '~/types'
 
-const {t} = useI18n()
+const {t, locale} = useI18n()
 const authStore = useAuthStore()
 const {notifyByError} = useNotifyUser()
 const {logout} = useFirebaseAuth()
@@ -11,26 +11,44 @@ const navigateToProfile = () => {
     return navigateTo(`${PAGES.PROFILE.path}/${authStore.authUser.username}`)
   }
 }
-const items = computed(() => [
-  [
-    {
-      label: authStore.authUser?.username || authStore.authUser?.email,
-      icon: 'i-heroicons-user',
-      slot: 'profile',
-      click: navigateToProfile
-    }
-  ],
-  [
-    {
-      label: t('common.SignOut'),
-      icon: 'i-heroicons-arrow-left-on-rectangle',
-      click: async () => {
-        await logout()
-          .catch(notifyByError)
+
+const navigateToProfileSettings = () => {
+  if (authStore.authUser?.username) {
+    return navigateTo(`${PAGES.PROFILE.path}/${authStore.authUser.username}/settings`)
+  }
+}
+
+const items = computed(() => {
+  if (!locale) { // locale changed trick for i18n
+    return []
+  }
+
+  return [
+    [
+      {
+        label: authStore.authUser?.username || authStore.authUser?.email,
+        icon: 'i-heroicons-user',
+        slot: 'profile',
+        click: navigateToProfile
+      },
+      {
+        label: t('common.Settings'),
+        icon: 'i-heroicons-cog-6-tooth',
+        click: navigateToProfileSettings
       }
-    }
+    ],
+    [
+      {
+        label: t('common.SignOut'),
+        icon: 'i-heroicons-arrow-left-on-rectangle',
+        click: async () => {
+          await logout()
+            .catch(notifyByError)
+        }
+      }
+    ]
   ]
-])
+})
 </script>
 
 <template>
