@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {PAGES} from "~/types";
+import {PAGES} from '~/types'
 
 definePageMeta({
   middleware: ['profile-owner-only'],
 })
 const {t, locale} = useI18n()
-const {profilePageState} = useUserProfileState()
+const {userProfileRef} = useUserProfileState()
 const leftLinks = computed(() => {
   if (!locale) {
     return []
@@ -15,13 +15,13 @@ const leftLinks = computed(() => {
     {
       label: t('page.profileSettings.navigator.profileSettings'),
       icon: 'i-heroicons-user-circle',
-      to: `${PAGES.PROFILE.path}/${profilePageState.value.username}/settings`,
+      to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}/settings`,
       exact: true
     },
     {
       label: t('page.profileSettings.navigator.accountSettings'),
       icon: 'i-heroicons-cog-6-tooth',
-      to: `${PAGES.PROFILE.path}/${profilePageState.value.username}/settings/account`
+      to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}/settings/account`
     }
   ]
 })
@@ -35,9 +35,9 @@ const links = computed(() => {
   <UContainer :ui="{ padding: 'px-2' }">
     <UPage>
       <template #left>
-        <UVerticalNavigation :links="links"/>
+        <UVerticalNavigation :links="links" />
       </template>
-      <NuxtPage/>
+      <NuxtPage />
     </UPage>
   </UContainer>
 </template>
