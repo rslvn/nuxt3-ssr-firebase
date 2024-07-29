@@ -14,13 +14,13 @@ const leftLinks = computed(() => {
   return [
     {
       label: t('page.profileSettings.navigator.profileSettings'),
-      icon: 'i-heroicons-user-circle',
+      icon: 'i-heroicons-pencil-square-20-solid',
       to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}/settings`,
       exact: true
     },
     {
       label: t('page.profileSettings.navigator.accountSettings'),
-      icon: 'i-heroicons-cog-6-tooth',
+      icon: 'i-heroicons-shield-check-20-solid',
       to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}/settings/account`
     }
   ]
@@ -35,7 +35,7 @@ const links = computed(() => {
   <UContainer :ui="{ padding: 'px-2' }">
     <UPage>
       <template #left>
-        <UVerticalNavigation :links="links" />
+        <UVerticalNavigation :links="links" :ui="{label: 'text-md', icon: { base: 'w-6 h-6' }}" />
       </template>
       <NuxtPage />
     </UPage>
