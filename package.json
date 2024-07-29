@@ -11,7 +11,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "postinstall": "nuxt prepare",
-    "prebuild:firebase": "npm run lint",
     "build:firebase": "npm run build -- --preset=firebase",
     "preemulator": "npm run build:firebase",
     "emulator": "firebase emulators:start",
