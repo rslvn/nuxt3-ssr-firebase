@@ -35,7 +35,7 @@ const links = computed(() => {
   <UContainer :ui="{ padding: 'px-2' }">
     <UPage>
       <template #left>
-        <UVerticalNavigation :links="links" :ui="{label: 'text-md', icon: { base: 'w-6 h-6' }}" />
+        <UVerticalNavigation :links="links" :ui="{ label: 'text-md', icon: { base: 'w-6 h-6' } }" />
       </template>
       <NuxtPage />
     </UPage>
