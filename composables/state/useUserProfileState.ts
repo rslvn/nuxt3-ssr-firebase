@@ -1,13 +1,13 @@
 import {UserProfile} from '~/types'
 
 export default function () {
+  const userProfileRef = useState<UserProfile>('userProfileState')
+
   const {getUserProfile} = useUserProfileCollection()
   const {refreshToken} = useFirebaseAuth()
-  const authStore = useAuthStore()
   const {getUserProfileByUsername} = useUserProfileCollection()
-
-  const userProfileRef = useState<UserProfile>('userProfileState')
-  const isMyProfile = computed(() => userProfileRef.value?.id === authStore.authUser?.userId)
+  const {authUserRef} = useAuthUserState()
+  const isMyProfile = computed(() => userProfileRef.value?.id === authUserRef.value?.userId)
 
   const setUserProfileState = (userProfile: UserProfile) => {
     delete userProfile.createdAt
@@ -25,7 +25,7 @@ export default function () {
     if (userProfileRef.value?.id) {
       const userProfile = await getUserProfile(userProfileRef.value.id)
       setUserProfileState(userProfile)
-      if (authStore.authUser?.userId === userProfileRef.value.id) { // do we really need this?
+      if (authUserRef.value?.userId === userProfileRef.value.id) { // do we really need this?
         await refreshToken()
       }
     }

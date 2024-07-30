@@ -2,19 +2,19 @@
 import {PAGES} from '~/types'
 
 const {t, locale} = useI18n()
-const authStore = useAuthStore()
+const {authUserRef} = useAuthUserState()
 const {notifyByError} = useNotifyUser()
 const {logout} = useFirebaseAuth()
 
 const navigateToProfile = () => {
-  if (authStore.authUser?.username) {
-    return navigateTo(`${PAGES.PROFILE.path}/${authStore.authUser.username}`)
+  if (authUserRef.value?.username) {
+    return navigateTo(`${PAGES.PROFILE.path}/${authUserRef.value.username}`)
   }
 }
 
 const navigateToProfileSettings = () => {
-  if (authStore.authUser?.username) {
-    return navigateTo(`${PAGES.PROFILE.path}/${authStore.authUser.username}/settings`)
+  if (authUserRef.value?.username) {
+    return navigateTo(`${PAGES.PROFILE.path}/${authUserRef.value.username}/settings`)
   }
 }
 
@@ -26,7 +26,7 @@ const items = computed(() => {
   return [
     [
       {
-        label: authStore.authUser?.username || authStore.authUser?.email,
+        label: authUserRef.value?.username || authUserRef.value?.email,
         icon: 'i-heroicons-user',
         slot: 'profile',
         click: navigateToProfile
@@ -60,13 +60,13 @@ const items = computed(() => {
       :ui="{ icon: { size: { sm: 'w-6 h-6' } } }"
     >
       <img class="object-cover rounded-full bg-center h-7 w-7"
-           :src="authStore.authUser.profilePhoto.src" alt="asdasd">
+           :src="authUserRef.profilePhoto.src" alt="asdasd">
     </UButton>
 
     <template #profile>
       <img class="object-cover rounded-full bg-center h-6 w-6"
-           :src="authStore.authUser.profilePhoto.src" alt="asdasd">
-      <span> {{ authStore.authUser?.displayName || 'Profile' }}</span>
+           :src="authUserRef.profilePhoto.src" alt="asdasd">
+      <span> {{ authUserRef?.displayName || 'Profile' }}</span>
     </template>
   </UDropdown>
 </template>

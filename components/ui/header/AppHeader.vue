@@ -2,7 +2,7 @@
 const {t} = useI18n()
 const {logout} = useFirebaseAuth()
 const {isHeaderDialogOpen} = useUIState()
-const authStore = useAuthStore()
+const {authUserRef} = useAuthUserState()
 
 const closeDialog = () => {
   isHeaderDialogOpen.value = false
@@ -22,10 +22,10 @@ const signOut = () => {
     </template>
 
     <template #right>
-      <RegisterBar v-if="!authStore.authUser" class="hidden lg:flex" />
+      <RegisterBar v-if="!authUserRef" class="hidden lg:flex" />
       <UColorModeButton class="hidden md:block" />
       <LanguageSelectDropdown class="hidden md:block" />
-      <NavUser v-if="authStore.authUser" />
+      <NavUser v-if="authUserRef" />
     </template>
 
     <template #panel>
@@ -34,8 +34,8 @@ const signOut = () => {
         <LanguageSelect />
       </div>
       <UDivider class="my-6" />
-      <RegisterBar v-if="!authStore.authUser" block />
-      <UButton v-if="authStore.authUser" :label="t('common.SignOut')" color="green" variant="ghost"
+      <RegisterBar v-if="!authUserRef" block />
+      <UButton v-if="authUserRef" :label="t('common.SignOut')" color="green" variant="ghost"
                block @click="signOut" />
     </template>
   </UHeader>

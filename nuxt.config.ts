@@ -19,13 +19,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@vueuse/nuxt',
     '@nuxt/image',
-    '@nuxt/eslint',
-    [
-      '@pinia/nuxt',
-      {
-        autoImports: ['defineStore', 'acceptHMRUpdate'],
-      },
-    ],
+    '@nuxt/eslint'
   ],
 
   extends: ['@nuxt/ui-pro'],

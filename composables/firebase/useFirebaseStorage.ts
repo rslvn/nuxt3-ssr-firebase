@@ -1,7 +1,6 @@
 import {getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable, UploadMetadata} from '@firebase/storage'
 import {getNewFileName} from '~/service/firebase/fire-storage-service'
 import {AlbumType} from '~/types'
-import useUserProfileState from '~/composables/state/useUserProfileState'
 
 export default function () {
   const {notifyByError, showErrorToaster} = useNotifyUser()
@@ -11,13 +10,13 @@ export default function () {
   const {saveAlbumImage} = useAlbumImageCollection()
 
   const uploadingFile = ref(false)
-  const authStore = useAuthStore()
+  const {authUserRef} = useAuthUserState()
 
   const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string, file: File) => {
     console.log('>>> uploadFileToFirebaseStorage albumType:', albumType)
     const filePath = `${parentPath}${getNewFileName(file.name)}`
     const fileUploadRef = storageRef(getStorage(), filePath)
-    const userId = authStore.authUser.userId
+    const userId = authUserRef.value.userId
 
     uploadingFile.value = true
 
@@ -25,7 +24,7 @@ export default function () {
       contentType: file.type,
       cacheControl: 'max-age=31536000, immutable',
       customMetadata: {
-        userId: authStore.authUser.userId,
+        userId: authUserRef.value.userId,
         albumType,
       }
     }
@@ -84,7 +83,7 @@ export default function () {
     if (!albumType || !photo) {
       console.log('>>>>> Cannot be uploaded')
     }
-    const userId = authStore.authUser.userId
+    const userId = authUserRef.value.userId
 
     console.log(`>>>>> Uploading ${albumType}:`, photo.name)
     switch (albumType) {
