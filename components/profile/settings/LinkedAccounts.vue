@@ -4,12 +4,12 @@ import {PROVIDER_CONFIGS, ProviderConfig} from '~/types'
 const {notifyByError, showWarningToaster, showSuccessToaster} = useNotifyUser()
 const {getCurrentProviderIds, isPasswordProvider} = useAuthProviders()
 const {linkProviderId, unlinkProviderId, getCurrentProviderId} = useFirebaseAuth()
-const authStore = useAuthStore()
+const {authUserRef} = useAuthUserState()
 const {t} = useI18n()
 
 const linkAccountBusy = ref(false)
 const currentProviderId = ref(await getCurrentProviderId())
-const currentProviderIds = computed(() => getCurrentProviderIds(authStore.authUser))
+const currentProviderIds = computed(() => getCurrentProviderIds(authUserRef.value))
 
 const linkAccount = (providerConfig: ProviderConfig) => {
   if (isPasswordProvider(providerConfig.providerId)) {

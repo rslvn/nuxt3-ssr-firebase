@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const authStore = useAuthStore()
+const {authUserRef} = useAuthUserState()
 const {userProfileRef} = useUserProfileState()
 const {getPasswordProvider} = useAuthProviders()
-const noPasswordProvider = computed(() => !getPasswordProvider(authStore.authUser?.providers))
+const noPasswordProvider = computed(() => !getPasswordProvider(authUserRef.value?.providers))
 </script>
 
 <template>

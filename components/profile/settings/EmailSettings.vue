@@ -8,7 +8,7 @@ defineProps<{
 
 const {t} = useI18n()
 const {showSuccessToaster, notifyByError} = useNotifyUser()
-const authStore = useAuthStore()
+const {authUserRef} = useAuthUserState()
 const {sendEmailVerificationMail} = useFirebaseAuth()
 
 const loading = ref(false)
@@ -29,8 +29,8 @@ const sendVerificationLink = () => {
     <template #links>
       <span>{{ userProfile?.email }}</span>
 
-      <template v-if="isMyProfile && authStore.authUser">
-        <UIcon v-if="authStore.authUser?.emailVerified" name="i-heroicons-check-circle-solid"
+      <template v-if="isMyProfile && authUserRef">
+        <UIcon v-if="authUserRef?.emailVerified" name="i-heroicons-check-circle-solid"
                class="text-green-700 h-7 w-7"
                dynamic />
         <UButton

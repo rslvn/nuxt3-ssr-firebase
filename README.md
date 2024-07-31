@@ -82,5 +82,6 @@ npm run dev
 * `clear`: delete .nuxt .output .firebase folders
 * `clear-all`: node_modules .nuxt .output .firebase folders and package-lock.json file
 * `emulator`: run the app in firebase emulators
-* `deploy`: deploy the app to the prod
+* `deploy`: deploy the app to the firebase prod
 * `upgrade`: upgrade all npm modules and install all
+* `lint:fix`: fixing eslint and stylistic issues if possible

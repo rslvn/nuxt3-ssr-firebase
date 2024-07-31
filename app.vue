@@ -11,13 +11,16 @@ import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from '~/types'
 
 const router = useRouter()
 const route = useRoute()
-const authStore = useAuthStore()
+const {authUserRef, removeAuthUser, setAuthUserByHeader} = useAuthUserState()
 
 const userChanged = async (user: User) => {
   if (user) {
     await user.getIdToken()
       .then(async (token) => {
-        await authStore.setAuthUserByHeader(token)
+        await setAuthUserByHeader(token)
+      })
+      .catch((reason) => {
+        console.log('>>> something wrong with user', reason)
       })
 
     if (typeof route.query.redirect === 'string') {
@@ -31,10 +34,9 @@ const userChanged = async (user: User) => {
     } else {
       console.log(new Date(), '>>>> user logged in, no action')
     }
-
   } else {
-    await authStore.removeAuthUser()
-    if (authStore.authUser && !AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
+    await removeAuthUser()
+    if (authUserRef.value && !AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
       return router.push(PAGES.LOGIN.path)
     } else if (PAGES.HOME.path !== route.path) {
       // re-trigger middleware of the current page if the path is not home in case of logout

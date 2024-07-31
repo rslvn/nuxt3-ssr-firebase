@@ -1,4 +1,4 @@
 export default defineNuxtPlugin(async () => {
-  const {setAuthUserByCookie} = useAuthStore()
+  const {setAuthUserByCookie} = useAuthUserState()
   await setAuthUserByCookie()
 })
