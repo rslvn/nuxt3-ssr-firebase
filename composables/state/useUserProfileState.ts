@@ -21,11 +21,13 @@ export default function () {
   }
 
   const reloadUserProfile = async () => {
-    console.log('>>>> reloadUserProfile', userProfileRef.value)
+    console.log('>>>> reloadUserProfile')
     if (userProfileRef.value?.id) {
       const userProfile = await getUserProfile(userProfileRef.value.id)
+      console.log('>>>> user profile is loaded', userProfile)
       setUserProfileState(userProfile)
       if (authUserRef.value?.userId === userProfileRef.value.id) { // do we really need this?
+        console.log('>>> refreshToken')
         await refreshToken()
       }
     }

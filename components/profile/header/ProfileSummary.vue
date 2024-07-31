@@ -10,7 +10,7 @@ const props = defineProps<{
 const {getAlbumImagesByAlbumId} = useAlbumImageCollection()
 const displayName = computed(() => getDisplayName(props.userProfile))
 const profilePhoto = computed(() => getProfilePhotoImage(props?.userProfile, displayName.value))
-const country = ref(props.userProfile?.address?.country && Country.getCountryByCode(props.userProfile.address.country))
+const country = computed(() => props.userProfile?.address?.country && Country.getCountryByCode(props.userProfile.address.country))
 const showProfileLightbox = ref(false)
 const profileAlbumImages = ref([])
 const currentProfileImageIndex = ref(0)

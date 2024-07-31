@@ -24,10 +24,6 @@ export default defineNuxtConfig({
 
   extends: ['@nuxt/ui-pro'],
 
-  ui: {
-    icons: ['heroicons', 'simple-icons', 'emojione'],
-  },
-
   colorMode: {
     preference: 'system',
   },

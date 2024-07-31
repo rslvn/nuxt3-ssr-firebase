@@ -19,6 +19,9 @@ const userChanged = async (user: User) => {
       .then(async (token) => {
         await setAuthUserByHeader(token)
       })
+      .catch((reason) => {
+        console.log('>>> something wrong with user', reason)
+      })
 
     if (typeof route.query.redirect === 'string') {
       // user logged in
