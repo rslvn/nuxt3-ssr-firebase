@@ -1,7 +1,7 @@
 import {UserRecord} from 'firebase-admin/auth'
 import {getUserProfile, saveUserProfile} from '~/server/utils/user-profile-admin-collection'
 import {AuthUser, UserProfile} from '~/types'
-import {generateUsernameByEmailWith4DigitSuffix, generateUsernameById} from '~/service/user-profile-service'
+import { generateUsernameByEmailWith4DigitSuffix, removeDashes } from '~/service/user-profile-service'
 
 const toAuthUser = (user: UserRecord, userProfile: UserProfile): AuthUser => {
   return {
@@ -18,7 +18,7 @@ const toAuthUser = (user: UserRecord, userProfile: UserProfile): AuthUser => {
 }
 
 const addUserProfile = (user: UserRecord) => {
-  const username = user.email ? generateUsernameByEmailWith4DigitSuffix(user.email) : generateUsernameById(user.uid)
+  const username = user.email ? generateUsernameByEmailWith4DigitSuffix(user.email) : removeDashes(user.uid)
   const userProfile: UserProfile = {
     id: user.uid,
     username,

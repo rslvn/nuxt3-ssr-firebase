@@ -3,5 +3,5 @@ const {userProfileRef, isMyProfile} = useUserProfileState()
 </script>
 
 <template>
-  <ProfileAbout :user-profile="userProfileRef" :is-my-profile="isMyProfile" />
+  <ProfileAbout v-if="userProfileRef" :user-profile="userProfileRef" :is-my-profile="isMyProfile" />
 </template>

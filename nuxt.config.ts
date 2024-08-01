@@ -19,7 +19,8 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@vueuse/nuxt',
     '@nuxt/image',
-    '@nuxt/eslint'
+    '@nuxt/eslint',
+    '@nuxt/test-utils/module'
   ],
 
   extends: ['@nuxt/ui-pro'],

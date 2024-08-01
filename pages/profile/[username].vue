@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {PAGES} from '~/types'
-import useUserProfileState from '~/composables/state/useUserProfileState'
 
 const {t, locale} = useI18n()
 const {params} = useRoute()
@@ -36,7 +35,7 @@ const leftLinks = computed(() => {
   const aboutLink = {
     label: t('common.About'),
     icon: 'i-heroicons-user-circle',
-    to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}`,
+    to: `${PAGES.PROFILE.path}/${userProfileRef.value?.username}`,
     exact: true
   }
 
@@ -44,7 +43,7 @@ const leftLinks = computed(() => {
     ? [aboutLink, {
         label: t('common.Settings'),
         icon: 'i-heroicons-cog-6-tooth',
-        to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}/settings`
+        to: `${PAGES.PROFILE.path}/${userProfileRef.value?.username}/settings`
       }]
     : [aboutLink]
 })
@@ -55,7 +54,7 @@ const links = computed(() => {
 </script>
 
 <template>
-  <section>
+  <section v-if="userProfileRef">
     <ProfileHeader :user-profile="userProfileRef" :is-my-profile="isMyProfile" />
   </section>
 

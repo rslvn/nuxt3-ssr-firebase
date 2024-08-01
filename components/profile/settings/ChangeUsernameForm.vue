@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {PAGES, UserProfile} from '~/types'
 import {sanitizeUrlContext} from '~/service/url-service'
-import useUserProfileState from '~/composables/state/useUserProfileState'
 
 const props = defineProps<{
   userProfile: UserProfile

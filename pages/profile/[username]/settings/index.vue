@@ -3,7 +3,7 @@ const {userProfileRef, isMyProfile} = useUserProfileState()
 </script>
 
 <template>
-  <UDashboardPanelContent class="pb-24" :ui="{ wrapper: 'p-2' }">
+  <UDashboardPanelContent v-if="userProfileRef" class="pb-24" :ui="{ wrapper: 'p-2' }">
     <UCard>
       <EmailSettings :user-profile="userProfileRef" :is-my-profile="isMyProfile" />
     </UCard>

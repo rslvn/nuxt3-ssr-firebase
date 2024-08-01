@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {UserProfile} from '~/types'
-import useUserProfileState from '~/composables/state/useUserProfileState'
 
 const props = defineProps<{
   userProfile: UserProfile

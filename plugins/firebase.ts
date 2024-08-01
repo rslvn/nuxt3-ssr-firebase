@@ -4,8 +4,10 @@ import {getFirestore} from 'firebase/firestore'
 import {getStorage} from 'firebase/storage'
 
 export default defineNuxtPlugin(async () => {
+  if (process.env.NODE_ENV === 'test') {
+    return {}
+  }
   const runtimeConfig = useRuntimeConfig()
-
   const firebaseConfig = runtimeConfig.public.firebase
   const firebaseApp = initializeApp(firebaseConfig)
   const firebaseAuth = getAuth(firebaseApp)

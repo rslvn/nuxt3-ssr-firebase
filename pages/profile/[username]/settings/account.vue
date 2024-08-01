@@ -6,7 +6,7 @@ const noPasswordProvider = computed(() => !getPasswordProvider(authUserRef.value
 </script>
 
 <template>
-  <UDashboardPanelContent class="pb-24" :ui="{ wrapper: 'p-2' }">
+  <UDashboardPanelContent v-if="userProfileRef" class="pb-24" :ui="{ wrapper: 'p-2' }">
     <UCard>
       <ChangeUsernameForm :user-profile="userProfileRef" />
     </UCard>

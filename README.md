@@ -79,6 +79,8 @@ npm run dev
 ## Command shortcuts
 
 * `dev`: start the app on local
+* `test`: run tests
+* `coverage`: run tests with coverage report
 * `clear`: delete .nuxt .output .firebase folders
 * `clear-all`: node_modules .nuxt .output .firebase folders and package-lock.json file
 * `emulator`: run the app in firebase emulators

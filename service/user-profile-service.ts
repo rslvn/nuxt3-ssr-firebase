@@ -32,7 +32,7 @@ export const getDisplayName = (userProfile?: UserProfile) => {
   return null
 }
 
-export const generateUsernameById = (id: string) => {
+export const removeDashes = (id: string) => {
   return id.replace(dashAllRegex, '')
 }
 

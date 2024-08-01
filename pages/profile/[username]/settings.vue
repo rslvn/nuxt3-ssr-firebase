@@ -15,13 +15,13 @@ const leftLinks = computed(() => {
     {
       label: t('page.profileSettings.navigator.profileSettings'),
       icon: 'i-heroicons-pencil-square-20-solid',
-      to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}/settings`,
+      to: `${PAGES.PROFILE.path}/${userProfileRef.value?.username}/settings`,
       exact: true
     },
     {
       label: t('page.profileSettings.navigator.accountSettings'),
       icon: 'i-heroicons-shield-check-20-solid',
-      to: `${PAGES.PROFILE.path}/${userProfileRef.value.username}/settings/account`
+      to: `${PAGES.PROFILE.path}/${userProfileRef.value?.username}/settings/account`
     }
   ]
 })
