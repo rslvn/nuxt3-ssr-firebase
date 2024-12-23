@@ -2,7 +2,7 @@ import {mount} from '@vue/test-utils'
 import {expect, test} from 'vitest'
 import {ProfileAbout} from '#components'
 import {UserProfile} from '~/types'
-import {i18nSetup} from '~/test/utils/i18n-test-utils'
+import {i18nSetup} from '~/tests/utils/i18n-test-utils'
 
 i18nSetup()
 

@@ -3,14 +3,8 @@ const separatedChunks = ['@firebase']
 const ONE_DAY = 60 * 60 * 24 * 1000
 const ONE_WEEK = ONE_DAY * 7
 export default defineNuxtConfig({
-  ssr: true,
 
-  devtools: {
-    enabled: true,
-    timeline: {
-      enabled: true,
-    },
-  },
+  extends: ['@nuxt/ui-pro'],
 
   modules: [
     '@nuxtjs/i18n',
@@ -22,16 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/test-utils/module'
   ],
-
-  extends: ['@nuxt/ui-pro'],
-
-  colorMode: {
-    preference: 'system',
-  },
-
-  gtag: {
-    id: 'G-2KY53M5NEN',
-  },
+  ssr: true,
 
   components: [
     {
@@ -39,6 +24,21 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+
+  imports: {
+    dirs: ['stores'],
+  },
+
+  devtools: {
+    enabled: true,
+    timeline: {
+      enabled: true,
+    },
+  },
+
+  colorMode: {
+    preference: 'system',
+  },
 
   runtimeConfig: {
     // private config
@@ -60,71 +60,31 @@ export default defineNuxtConfig({
     },
   },
 
-  eslint: {
-    config: {
-      stylistic: true,
-    },
-  },
-
-  sitemap: {
-    sources: ['/api/sitemap'],
-    xsl: false,
-    exclude: ['/auth/**', 'register'],
-  },
+  compatibilityDate: '2024-07-24',
 
   nitro: {
     preset: 'firebase',
     compressPublicAssets: true,
-    // for the upcoming preset
+    // https://nitro.build/deploy/providers/firebase#using-2nd-generation-firebase-functions
     firebase: {
       gen: 2,
-      nodeVersion: '20',
+      nodeVersion: '20'
     },
   },
 
-  imports: {
-    dirs: ['stores'],
-  },
-
-  i18n: {
-    locales: [
-      {
-        name: 'English',
-        code: 'en',
-        iso: 'en-US',
-        flag: '🇬🇧',
-        files: [
-          'en/button-en.ts',
-          'en/common-en.ts',
-          'en/field-en.ts',
-          'en/notification-en.ts',
-          'en/page-en.ts',
-          'en/dialog-en.ts',
-        ],
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id: any) {
+            const separateModule = separatedChunks.find(module => id.includes(module))
+            if (separateModule) return separateModule
+          },
+        },
       },
-      {
-        name: 'Turkce',
-        code: 'tr',
-        iso: 'tr-US',
-        flag: '🇹🇷',
-        files: [
-          'tr/button-tr.ts',
-          'tr/common-tr.ts',
-          'tr/field-tr.ts',
-          'tr/notification-tr.ts',
-          'tr/page-tr.ts',
-          'tr/dialog-tr.ts',
-        ],
-      },
-    ],
-    defaultLocale: 'en',
-    langDir: './i18n/',
-    lazy: true,
-    strategy: 'no_prefix',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root', // recommended
+    },
+    optimizeDeps: {
+      exclude: separatedChunks,
     },
   },
 
@@ -160,21 +120,60 @@ export default defineNuxtConfig({
     },
   },
 
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks(id: any) {
-            const separateModule = separatedChunks.find(module => id.includes(module))
-            if (separateModule) return separateModule
-          },
-        },
-      },
-    },
-    optimizeDeps: {
-      exclude: separatedChunks,
+  eslint: {
+    config: {
+      stylistic: true,
     },
   },
 
-  compatibilityDate: '2024-07-24',
+  gtag: {
+    id: 'G-2KY53M5NEN',
+  },
+
+  i18n: {
+    locales: [
+      {
+        name: 'English',
+        code: 'en',
+        iso: 'en-US',
+        flag: '🇬🇧',
+        files: [
+          'en/button-en.ts',
+          'en/common-en.ts',
+          'en/field-en.ts',
+          'en/notification-en.ts',
+          'en/page-en.ts',
+          'en/dialog-en.ts',
+        ],
+      },
+      {
+        name: 'Turkce',
+        code: 'tr',
+        iso: 'tr-US',
+        flag: '🇹🇷',
+        files: [
+          'tr/button-tr.ts',
+          'tr/common-tr.ts',
+          'tr/field-tr.ts',
+          'tr/notification-tr.ts',
+          'tr/page-tr.ts',
+          'tr/dialog-tr.ts',
+        ],
+      },
+    ],
+    defaultLocale: 'en',
+    lazy: true,
+    strategy: 'no_prefix',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root', // recommended
+    },
+  },
+
+  sitemap: {
+    sources: ['/api/sitemap'],
+    xsl: false,
+    exclude: ['/auth/**', 'register'],
+  },
 })
