@@ -85,9 +85,7 @@ export default function () {
         return new TwitterAuthProvider()
 
       default:
-        throw new Error(
-                    `No social auth provider for provider id ${providerId}`
-        )
+        throw new Error(`No social auth provider for provider id ${providerId}`)
     }
   }
 

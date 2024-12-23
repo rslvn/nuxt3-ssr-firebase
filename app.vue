@@ -48,7 +48,7 @@ const userChanged = async (user: User) => {
 
 onMounted(() => {
   const {firebaseAuth} = useFirebaseAuth()
-  firebaseAuth && firebaseAuth.onIdTokenChanged(userChanged)
+  firebaseAuth?.onIdTokenChanged(userChanged)
 })
 onErrorCaptured((error, instance, info) => {
   console.log('[errorCaptured] error', error, 'instance:', instance, 'info:', info)
