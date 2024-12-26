@@ -90,7 +90,9 @@ export enum AlbumType {
 }
 
 export interface Address {
+  building?: string
   street?: string
+  customInformation?: string
   city?: string
   state?: string
   zip?: string
