@@ -26,6 +26,7 @@ function onFileChange(e: Event) {
     maxSizeMB: 1,
     maxWidthOrHeight: 1024,
     useWebWorker: true,
+    // fileType: 'image/webp'
   }
 
   imageCompression(input.files[0], options)
