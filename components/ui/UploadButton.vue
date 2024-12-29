@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import imageCompression from 'browser-image-compression'
-import {AlbumType} from '~/types'
+import { AlbumType } from '~/types'
+import { DEFAULT_COMPRESSED_IMAGE_FILE } from '~/service/firebase/fire-storage-service'
 
 const props = defineProps<{
   albumType: AlbumType
@@ -17,8 +18,8 @@ function onFileChange(e: Event) {
   }
   const fileSize = input.files[0].size / 1024 / 1024
   console.log(`originalFile size ${fileSize} MB`)
-  if (fileSize > 5) {
-    showErrorToaster({key: 'notification.uploadFileSizeTooBig', params: {fileSize: 5}})
+  if (fileSize > 30) {
+    showErrorToaster({key: 'notification.uploadFileSizeTooBig', params: {fileSize: 35}})
     return
   }
 
@@ -26,7 +27,7 @@ function onFileChange(e: Event) {
     maxSizeMB: 1,
     maxWidthOrHeight: 1024,
     useWebWorker: true,
-    // fileType: 'image/webp'
+    fileType: DEFAULT_COMPRESSED_IMAGE_FILE.mimeType
   }
 
   imageCompression(input.files[0], options)

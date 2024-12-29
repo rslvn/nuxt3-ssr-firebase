@@ -1,6 +1,6 @@
-import {getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable, UploadMetadata} from '@firebase/storage'
-import {getNewFileName} from '~/service/firebase/fire-storage-service'
-import {AlbumType} from '~/types'
+import { getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable, UploadMetadata } from '@firebase/storage'
+import { DEFAULT_COMPRESSED_IMAGE_FILE, getNewFileName } from '~/service/firebase/fire-storage-service'
+import { AlbumType } from '~/types'
 
 export default function () {
   const {notifyByError, showErrorToaster} = useNotifyUser()
@@ -14,7 +14,7 @@ export default function () {
 
   const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string, file: File) => {
     console.log('>>> uploadFileToFirebaseStorage albumType:', albumType)
-    const filePath = `${parentPath}${getNewFileName(file.name)}`
+    const filePath = `${parentPath}/${getNewFileName(file.name, DEFAULT_COMPRESSED_IMAGE_FILE.extension)}`
     const fileUploadRef = storageRef(getStorage(), filePath)
     const userId = authUserRef.value.userId
 
@@ -57,6 +57,7 @@ export default function () {
               src: downloadURL,
             }
           })
+
           await getUserProfile(userId)
             .then(async (profile) => {
               if (albumType === AlbumType.PROFILE) {
@@ -88,9 +89,9 @@ export default function () {
     console.log(`>>>>> Uploading ${albumType}:`, photo.name)
     switch (albumType) {
       case AlbumType.PROFILE:
-        return uploadFileToFirebaseStorage(albumType, `users/${userId}/profilePhotos/`, photo)
+        return uploadFileToFirebaseStorage(albumType, `users/${userId}/profilePhotos`, photo)
       case AlbumType.COVER:
-        return uploadFileToFirebaseStorage(albumType, `users/${userId}/coverPhotos/`, photo)
+        return uploadFileToFirebaseStorage(albumType, `users/${userId}/coverPhotos`, photo)
       case AlbumType.CUSTOM:
       default:
         console.log('>>>>> Unknown albumType: ', albumType)
