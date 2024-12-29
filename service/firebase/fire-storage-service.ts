@@ -12,7 +12,7 @@ const getFileBaseName = (fileName: string): string => {
 
 export const getNewFileName = (fileName: string, fileExtension?: string): string => {
   const fileBaseName = getFileBaseName(fileName) || ''
-  const baseNameSanitized = `${sanitizeUrlContext(fileBaseName)}${SLUG_DELIMITER}${uuidv4()}`
+  const baseNameSanitized = `${sanitizeUrlContext(fileBaseName)}${SLUG_DELIMITER}${uuidv4().split('-')[0]}`
   const extension = fileExtension || fileName.split('.').pop()
   return extension ? `${baseNameSanitized}.${extension}` : baseNameSanitized
 }

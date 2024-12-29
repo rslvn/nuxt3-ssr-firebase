@@ -1,20 +1,22 @@
 import { getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable, UploadMetadata } from '@firebase/storage'
-import { DEFAULT_COMPRESSED_IMAGE_FILE, getNewFileName } from '~/service/firebase/fire-storage-service'
+import { extension } from 'mime-types'
+import { getNewFileName } from '~/service/firebase/fire-storage-service'
 import { AlbumType } from '~/types'
 
 export default function () {
-  const {notifyByError, showErrorToaster} = useNotifyUser()
-  const {reloadUserProfile} = useUserProfileState()
-  const {saveUserProfile, getUserProfile} = useUserProfileCollection()
-  const {getOrAddAlbum} = useAlbumCollection()
-  const {saveAlbumImage} = useAlbumImageCollection()
+  const { notifyByError, showErrorToaster } = useNotifyUser()
+  const { reloadUserProfile } = useUserProfileState()
+  const { saveUserProfile, getUserProfile } = useUserProfileCollection()
+  const { getOrAddAlbum } = useAlbumCollection()
+  const { saveAlbumImage } = useAlbumImageCollection()
 
   const uploadingFile = ref(false)
-  const {authUserRef} = useAuthUserState()
+  const { authUserRef } = useAuthUserState()
 
   const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string, file: File) => {
     console.log('>>> uploadFileToFirebaseStorage albumType:', albumType)
-    const filePath = `${parentPath}/${getNewFileName(file.name, DEFAULT_COMPRESSED_IMAGE_FILE.extension)}`
+    const fileExtension = extension(file.type)
+    const filePath = `${parentPath}/${getNewFileName(file.name, fileExtension || '')}`
     const fileUploadRef = storageRef(getStorage(), filePath)
     const userId = authUserRef.value.userId
 
@@ -38,7 +40,7 @@ export default function () {
         case 'success':
           break
         default:
-          showErrorToaster({key: 'notification.photoUploadFailed'})
+          showErrorToaster({ key: 'notification.photoUploadFailed' })
       }
     },
     (reason) => {
