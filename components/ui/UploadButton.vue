@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import imageCompression from 'browser-image-compression'
 import { AlbumType } from '~/types'
-import { DEFAULT_COMPRESSED_IMAGE_FILE } from '~/service/firebase/fire-storage-service'
+import { DEFAULT_COMPRESSED_IMAGE_MIME } from '~/service/firebase/fire-storage-service'
 
 const props = defineProps<{
   albumType: AlbumType
@@ -27,7 +27,7 @@ function onFileChange(e: Event) {
     maxSizeMB: 1,
     maxWidthOrHeight: 1024,
     useWebWorker: true,
-    fileType: DEFAULT_COMPRESSED_IMAGE_FILE.mimeType
+    fileType: DEFAULT_COMPRESSED_IMAGE_MIME
   }
 
   imageCompression(input.files[0], options)

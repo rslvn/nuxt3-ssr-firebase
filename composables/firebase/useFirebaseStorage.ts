@@ -68,9 +68,9 @@ export default function () {
                 profile.coverPhoto = savedAlbumImage
               }
               await saveUserProfile(profile)
-                .then(async () => {
+                .then(() => {
                   // userProfile.value = savedProfile
-                  await reloadUserProfile()
+                  reloadUserProfile()
                 })
             })
         })

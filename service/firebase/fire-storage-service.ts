@@ -1,10 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import { sanitizeUrlContext, SLUG_DELIMITER } from '~/service/url-service'
 
-export const DEFAULT_COMPRESSED_IMAGE_FILE = {
-  mimeType: 'image/webp',
-  extension: 'webp'
-}
+export const DEFAULT_COMPRESSED_IMAGE_MIME = 'image/webp'
 
 const getFileBaseName = (fileName: string): string => {
   return fileName?.split('.')?.slice(0, -1)?.join('.')
