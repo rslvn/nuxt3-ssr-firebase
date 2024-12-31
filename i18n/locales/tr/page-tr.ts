@@ -3,7 +3,7 @@ export default {
     notFound: 'Sayfa bulunamadi',
     home: {
       title: 'NUXT3 firebase\'e hosgeldiniz',
-      description: 'Firebase hosting ve authentication ile Nuxt3 uygulamasi',
+      description: 'Firebase hosting, authentication ve storage ile Nuxt3 uygulamasi',
       goToGithub: ' Github uzerinde kaynak koda ulas'
     },
     auth: {
