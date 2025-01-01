@@ -46,6 +46,7 @@ export default defineNuxtConfig({
     // public config
     public: {
       appName: 'nuxt3-ssr-firebase',
+      appDomain: 'nuxt3-ssr-firebase.web.app',
       authCookieName: '__session',
       authCookieExpires: parseInt(ONE_WEEK.toString(), 10),
       firebase: {

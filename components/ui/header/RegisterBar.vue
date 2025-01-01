@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {PAGES} from '~/types'
-
 defineProps({
   block: {
     type: Boolean,
@@ -9,8 +7,9 @@ defineProps({
   }
 })
 
-const {isHeaderDialogOpen} = useUIState()
-const {t} = useI18n()
+const { t } = useI18n()
+const { isHeaderDialogOpen } = useUIState()
+const { PAGES } = usePages()
 </script>
 
 <template>

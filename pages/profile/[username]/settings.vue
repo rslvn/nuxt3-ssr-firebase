@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import {PAGES} from '~/types'
-
 definePageMeta({
   middleware: ['profile-owner-only'],
 })
-const {t, locale} = useI18n()
-const {userProfileRef} = useUserProfileState()
+const { t, locale } = useI18n()
+const { getProfileSettingsPath, getProfileAccountSettingsPath } = usePages()
+const { userProfileRef } = useUserProfileState()
 const leftLinks = computed(() => {
   if (!locale) {
     return []
@@ -15,13 +14,13 @@ const leftLinks = computed(() => {
     {
       label: t('page.profileSettings.navigator.profileSettings'),
       icon: 'i-heroicons-pencil-square-20-solid',
-      to: `${PAGES.PROFILE.path}/${userProfileRef.value?.username}/settings`,
+      to: getProfileSettingsPath(userProfileRef.value?.username),
       exact: true
     },
     {
       label: t('page.profileSettings.navigator.accountSettings'),
       icon: 'i-heroicons-shield-check-20-solid',
-      to: `${PAGES.PROFILE.path}/${userProfileRef.value?.username}/settings/account`
+      to: getProfileAccountSettingsPath(userProfileRef.value?.username)
     }
   ]
 })

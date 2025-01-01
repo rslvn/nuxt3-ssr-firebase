@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {PAGES} from '~/types'
-
 const props = defineProps({
   oobCode: {
     type: String,
@@ -8,13 +6,14 @@ const props = defineProps({
     default: ''
   },
 })
-const {notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert} = useNotifyUser()
-const {t} = useI18n()
-const {resetPassword} = useFirebaseAuth()
-const {password, confirmPassword, getSchema} = useFormFields()
+const { t } = useI18n()
+const { PAGES } = usePages()
+const { notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert } = useNotifyUser()
+const { resetPassword } = useFirebaseAuth()
+const { password, confirmPassword, getSchema } = useFormFields()
 const loading = ref(false)
 if (!props.oobCode) {
-  showErrorAlert({key: 'notification.invalidVerificationCode'})
+  showErrorAlert({ key: 'notification.invalidVerificationCode' })
 }
 
 const fields = computed(() => [password.value, confirmPassword.value])
@@ -24,7 +23,7 @@ const handleResetPassword = async (data: any) => {
   loading.value = true
   await resetPassword(props.oobCode, data.password)
     .then(() => {
-      showSuccessAlert({key: 'notification.passwordUpdated'})
+      showSuccessAlert({ key: 'notification.passwordUpdated' })
     })
     .catch(notifyByError)
     .finally(() => loading.value = false)

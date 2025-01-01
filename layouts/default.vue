@@ -7,7 +7,7 @@
 
   <UFooter>
     <template #center>
-      Copyright© {{ thisYear }} nuxt3-ssr-firebase.com
+      Copyright© {{ thisYear }} {{ runtimeConfig.public.appDomain }}
     </template>
   </UFooter>
 </template>

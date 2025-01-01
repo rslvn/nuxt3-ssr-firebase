@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import {PAGES, UserProfile} from '~/types'
-import {sanitizeUrlContext} from '~/service/url-service'
+import { UserProfile } from '~/types'
+import { sanitizeUrlContext } from '~/service/url-service'
 
 const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {username, getSchema} = useFormFields()
-const {getUserProfile, saveUserProfile} = useUserProfileCollection()
-const {notifyByError, showSuccessToaster} = useNotifyUser()
-const {reloadUserProfile} = useUserProfileState()
+const { username, getSchema } = useFormFields()
+const { getUserProfile, saveUserProfile } = useUserProfileCollection()
+const { notifyByError, showSuccessToaster } = useNotifyUser()
+const { reloadUserProfile } = useUserProfileState()
 const requestURL = useRequestURL()
+const { getProfilePath } = usePages()
 
-const {t} = useI18n()
+const { t } = useI18n()
 const showConfirmModal = ref(false)
 const state = reactive({
   username: props.userProfile?.username || ''
@@ -29,19 +30,20 @@ const updateUsername = () => {
     .then((profile) => {
       if (profile) {
         reloadUserProfile()
-        showSuccessToaster({key: 'notification.profileUsernameUpdated'})
-        navigateTo(`${PAGES.PROFILE.path}/${profile.username}`, {replace: true})
+        showSuccessToaster({ key: 'notification.profileUsernameUpdated' })
+        navigateTo(getProfilePath(profile.username), { replace: true })
       }
     })
     .catch(notifyByError)
 }
 
-const source = ref(requestURL.href)
-const {copy, copied} = useClipboard({source})
+const source = ref(requestURL.origin + getProfilePath(state.username))
+const { copy, copied } = useClipboard({ source })
 
 const copyClipboard = () => {
+  console.log('>>> requestURL: ', requestURL)
   copy(source.value)
-  showSuccessToaster({key: 'notification.profileUrlCopied'})
+  showSuccessToaster({ key: 'notification.profileUrlCopied' })
 }
 
 const copyProfileUrlDisabled = computed(() => {

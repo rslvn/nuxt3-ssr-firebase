@@ -6,12 +6,12 @@
 </template>
 
 <script setup lang="ts">
-import {User} from '@firebase/auth'
-import {AUTHENTICATED_NOT_ALLOWED_ROUTES, PAGES} from '~/types'
+import { User } from '@firebase/auth'
 
 const router = useRouter()
 const route = useRoute()
-const {authUserRef, removeAuthUser, setAuthUserByHeader} = useAuthUserState()
+const { authUserRef, removeAuthUser, setAuthUserByHeader } = useAuthUserState()
+const { PAGES, authenticatedUserNotAllowed, authenticatedUserAllowed } = usePages()
 
 const userChanged = async (user: User) => {
   if (user) {
@@ -28,7 +28,7 @@ const userChanged = async (user: User) => {
       console.log(new Date(), '>>>> user logged in')
       return router.push(route.query.redirect)
 
-    } else if (AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
+    } else if (authenticatedUserNotAllowed(route.path)) {
       return router.push(PAGES.HOME.path)
 
     } else {
@@ -36,7 +36,7 @@ const userChanged = async (user: User) => {
     }
   } else {
     await removeAuthUser()
-    if (authUserRef.value && !AUTHENTICATED_NOT_ALLOWED_ROUTES.includes(route.path)) {
+    if (authUserRef.value && authenticatedUserAllowed(route.path)) {
       return router.push(PAGES.LOGIN.path)
     } else if (PAGES.HOME.path !== route.path) {
       // re-trigger middleware of the current page if the path is not home in case of logout
@@ -47,7 +47,7 @@ const userChanged = async (user: User) => {
 }
 
 onMounted(() => {
-  const {firebaseAuth} = useFirebaseAuth()
+  const { firebaseAuth } = useFirebaseAuth()
   firebaseAuth?.onIdTokenChanged(userChanged)
 })
 onErrorCaptured((error, instance, info) => {

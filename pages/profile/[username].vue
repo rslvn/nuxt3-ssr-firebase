@@ -1,31 +1,30 @@
 <script setup lang="ts">
-import {PAGES} from '~/types'
-
-const {t, locale} = useI18n()
-const {params} = useRoute()
+const { t, locale } = useI18n()
+const { getProfilePath, getProfileSettingsPath } = usePages()
+const { params } = useRoute()
 const username = params.username as string
 if (!username) {
-  throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
+  throw createError({ statusCode: 404, statusMessage: t('page.notFound'), fatal: true })
 }
 
-const {userProfileRef, setUserProfileByUsername, clearUserProfile, isMyProfile} = useUserProfileState()
+const { userProfileRef, setUserProfileByUsername, clearUserProfile, isMyProfile } = useUserProfileState()
 await setUserProfileByUsername(username)
   .catch((reason: any) => {
     if (reason?.code === 'permission-denied') {
-      throw createError({statusCode: 403, statusMessage: t('page.accessDenied'), fatal: true})
+      throw createError({ statusCode: 403, statusMessage: t('page.accessDenied'), fatal: true })
     }
   })
 
 if (!userProfileRef.value) {
   console.log('>>>> no profile found by username', username)
-  throw createError({statusCode: 404, statusMessage: t('page.notFound'), fatal: true})
+  throw createError({ statusCode: 404, statusMessage: t('page.notFound'), fatal: true })
 }
 
 onBeforeRouteLeave(() => {
   clearUserProfile()
 })
 
-const {seoMetaInputByUserProfile} = useAppSeoMeta()
+const { seoMetaInputByUserProfile } = useAppSeoMeta()
 useSeoMeta(seoMetaInputByUserProfile(userProfileRef.value))
 
 const leftLinks = computed(() => {
@@ -35,7 +34,7 @@ const leftLinks = computed(() => {
   const aboutLink = {
     label: t('common.About'),
     icon: 'i-heroicons-user-circle',
-    to: `${PAGES.PROFILE.path}/${userProfileRef.value?.username}`,
+    to: getProfilePath(userProfileRef.value?.username),
     exact: true
   }
 
@@ -43,7 +42,7 @@ const leftLinks = computed(() => {
     ? [aboutLink, {
         label: t('common.Settings'),
         icon: 'i-heroicons-cog-6-tooth',
-        to: `${PAGES.PROFILE.path}/${userProfileRef.value?.username}/settings`
+        to: getProfileSettingsPath(userProfileRef.value?.username)
       }]
     : [aboutLink]
 })

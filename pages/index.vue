@@ -1,10 +1,8 @@
 <script setup>
-import {PAGES} from '~/types'
-
 const {seoMetaInputByPageConfig} = useAppSeoMeta()
+const {PAGES} = usePages()
 useSeoMeta(seoMetaInputByPageConfig(PAGES.HOME))
 const {t} = useI18n()
-const profilePage = useState('profilePage')
 </script>
 
 <template>
@@ -23,6 +21,5 @@ const profilePage = useState('profilePage')
         }]"
       />
     </UContainer>
-    <pre>{{ profilePage }}</pre>
   </div>
 </template>

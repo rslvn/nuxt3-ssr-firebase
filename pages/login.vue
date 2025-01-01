@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import {computed} from 'vue'
-import {PAGES} from '~/types'
+import { computed } from 'vue'
 
 definePageMeta({
   middleware: ['authenticated-not-allowed'],
 })
 
-const {t, locale} = useI18n()
-const {seoMetaInputByPageConfig} = useAppSeoMeta()
+const { t, locale } = useI18n()
+const { PAGES } = usePages()
+const { seoMetaInputByPageConfig } = useAppSeoMeta()
 
 useSeoMeta(seoMetaInputByPageConfig(PAGES.LOGIN))
 
-const {loginWithPassword} = useFirebaseAuth()
-const {getLoginProviders} = useAuthProviders()
-const {notifyByError, showWarningToaster} = useNotifyUser()
-const {email, password, getSchema} = useFormFields()
+const { loginWithPassword } = useFirebaseAuth()
+const { getLoginProviders } = useAuthProviders()
+const { notifyByError, showWarningToaster } = useNotifyUser()
+const { email, password, getSchema } = useFormFields()
 
 const loading = ref(false)
 const providers = computed(() => {
@@ -29,7 +29,7 @@ const handleLogin = async (data: any) => {
   await loginWithPassword(data.email, data.password)
     .then((userCredentials) => {
       if (!userCredentials?.user?.emailVerified) {
-        showWarningToaster({key: 'notification.emailNotVerified'})
+        showWarningToaster({ key: 'notification.emailNotVerified' })
       }
     })
     .catch(notifyByError)

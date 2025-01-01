@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import {PAGES} from '~/types'
-
-const {t} = useI18n()
-const {sendResetPasswordMail} = useFirebaseAuth()
-const {notifyByError, alertMessage, closeAlert, showSuccessAlert} = useNotifyUser()
-const {email, getSchema} = useFormFields()
+const { t } = useI18n()
+const { PAGES } = usePages()
+const { sendResetPasswordMail } = useFirebaseAuth()
+const { notifyByError, alertMessage, closeAlert, showSuccessAlert } = useNotifyUser()
+const { email, getSchema } = useFormFields()
 const loading = ref(false)
 
 const fields = computed(() => [email.value])
@@ -14,7 +13,7 @@ const handleForgotPassword = async (data: any) => {
   loading.value = true
   await sendResetPasswordMail(data.email)
     .then(() => {
-      showSuccessAlert({key: 'notification.resetPasswordMailSent'})
+      showSuccessAlert({ key: 'notification.resetPasswordMailSent' })
     })
     .catch(notifyByError)
     .finally(() => loading.value = false)

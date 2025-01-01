@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import {PAGES} from '~/types'
-
-const {t, locale} = useI18n()
-const {authUserRef} = useAuthUserState()
-const {notifyByError} = useNotifyUser()
-const {logout} = useFirebaseAuth()
+const { t, locale } = useI18n()
+const { getProfilePath, getProfileSettingsPath } = usePages()
+const { authUserRef } = useAuthUserState()
+const { notifyByError } = useNotifyUser()
+const { logout } = useFirebaseAuth()
 
 const navigateToProfile = () => {
   if (authUserRef.value?.username) {
-    return navigateTo(`${PAGES.PROFILE.path}/${authUserRef.value.username}`)
+    return navigateTo(getProfilePath(authUserRef.value.username))
   }
 }
 
 const navigateToProfileSettings = () => {
   if (authUserRef.value?.username) {
-    return navigateTo(`${PAGES.PROFILE.path}/${authUserRef.value.username}/settings`)
+    return navigateTo(getProfileSettingsPath(authUserRef.value.username))
   }
 }
 

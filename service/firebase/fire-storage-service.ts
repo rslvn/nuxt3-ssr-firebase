@@ -1,5 +1,5 @@
-import {v4 as uuidv4} from 'uuid'
-import {sanitizeUrlContext, SLUG_DELIMITER} from '~/service/url-service'
+import { v4 as uuidv4 } from 'uuid'
+import { sanitizeUrlContext, SLUG_DELIMITER } from '~/service/url-service'
 
 const basename = (fileName: string): string => {
   return fileName.split('.').slice(0, -1).join('.')
@@ -13,11 +13,3 @@ export const getNewFileName = (fileName: string): string => {
   }
   return fileName
 }
-
-// export const getProfilePhotosPath = (userId: string) => {
-//     return `users/${userId}/profilePhotos/`
-// }
-//
-// export const getCoverPhotosPath = (userId: string) => {
-//     return `users/${userId}/coverPhotos/`
-// }
