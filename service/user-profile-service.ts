@@ -1,10 +1,11 @@
-import {Image, UserProfile} from '~/types'
-import {sanitizeUrlContext} from '~/service/url-service'
+import {
+  Image,
+  UserProfile
+} from '~/types'
+import { sanitizeUrlContext } from '~/service/url-service'
 
 const DEFAULT_PROFILE_PHOTO = 'https://picsum.photos/500/800'
 const DEFAULT_COVER_PHOTO = 'https://picsum.photos/1920/1080?random=1'
-const dashAllRegex = /-/g
-const httpProtocolRegex = /(^\w+:|^)\/\//
 
 export const getProfilePhotoImage = (userProfile: UserProfile, displayName: string): Image => {
   return {
@@ -29,11 +30,7 @@ export const getDisplayName = (userProfile?: UserProfile) => {
     }
     return userProfile.name.firstName
   }
-  return null
-}
-
-export const removeDashes = (id: string) => {
-  return id.replace(dashAllRegex, '')
+  return ''
 }
 
 export const generateUsernameByEmail = (email: string) => {
@@ -44,5 +41,3 @@ export const generateUsernameByEmail = (email: string) => {
 export const generateUsernameByEmailWith4DigitSuffix = (email: string) => {
   return generateUsernameByEmail(email) + (1000 + Math.random() * 9000).toFixed(0)
 }
-
-export const removeHttpProtocol = (url: string) => url.replace(httpProtocolRegex, '')

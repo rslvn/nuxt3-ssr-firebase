@@ -1,7 +1,14 @@
-import {UserRecord} from 'firebase-admin/auth'
-import {getUserProfile, saveUserProfile} from '~/server/utils/user-profile-admin-collection'
-import {AuthUser, UserProfile} from '~/types'
-import { generateUsernameByEmailWith4DigitSuffix, removeDashes } from '~/service/user-profile-service'
+import { UserRecord } from 'firebase-admin/auth'
+import {
+  getUserProfile,
+  saveUserProfile
+} from '~/server/utils/user-profile-admin-collection'
+import {
+  AuthUser,
+  UserProfile
+} from '~/types'
+import { generateUsernameByEmailWith4DigitSuffix } from '~/service/user-profile-service'
+import { removeDashes } from '~/service/text-service'
 
 const toAuthUser = (user: UserRecord, userProfile: UserProfile): AuthUser => {
   return {
@@ -22,15 +29,15 @@ const addUserProfile = (user: UserRecord) => {
   const userProfile: UserProfile = {
     id: user.uid,
     username,
-    name: {firstName: user.displayName || ''},
+    name: { firstName: user.displayName || '' },
     email: user.email,
     profilePhoto: {
       albumId: '',
-      image: {src: user.photoURL || 'https://picsum.photos/500/800'}
+      image: { src: user.photoURL || 'https://picsum.photos/500/800' }
     },
     coverPhoto: {
       albumId: '',
-      image: {src: 'https://picsum.photos/1920/1080?random=1'}
+      image: { src: 'https://picsum.photos/1920/1080?random=1' }
     }
   }
   return saveUserProfile(userProfile, user.uid)

@@ -1,6 +1,9 @@
-import { test, expect } from 'vitest'
-import {uuidv4} from '@firebase/util'
-import {removeDashes} from '~/service/user-profile-service'
+import {
+  expect,
+  test
+} from 'vitest'
+import { uuidv4 } from '@firebase/util'
+import { removeDashes } from '~/service/text-service'
 
 test('removeDashes > uuid without dashes', () => {
   const uuid = uuidv4()

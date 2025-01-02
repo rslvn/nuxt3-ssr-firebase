@@ -1,16 +1,22 @@
-import {getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable, UploadMetadata} from '@firebase/storage'
-import {getNewFileName} from '~/service/firebase/fire-storage-service'
-import {AlbumType} from '~/types'
+import {
+  getDownloadURL,
+  getStorage,
+  ref as storageRef,
+  uploadBytesResumable,
+  UploadMetadata
+} from '@firebase/storage'
+import { getNewFileName } from '~/service/file-service'
+import { AlbumType } from '~/types'
 
 export default function () {
-  const {notifyByError, showErrorToaster} = useNotifyUser()
-  const {reloadUserProfile} = useUserProfileState()
-  const {saveUserProfile, getUserProfile} = useUserProfileCollection()
-  const {getOrAddAlbum} = useAlbumCollection()
-  const {saveAlbumImage} = useAlbumImageCollection()
+  const { notifyByError, showErrorToaster } = useNotifyUser()
+  const { reloadUserProfile } = useUserProfileState()
+  const { saveUserProfile, getUserProfile } = useUserProfileCollection()
+  const { getOrAddAlbum } = useAlbumCollection()
+  const { saveAlbumImage } = useAlbumImageCollection()
 
   const uploadingFile = ref(false)
-  const {authUserRef} = useAuthUserState()
+  const { authUserRef } = useAuthUserState()
 
   const uploadFileToFirebaseStorage = (albumType: AlbumType, parentPath: string, file: File) => {
     console.log('>>> uploadFileToFirebaseStorage albumType:', albumType)
@@ -38,7 +44,7 @@ export default function () {
         case 'success':
           break
         default:
-          showErrorToaster({key: 'notification.photoUploadFailed'})
+          showErrorToaster({ key: 'notification.photoUploadFailed' })
       }
     },
     (reason) => {

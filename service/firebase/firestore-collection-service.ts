@@ -15,9 +15,16 @@ import {
   where
 } from 'firebase/firestore'
 
-import {Auth} from '@firebase/auth'
-import {getIdsInWhereClause, sliceIntoChunks} from '../firebase-type-util'
-import {BaseModel, OrderBy, WhereClause} from '~/types'
+import { Auth } from '@firebase/auth'
+import {
+  getIdsInWhereClause,
+  sliceIntoChunks
+} from './firebase-type-util'
+import {
+  BaseModel,
+  OrderBy,
+  WhereClause
+} from '~/types'
 
 const getQueryConstraintByWhereClauses = (...whereClauses: WhereClause[]) => {
   return whereClauses.map(clause => where(clause.field, clause.operator, clause.value))
@@ -52,9 +59,9 @@ const getDocByRef = <T extends BaseModel>(docRef: DocumentReference) => {
 }
 
 const setModelByRef = <T extends BaseModel>(firebaseAuth: Auth, docRef: DocumentReference, model: T): Promise<T> => {
-  const modelCopy = {...model}
+  const modelCopy = { ...model }
   updateBaseModel(firebaseAuth, modelCopy)
-  return setDoc(docRef, modelCopy, {merge: true})
+  return setDoc(docRef, modelCopy, { merge: true })
     .then(() => {
       // return getDocByRef(docRef)
       return model
@@ -110,9 +117,7 @@ export const getModelById = <T extends BaseModel>(firestore: Firestore, collecti
   return getDocByRef(docRef)
 }
 
-export const getModelsByWhereClauses = <T extends BaseModel>(firestore: Firestore, collectionName: string,
-  whereClause: WhereClause,
-  ...whereClauses: WhereClause[]): Promise<T[]> => {
+export const getModelsByWhereClauses = <T extends BaseModel>(firestore: Firestore, collectionName: string, whereClause: WhereClause, ...whereClauses: WhereClause[]): Promise<T[]> => {
   const queryConstraints = [...getQueryConstraintByWhereClauses(whereClause), ...getQueryConstraintByWhereClauses(...whereClauses)]
   const collectionReference = collection(firestore, collectionName)
   const _query = query(collectionReference, ...queryConstraints)
@@ -122,9 +127,7 @@ export const getModelsByWhereClauses = <T extends BaseModel>(firestore: Firestor
     })
 }
 
-export const getModelsByOrderByAndWhereClauses = <T extends BaseModel>(firestore: Firestore, collectionName: string,
-  order: OrderBy,
-  ...whereClauses: WhereClause[]): Promise<T[]> => {
+export const getModelsByOrderByAndWhereClauses = <T extends BaseModel>(firestore: Firestore, collectionName: string, order: OrderBy, ...whereClauses: WhereClause[]): Promise<T[]> => {
   const queryConstraints = [...getQueryConstraintByWhereClauses(...whereClauses), ...getQueryConstraintByOrderBy(order)]
   const collectionReference = collection(firestore, collectionName)
   const _query = query(collectionReference, ...queryConstraints)
@@ -134,15 +137,14 @@ export const getModelsByOrderByAndWhereClauses = <T extends BaseModel>(firestore
     })
 }
 
-export const getModelsByIds = <T extends BaseModel>(firestore: Firestore, collectionName: string, ...ids: string[]): Promise<T[]> => {
-  if (ids.length === 0) {
+export const getModelsByIds = <T extends BaseModel>(firestore: Firestore, collectionName: string, ...modelIds: string[]): Promise<T[]> => {
+  if (modelIds.length === 0) {
     return Promise.resolve([])
   }
 
-  const slicedArray = sliceIntoChunks(ids, 10)
+  const chunkedModelIds = sliceIntoChunks(modelIds, 10)
 
-  return Promise.all(slicedArray.map(slicedIps =>
-    getModelsByWhereClauses(firestore, collectionName, getIdsInWhereClause(slicedIps))))
+  return Promise.all(chunkedModelIds.map(chunkedIds => getModelsByWhereClauses(firestore, collectionName, getIdsInWhereClause(chunkedIds))))
     .then((models) => {
       return models.length === 0
         ? ([] as T[])

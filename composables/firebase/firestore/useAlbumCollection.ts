@@ -1,13 +1,18 @@
-import {Album, AlbumType, FirebaseQueryOperator, FirestoreCollection} from '~/types'
+import {
+  Album,
+  AlbumType,
+  FirebaseQueryOperator,
+  FirestoreCollection
+} from '~/types'
 import {
   getModelById,
   getModelsByWhereClauses,
   saveModel
-} from '~/service/firebase/firestore/firestore-collection-service'
-import {getWhereClause} from '~/service/firebase/firebase-type-util'
+} from '~/service/firebase/firestore-collection-service'
+import { getWhereClause } from '~/service/firebase/firebase-type-util'
 
 export default function () {
-  const {$firebaseAuth, $firebaseStore} = useNuxtApp()
+  const { $firebaseAuth, $firebaseStore } = useNuxtApp()
 
   const saveAlbum = (album: Album): Promise<Album> => {
     return saveModel($firebaseStore, $firebaseAuth, FirestoreCollection.ALBUM, album)
