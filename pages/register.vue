@@ -12,15 +12,15 @@ useSeoMeta(seoMetaInputByPageConfig(PAGES.REGISTER))
 const { t, locale } = useI18n()
 const { registerWithPassword } = useFirebaseAuth()
 const { notifyByError, showSuccessToaster } = useNotifyUser()
-const { email, password, confirmPassword, getSchema } = useFormFields()
+const { email, password, confirmPassword, getSchema } = useFormFieldsYup()
 const { getRegisterProviders } = useAuthProviders()
 const loading = ref(false)
 const providers = computed(() => {
-  return locale ? getRegisterProviders() : []
+  return locale ? getRegisterProviders() : getRegisterProviders()
 })
 
-const fields = computed(() => [email.value, password.value, confirmPassword.value])
-const schema = computed(() => getSchema(fields.value))
+const fields = [email, password, confirmPassword]
+const schema = computed(() => locale ? getSchema(fields) : getSchema(fields))
 
 const handleRegister = async (data: any) => {
   loading.value = true

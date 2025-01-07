@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {UserProfile} from '~/types'
+import { UserProfile } from '~/types'
 
 const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {password, confirmPassword, getSchema} = useFormFields()
+const {password, confirmPassword, getSchema} = useFormFieldsYup()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {t} = useI18n()
 const {linkPassword} = useFirebaseAuth()
@@ -15,8 +15,8 @@ const state = reactive({
   password: '',
   confirmPassword: ''
 })
-const fields = computed(() => [password.value, confirmPassword.value])
-const schema = computed(() => getSchema(fields.value))
+const fields = [password, confirmPassword]
+const schema = computed(() => getSchema(fields))
 
 const addPassword = async () => {
   loading.value = true

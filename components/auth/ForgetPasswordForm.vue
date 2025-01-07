@@ -3,7 +3,7 @@ const { t } = useI18n()
 const { PAGES } = usePages()
 const { sendResetPasswordMail } = useFirebaseAuth()
 const { notifyByError, alertMessage, closeAlert, showSuccessAlert } = useNotifyUser()
-const { email, getSchema } = useFormFields()
+const { email, getSchema } = useFormFieldsYup()
 const loading = ref(false)
 
 const fields = computed(() => [email.value])

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {UserProfile} from '~/types'
+import { UserProfile } from '~/types'
 
 defineProps<{
   userProfile: UserProfile
@@ -25,7 +25,7 @@ const sendVerificationLink = () => {
 </script>
 
 <template>
-  <UDashboardSection :title="t('field.emailAddress.label')" :description="t('field.emailAddress.description')">
+  <UDashboardSection :title="t('field.email.label')" :description="t('field.email.description')">
     <template #links>
       <span>{{ userProfile?.email }}</span>
 

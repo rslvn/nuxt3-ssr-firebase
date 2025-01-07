@@ -14,15 +14,17 @@ useSeoMeta(seoMetaInputByPageConfig(PAGES.LOGIN))
 const { loginWithPassword } = useFirebaseAuth()
 const { getLoginProviders } = useAuthProviders()
 const { notifyByError, showWarningToaster } = useNotifyUser()
-const { email, password, getSchema } = useFormFields()
+const { email, password, getSchema } = useFormFieldsYup()
 
 const loading = ref(false)
 const providers = computed(() => {
-  return locale ? getLoginProviders() : []
+  // locale check is for a workaround if locale is changed
+  return locale ? getLoginProviders() : getLoginProviders()
 })
 
-const fields = computed(() => [email.value, password.value])
-const schema = computed(() => getSchema(fields.value))
+const fields = [email, password]
+// locale check is for a workaround if locale is changed
+const schema = computed(() => locale ? getSchema(fields) : getSchema(fields))
 
 const handleLogin = async (data: any) => {
   loading.value = true

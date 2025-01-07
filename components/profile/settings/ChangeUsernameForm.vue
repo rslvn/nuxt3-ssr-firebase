@@ -6,7 +6,7 @@ const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const { username, getSchema } = useFormFields()
+const { username, getSchema } = useFormFieldsYup()
 const { getUserProfile, saveUserProfile } = useUserProfileCollection()
 const { notifyByError, showSuccessToaster } = useNotifyUser()
 const { reloadUserProfile } = useUserProfileState()
@@ -18,8 +18,8 @@ const showConfirmModal = ref(false)
 const state = reactive({
   username: props.userProfile?.username || ''
 })
-const fields = computed(() => [username.value])
-const schema = computed(() => getSchema(fields.value))
+const fields = [username]
+const schema = computed(() => getSchema(fields))
 
 const updateUsername = () => {
   return getUserProfile(props.userProfile.id)
@@ -58,13 +58,11 @@ const sanitizeUsername = () => {
 <template>
   <UForm :state="state" :schema="schema" @submit="showConfirmModal = true">
     <UDashboardSection :title="t('button.ChangeUsername')">
-      <UFormGroup :label="username.label" :name="username.name" :description="username.description"
+      <UFormGroup :label="t(username.label)" :name="username.name" :description="t(username.description)"
                   :required="username.required" eager-validation
                   class="grid grid-cols-1 sm:grid-cols-2 gap-2 items-center"
                   :ui="{ container: '' }">
-        <UInput v-model="state.username" :type="username.type" :placeholder="username.placeholder"
-                :required="username.required"
-                @keyup="sanitizeUsername" />
+        <UInput v-model="state.username" :type="username.type" :placeholder="t(username.placeholder)" @keyup="sanitizeUsername" />
       </UFormGroup>
 
       <template #links>
