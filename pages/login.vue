@@ -60,7 +60,7 @@ const handleLogin = async (data: any) => {
           <NuxtLink to="/auth/forgot-password" class="text-primary font-medium">{{ t('common.ForgotPassword') }}?
           </NuxtLink>
         </template>
-        
+
         <template #footer>
           {{ t('page.login.notRegistered') }}
           <NuxtLink :to="PAGES.REGISTER.path" class="text-primary font-medium">

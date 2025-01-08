@@ -1,2 +1,5 @@
-UserAgent: *
-Disallow: /auth
+User-agent: *
+Disallow: /auth/
+Disallow: /register
+Allow: /public/
+Sitemap: https://nuxt3-ssr-firebase.web.app/sitemap.xml
