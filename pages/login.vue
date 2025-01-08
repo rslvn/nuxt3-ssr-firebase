@@ -19,12 +19,14 @@ const { email, password, getSchema } = useFormFieldsYup()
 const loading = ref(false)
 const providers = computed(() => {
   // locale check is for a workaround if locale is changed
-  return locale ? getLoginProviders() : getLoginProviders()
+  return locale && getLoginProviders()
 })
 
-const fields = [email, password]
-// locale check is for a workaround if locale is changed
-const schema = computed(() => locale ? getSchema(fields) : getSchema(fields))
+const fields = computed(() => {
+  // locale check is for a workaround if locale is changed
+  return locale && [email, password].map(field => ({ ...field, label: t(field.label), placeholder: t(field.placeholder) }))
+})
+const schema = computed(() => getSchema(fields.value))
 
 const handleLogin = async (data: any) => {
   loading.value = true
@@ -58,7 +60,7 @@ const handleLogin = async (data: any) => {
           <NuxtLink to="/auth/forgot-password" class="text-primary font-medium">{{ t('common.ForgotPassword') }}?
           </NuxtLink>
         </template>
-
+        
         <template #footer>
           {{ t('page.login.notRegistered') }}
           <NuxtLink :to="PAGES.REGISTER.path" class="text-primary font-medium">

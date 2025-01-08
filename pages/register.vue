@@ -16,11 +16,15 @@ const { email, password, confirmPassword, getSchema } = useFormFieldsYup()
 const { getRegisterProviders } = useAuthProviders()
 const loading = ref(false)
 const providers = computed(() => {
-  return locale ? getRegisterProviders() : getRegisterProviders()
+  // locale check is for a workaround if locale is changed
+  return locale && getRegisterProviders()
 })
 
-const fields = [email, password, confirmPassword]
-const schema = computed(() => locale ? getSchema(fields) : getSchema(fields))
+const fields = computed(() => {
+  // locale check is for a workaround if locale is changed
+  return locale && [email, password, confirmPassword].map(field => ({ ...field, label: t(field.label), placeholder: t(field.placeholder) }))
+})
+const schema = computed(() => getSchema(fields.value))
 
 const handleRegister = async (data: any) => {
   loading.value = true
