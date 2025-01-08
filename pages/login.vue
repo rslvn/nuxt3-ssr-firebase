@@ -14,7 +14,7 @@ useSeoMeta(seoMetaInputByPageConfig(PAGES.LOGIN))
 const { loginWithPassword } = useFirebaseAuth()
 const { getLoginProviders } = useAuthProviders()
 const { notifyByError, showWarningToaster } = useNotifyUser()
-const { email, password, getSchema } = useFormFieldsYup()
+const { email, password, getSchema } = useFormSchema()
 
 const loading = ref(false)
 const providers = computed(() => {

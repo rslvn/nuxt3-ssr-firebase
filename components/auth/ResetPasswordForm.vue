@@ -10,7 +10,7 @@ const { t } = useI18n()
 const { PAGES } = usePages()
 const { notifyByError, closeAlert, alertMessage, showErrorAlert, showSuccessAlert } = useNotifyUser()
 const { resetPassword } = useFirebaseAuth()
-const { password, confirmPassword, getSchema } = useFormFieldsYup()
+const { password, confirmPassword, getSchema } = useFormSchema()
 const loading = ref(false)
 if (!props.oobCode) {
   showErrorAlert({ key: 'notification.invalidVerificationCode' })

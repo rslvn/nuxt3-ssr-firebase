@@ -5,7 +5,7 @@ const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {password, confirmPassword, getSchema} = useFormFieldsYup()
+const {password, confirmPassword, getSchema} = useFormSchema()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {t} = useI18n()
 const {linkPassword} = useFirebaseAuth()

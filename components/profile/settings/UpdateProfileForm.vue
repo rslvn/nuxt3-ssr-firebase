@@ -5,7 +5,7 @@ const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const { about, firstName, middleName, lastName, getSchema } = useFormFieldsYup()
+const { about, firstName, middleName, lastName, getSchema } = useFormSchema()
 const { getUserProfile, saveUserProfile } = useUserProfileCollection()
 const { notifyByError, showSuccessToaster } = useNotifyUser()
 const { reloadUserProfile } = useUserProfileState()
