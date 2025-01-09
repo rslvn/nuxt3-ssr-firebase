@@ -24,7 +24,7 @@ const fields = computed(() => {
   // locale check is for a workaround if locale is changed
   return locale && [email, password, confirmPassword].map(field => ({ ...field, label: t(field.label), placeholder: t(field.placeholder) }))
 })
-const schema = computed(() => getSchema(fields.value))
+const schema = getSchema(fields.value)
 
 const handleRegister = async (data: any) => {
   loading.value = true
