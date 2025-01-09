@@ -126,7 +126,6 @@ export default function () {
   }
 
   const getSchema = (fields: { name: string }[]) => {
-    console.log('>>> getSchema', fields)
     const shape = fields.reduce((previousValue: any, currentValue) => {
       previousValue[currentValue.name] = schemaConfig[currentValue.name]
       return previousValue
