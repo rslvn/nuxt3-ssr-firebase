@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {Country} from 'country-state-city'
-import {UserProfile} from '~/types'
+import { Country } from 'country-state-city'
+import { UserProfile } from '~/types'
 
 const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {country, getSchema} = useFormFields()
+const {country, getSchema} = useFormSchema()
 const {getUserProfile, saveUserProfile} = useUserProfileCollection()
 const {notifyByError, showSuccessToaster} = useNotifyUser()
 const {reloadUserProfile} = useUserProfileState()
@@ -16,8 +16,8 @@ const loading = ref(false)
 const state = reactive({
   country: props.userProfile?.address?.country,
 })
-const fields = computed(() => [country.value])
-const schema = computed(() => getSchema(fields.value))
+const fields = [country]
+const schema = computed(() => getSchema(fields))
 
 const updateAddress = () => {
   loading.value = true
@@ -48,7 +48,7 @@ const selectedCountry = computed(() => {
 <template>
   <UForm :state="state" :schema="schema" @submit="updateAddress">
     <UDashboardSection :title="t('button.UpdateAddress')" />
-    <UFormGroup :label="country.label" :name="country.name" :description="country.description"
+    <UFormGroup :label="country.label" :name="country.name" :description="t(country.description)"
                 :required="country.required"
                 class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                 :ui="{ container: '' }">
@@ -56,7 +56,7 @@ const selectedCountry = computed(() => {
         v-model="state.country"
         searchable
         selected-icon="i-heroicons-check-solid"
-        :placeholder="country.placeholder"
+        :searchable-placeholder="t(country.placeholder)"
         :options="countries"
         option-attribute="name"
         value-attribute="isoCode"

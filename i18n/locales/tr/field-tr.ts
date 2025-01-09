@@ -1,4 +1,12 @@
 export default {
+  validation: {
+    required: '{field} gereklidir',
+    email: '{field} gecersiz',
+    min: '{field} en azindan {min} karakter olmalidir',
+    max: '{field} an fazla {max} karakter olmalidir',
+    confirmPassword: 'Parola eslesmedi',
+    username: '{username} alinmis. Baska bir kullanici adi deneyiniz',
+  },
   field: {
     fullName: {
       label: 'Adiniz',
@@ -20,7 +28,7 @@ export default {
       placeholder: 'Soyadinizi giriniz',
       description: 'Profilinizde gorunen soyadiniz'
     },
-    emailAddress: {
+    email: {
       label: 'E-posta adresiniz',
       placeholder: 'e-posta adresinizi giriniz',
       description: 'Sizin e-posta adresiniz'

@@ -1,8 +1,4 @@
 export default {
-  validation: {
-    confirmPassword: 'Password doesn\'t match',
-    username: '{username} is taken. please try with another username',
-  },
   common: {
     About: 'About',
     Home: 'Home',

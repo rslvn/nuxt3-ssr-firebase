@@ -1,8 +1,4 @@
 export default {
-  validation: {
-    confirmPassword: 'Parola eslesmedi',
-    username: '{username} alinmis. Baska bir kullanici adi deneyiniz',
-  },
   common: {
     About: 'Hakkinda',
     Home: 'Anasayfa',
@@ -22,6 +18,5 @@ export default {
     Disconnect: 'Kaldir',
     Cancel: 'Iptal et',
     Confirm: 'Onayla'
-  },
-
+  }
 }

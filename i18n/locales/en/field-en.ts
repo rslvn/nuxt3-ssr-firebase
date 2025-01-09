@@ -1,4 +1,13 @@
 export default {
+  // see https://github.com/jquense/yup/blob/d00abc331801388cb572a07094ba0cb803a50d5d/src/locale.ts
+  validation: {
+    required: '{field} is required',
+    email: 'invalid {field}',
+    min: '{field} must be at least {min} characters',
+    max: '{field} must be at most {max} characters',
+    confirmPassword: 'Password doesn\'t match',
+    username: '{username} is taken. Please try with another username',
+  },
   field: {
     fullName: {
       label: 'Name',
@@ -20,7 +29,7 @@ export default {
       placeholder: 'enter last name',
       description: 'Your last name that is displayed in your profile'
     },
-    emailAddress: {
+    email: {
       label: 'Email Address',
       placeholder: 'enter email address',
       description: 'Your email address for communication'
