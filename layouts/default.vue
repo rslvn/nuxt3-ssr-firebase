@@ -1,17 +1,3 @@
-<template>
-  <AppHeader />
-
-  <UMain>
-    <slot />
-  </UMain>
-
-  <UFooter>
-    <template #center>
-      Copyright© {{ thisYear }} {{ runtimeConfig.public.appDomain }}
-    </template>
-  </UFooter>
-</template>
-
 <script setup>
 const {locale} = useI18n()
 const runtimeConfig = useRuntimeConfig()
@@ -29,5 +15,14 @@ useHead({
     }
   ]
 })
-const thisYear = new Date().getFullYear()
 </script>
+
+<template>
+  <AppHeader />
+
+  <UMain>
+    <slot />
+  </UMain>
+
+  <AppFooter />
+</template>

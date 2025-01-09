@@ -15,6 +15,7 @@ export default {
     Resend: 'Resend',
     processing: 'processing...',
     Profile: 'Profile',
+    ProfileSettings: 'Profile settings',
     Settings: 'Settings',
     Verify: 'Verify',
     Connect: 'Connect',

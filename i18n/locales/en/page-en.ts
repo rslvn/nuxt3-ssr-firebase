@@ -7,6 +7,14 @@ export default {
       description: 'Nuxt3 application with firebase hosting, authentication and storage',
       goToGithub: 'Go to the source code on Github'
     },
+    terms: {
+      title: 'Terms',
+      description: 'You have agreed if you use the website',
+    },
+    privacyAndPolicy: {
+      title: 'Privacy and policy',
+      description: 'Here are the privacy and policy',
+    },
     auth: {
       title: 'Authentication',
       rememberedPassword: 'Have you remembered your password?'

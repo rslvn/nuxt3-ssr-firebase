@@ -31,7 +31,7 @@ const items = computed(() => {
         click: navigateToProfile
       },
       {
-        label: t('common.Settings'),
+        label: t('common.ProfileSettings'),
         icon: 'i-heroicons-cog-6-tooth',
         click: navigateToProfileSettings
       }

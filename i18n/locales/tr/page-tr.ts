@@ -6,6 +6,14 @@ export default {
       description: 'Firebase hosting, authentication ve storage ile Nuxt3 uygulamasi',
       goToGithub: ' Github uzerinde kaynak koda ulas'
     },
+    terms: {
+      title: 'Kosullar',
+      description: 'Web sitesini kullaniyorsaniz kosullari kabul etmis sayilirsiniz',
+    },
+    privacyAndPolicy: {
+      title: 'Gizlilik ve politikalar',
+      description: 'Gizlilik ve politikalar buraya gelecek',
+    },
     auth: {
       title: 'Dogrulama',
       rememberedPassword: 'Paralonizi hatirladiniz mi?'

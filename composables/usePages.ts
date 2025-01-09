@@ -9,6 +9,16 @@ export default function () {
       description: { key: 'page.register.description' },
       path: '/register'
     } as PageConfig,
+    TERMS: {
+      title: { key: 'page.terms.title' },
+      description: { key: 'page.terms.description' },
+      path: '/terms'
+    } as PageConfig,
+    PRIVACY_AND_POLICY: {
+      title: { key: 'page.privacyAndPolicy.title' },
+      description: { key: 'page.privacyAndPolicy.description' },
+      path: '/privacy-policy'
+    } as PageConfig,
     AUTH_ACTION: {
       title: { key: 'page.auth.title' },
       description: { key: 'page.home.description' },
