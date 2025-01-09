@@ -19,7 +19,7 @@ const state = reactive({
   username: props.userProfile?.username || ''
 })
 const fields = [username]
-const schema = computed(() => getSchema(fields))
+const schema = getSchema(fields)
 
 const updateUsername = () => {
   return getUserProfile(props.userProfile.id)

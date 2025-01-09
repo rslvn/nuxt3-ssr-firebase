@@ -5,10 +5,10 @@ const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {password, confirmPassword, getSchema} = useFormSchema()
-const {notifyByError, showSuccessToaster} = useNotifyUser()
-const {t} = useI18n()
-const {linkPassword} = useFirebaseAuth()
+const { password, confirmPassword, getSchema } = useFormSchema()
+const { notifyByError, showSuccessToaster } = useNotifyUser()
+const { t } = useI18n()
+const { linkPassword } = useFirebaseAuth()
 
 const loading = ref(false)
 const state = reactive({
@@ -16,14 +16,14 @@ const state = reactive({
   confirmPassword: ''
 })
 const fields = [password, confirmPassword]
-const schema = computed(() => getSchema(fields))
+const schema = getSchema(fields)
 
 const addPassword = async () => {
   loading.value = true
 
   await linkPassword(props.userProfile.email, state.password)
     .then(() => {
-      showSuccessToaster({key: 'notification.profilePasswordUpdated'})
+      showSuccessToaster({ key: 'notification.profilePasswordUpdated' })
     })
     .catch(notifyByError)
     .finally(() => loading.value = false)

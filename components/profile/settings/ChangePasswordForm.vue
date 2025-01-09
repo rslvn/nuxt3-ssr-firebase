@@ -17,7 +17,7 @@ const state = reactive({
   oldPassword: '',
 })
 const fields = [password, confirmPassword, oldPassword]
-const schema = computed(() => getSchema(fields))
+const schema = getSchema(fields)
 
 const changePassword = async () => {
   await updateUserPassword(props.userProfile.email, state.oldPassword, state.password)

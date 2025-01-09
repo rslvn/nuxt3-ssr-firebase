@@ -6,8 +6,8 @@ const { notifyByError, alertMessage, closeAlert, showSuccessAlert } = useNotifyU
 const { email, getSchema } = useFormSchema()
 const loading = ref(false)
 
-const fields = computed(() => [email.value])
-const schema = computed(() => getSchema(fields.value))
+const fields = [email]
+const schema = getSchema(fields)
 
 const handleForgotPassword = async (data: any) => {
   loading.value = true

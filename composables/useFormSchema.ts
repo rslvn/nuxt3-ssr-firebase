@@ -56,7 +56,7 @@ export default function () {
   const middleName = {
     name: 'middleName',
     type: 'text',
-    label: t('field.middleName.label'),
+    label: 'field.middleName.label',
     placeholder: 'field.middleName.placeholder',
     description: 'field.middleName.description',
     color: 'gray',
@@ -86,7 +86,7 @@ export default function () {
   const country = {
     name: 'country',
     type: 'text',
-    label: t('field.country.label'),
+    label: 'field.country.label',
     placeholder: 'field.country.placeholder',
     description: 'field.country.description',
     color: 'gray',

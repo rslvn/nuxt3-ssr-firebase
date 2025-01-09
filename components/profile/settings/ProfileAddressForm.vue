@@ -6,18 +6,18 @@ const props = defineProps<{
   userProfile: UserProfile
 }>()
 
-const {country, getSchema} = useFormSchema()
-const {getUserProfile, saveUserProfile} = useUserProfileCollection()
-const {notifyByError, showSuccessToaster} = useNotifyUser()
-const {reloadUserProfile} = useUserProfileState()
-const {t} = useI18n()
+const { country, getSchema } = useFormSchema()
+const { getUserProfile, saveUserProfile } = useUserProfileCollection()
+const { notifyByError, showSuccessToaster } = useNotifyUser()
+const { reloadUserProfile } = useUserProfileState()
+const { t } = useI18n()
 
 const loading = ref(false)
 const state = reactive({
   country: props.userProfile?.address?.country,
 })
 const fields = [country]
-const schema = computed(() => getSchema(fields))
+const schema = getSchema(fields)
 
 const updateAddress = () => {
   loading.value = true
@@ -31,7 +31,7 @@ const updateAddress = () => {
     .then((profile) => {
       if (profile) {
         reloadUserProfile()
-        showSuccessToaster({key: 'notification.profileAddressUpdated'})
+        showSuccessToaster({ key: 'notification.profileAddressUpdated' })
       }
     })
     .catch(notifyByError)
@@ -48,7 +48,7 @@ const selectedCountry = computed(() => {
 <template>
   <UForm :state="state" :schema="schema" @submit="updateAddress">
     <UDashboardSection :title="t('button.UpdateAddress')" />
-    <UFormGroup :label="country.label" :name="country.name" :description="t(country.description)"
+    <UFormGroup :label="t(country.label)" :name="country.name" :description="t(country.description)"
                 :required="country.required"
                 class="grid grid-cols-1 sm:grid-cols-2 gap-2"
                 :ui="{ container: '' }">
