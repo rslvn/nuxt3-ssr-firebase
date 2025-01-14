@@ -14,10 +14,12 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/image',
     '@nuxt/eslint',
-    '@nuxt/test-utils/module'
+    '@nuxt/test-utils/module',
+    'nuxt-tiptap-editor',
   ],
   ssr: true,
 
+  css: ['~/assets/css/tailwind.css'],
   components: [
     {
       path: '~/components', // will get any components nested in let's say /components/test too
@@ -92,10 +94,10 @@ export default defineNuxtConfig({
   typescript: {
     tsConfig: {
       compilerOptions:
-                {
-                  strictNullChecks: false,
-                  verbatimModuleSyntax: false,
-                },
+        {
+          strictNullChecks: false,
+          verbatimModuleSyntax: false,
+        },
     },
   },
 
@@ -106,17 +108,17 @@ export default defineNuxtConfig({
       'autoprefixer': {},
       ...(process.env.NODE_ENV === 'production'
         ? {
-            cssnano: {
-              preset: [
-                'default',
-                {
-                  discardComments: {
-                    removeAll: true,
-                  },
+          cssnano: {
+            preset: [
+              'default',
+              {
+                discardComments: {
+                  removeAll: true,
                 },
-              ],
-            },
-          }
+              },
+            ],
+          },
+        }
         : {}),
     },
   },
@@ -176,5 +178,9 @@ export default defineNuxtConfig({
     sources: ['/api/sitemap'],
     xsl: false,
     exclude: ['/auth/**', 'register'],
+  },
+
+  tiptap: {
+    prefix: 'Tiptap', //prefix for Tiptap imports, composables not included
   },
 })
